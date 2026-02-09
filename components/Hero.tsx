@@ -34,7 +34,7 @@ const Hero: React.FC = () => {
               Weboldalad csak egy digitális névjegykártya, vagy <span className="text-brand-accent">valódi ügyfeleket is szállít?</span>
             </h1>
             
-            <p className="text-lg lg:text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+            <p className="text-lg lg:text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto lg:mx-0 min-h-[6rem]">
 Hiába küldesz látogatókat az oldaladra drága hirdetésekkel, ha a kattintásokból végül nem lesz üzlet. Adatvezérelt oldakat készítünk, hogy a hirdetéseid végre ne költséget, hanem profitot termeljenek neked.            </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
