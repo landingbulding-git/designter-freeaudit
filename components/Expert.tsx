@@ -19,7 +19,7 @@ const Expert: React.FC = () => {
              <div className="aspect-square rounded-2xl overflow-hidden shadow-lg bg-gray-200 relative">
                <img 
                  src="https://xa5228yhxohqyplr.public.blob.vercel-storage.com/me-landing-image.webp" 
-                 alt="Expert Portrait" 
+                 alt="B. Norbi, a DesignTér tulajdonosa" 
                  className="w-full h-full object-cover"
                />
              </div>

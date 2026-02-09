@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://designter-freeaudit.vercel.app/sitemap.xml
