@@ -3,9 +3,10 @@ import { AlertCircle, ArrowRight } from 'lucide-react';
 
 const ProblemAgitation: React.FC = () => {
   const scrollToAudit = () => {
-    const element = document.getElementById('audit-section');
+    const isMobile = window.innerWidth < 768;
+    const element = document.getElementById(isMobile ? 'audit-form' : 'audit-section');
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   };
 

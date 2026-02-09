@@ -52,7 +52,7 @@ const Closer: React.FC = () => {
             <h3 className="text-2xl font-bold text-brand-900 mb-2">Ingyenes Audit</h3>
             <p className="text-gray-600 mb-6">Töltsd ki az űrlapot és 48 órán belül küldjük a videós elemzést.</p>
 
-            <form className="flex flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
+            <form id="audit-form" className="flex flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
               <div>
                 <label htmlFor="firstname" className="block text-sm font-medium text-gray-700 mb-1">
                   Keresztnév
