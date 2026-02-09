@@ -1,7 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Star, Check, Lock } from 'lucide-react';
 
 const Closer: React.FC = () => {
+  const [formData, setFormData] = useState({
+    firstname: '',
+    email: '',
+    website: '',
+    access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY
+  });
+  const [status, setStatus] = useState('');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus('Submitting...');
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+      const result = await response.json();
+      if (result.success) {
+        window.location.href = '/thank-you';
+      } else {
+        setStatus(result.message || 'An error occurred.');
+      }
+    } catch (error) {
+      setStatus('An error occurred while submitting the form.');
+    }
+  };
+  
   const benefits = [
     "Ne hagyd, hogy a látogatóid vásárlás nélkül távozzanak.",
     "Ne költs többé olyan forgalomra, ami nem hoz neked profitot.",
@@ -52,17 +90,20 @@ const Closer: React.FC = () => {
             <h3 className="text-2xl font-bold text-brand-900 mb-2">Ingyenes Audit</h3>
             <p className="text-gray-600 mb-6">Töltsd ki az űrlapot és 48 órán belül küldjük a videós elemzést.</p>
 
-            <form id="audit-form" className="flex flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
+            <form id="audit-form" className="flex flex-col gap-4" onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="firstname" className="block text-sm font-medium text-gray-700 mb-1">
                   Keresztnév
                 </label>
                 <input 
                   type="text" 
-                  id="firstname" 
+                  id="firstname"
+                  name="firstname"
                   placeholder="Keresztnév" 
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-accent focus:border-brand-accent outline-none text-brand-900 transition-all bg-gray-50"
                   required
+                  value={formData.firstname}
+                  onChange={handleChange}
                 />
               </div>
 
@@ -73,9 +114,12 @@ const Closer: React.FC = () => {
                 <input 
                   type="email" 
                   id="email" 
+                  name="email"
                   placeholder="pelda@ceg.hu" 
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-accent focus:border-brand-accent outline-none text-brand-900 transition-all bg-gray-50"
                   required
+                  value={formData.email}
+                  onChange={handleChange}
                 />
               </div>
               
@@ -86,9 +130,12 @@ const Closer: React.FC = () => {
                 <input 
                   type="url" 
                   id="website" 
+                  name="website"
                   placeholder="https://www.weboldalad.hu" 
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-accent focus:border-brand-accent outline-none text-brand-900 transition-all bg-gray-50"
                   required
+                  value={formData.website}
+                  onChange={handleChange}
                 />
               </div>
 
@@ -98,7 +145,7 @@ const Closer: React.FC = () => {
               >
                 Kérem az auditot
               </button>
-              
+              {status && <p className="text-center mt-2">{status}</p>}
               <div className="flex items-center justify-center gap-2 mt-4 p-3 bg-green-50 rounded-lg border border-green-100">
                 <Lock className="w-4 h-4 text-brand-900" />
                 <p className="text-sm font-bold text-brand-900 text-center">

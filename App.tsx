@@ -34,7 +34,7 @@ const App: React.FC = () => {
     <Router>
       <Routes>
         <Route path="/" element={<MainLayout />} />
-        <Route path="/thankyou" element={<ThankYou />} />
+        <Route path="/thank-you" element={<ThankYou />} />
       </Routes>
     </Router>
   );
