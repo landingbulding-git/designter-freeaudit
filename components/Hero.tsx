@@ -100,7 +100,7 @@ Hiába küldesz látogatókat az oldaladra drága hirdetésekkel, ha a kattintá
                          <div className="h-4 bg-gray-700 rounded w-1/2 mx-auto"></div>
                       </div>
                       <div className="mt-6 flex justify-center">
-                          <span className="text-3xl font-bold text-green-400">3.5% CR</span>
+                          <span className="text-2xl md:text-3xl font-bold text-green-400 whitespace-nowrap">3.5% CR</span>
                       </div>
                     </div>
                  </div>
