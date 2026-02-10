@@ -68,39 +68,39 @@ Hiába küldesz látogatókat az oldaladra drága hirdetésekkel, ha a kattintá
 
           {/* Visual Strategy */}
           <div className="relative">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-brand-700 bg-brand-800/50 backdrop-blur-sm">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-100 bg-white">
                {/* Concept: Before/After Infographic */}
                <div className="grid grid-cols-2">
-                 <div className="p-6 bg-brand-900/50 border-r border-brand-700">
+                 <div className="p-6 bg-gray-50 border-r border-gray-200">
                     <div className="text-center mb-4">
-                      <span className="text-red-400 font-bold uppercase tracking-wider text-sm">Előtte</span>
-                      <p className="text-xs text-gray-400 mt-1">Összezavart látogatók</p>
+                      <span className="text-red-600 font-bold uppercase tracking-wider text-sm">Előtte</span>
+                      <p className="text-xs text-gray-500 mt-1">Összezavart látogatók</p>
                     </div>
                     <div className="space-y-3 opacity-60 grayscale blur-[1px]">
-                       <div className="h-4 bg-gray-600 rounded w-3/4 mx-auto"></div>
-                       <div className="h-20 bg-gray-600 rounded w-full"></div>
-                       <div className="h-4 bg-gray-600 rounded w-1/2 mx-auto"></div>
+                       <div className="h-4 bg-gray-300 rounded w-3/4 mx-auto"></div>
+                       <div className="h-20 bg-gray-300 rounded w-full"></div>
+                       <div className="h-4 bg-gray-300 rounded w-1/2 mx-auto"></div>
                     </div>
                     <div className="mt-6 flex justify-center">
-                        <span className="text-2xl font-bold text-gray-500">0.5% CR</span>
+                        <span className="text-2xl font-bold text-gray-400">0.5% CR</span>
                     </div>
                  </div>
-                 <div className="p-6 bg-transparent relative">
-                    <div className="absolute inset-0 bg-green-500/10"></div>
+                 <div className="p-6 bg-white relative">
+                    <div className="absolute inset-0 bg-green-50/30"></div>
                     <div className="relative z-10">
                       <div className="text-center mb-4">
-                        <span className="text-green-400 font-bold uppercase tracking-wider text-sm">Utána</span>
-                        <p className="text-xs text-gray-400 mt-1">Tiszta értékajánlat</p>
+                        <span className="text-green-600 font-bold uppercase tracking-wider text-sm">Utána</span>
+                        <p className="text-xs text-gray-500 mt-1">Tiszta értékajánlat</p>
                       </div>
                       <div className="space-y-3">
-                         <div className="h-4 bg-brand-700 rounded w-3/4 mx-auto"></div>
-                         <div className="h-20 bg-brand-800 border border-brand-700 rounded w-full flex items-center justify-center">
+                         <div className="h-4 bg-brand-900 rounded w-3/4 mx-auto"></div>
+                         <div className="h-20 bg-blue-50 border border-blue-100 rounded w-full flex items-center justify-center">
                             <span className="bg-brand-accent text-white px-4 py-1 rounded text-xs font-bold shadow-sm">CTA</span>
                          </div>
-                         <div className="h-4 bg-gray-700 rounded w-1/2 mx-auto"></div>
+                         <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto"></div>
                       </div>
                       <div className="mt-6 flex justify-center">
-                          <span className="text-3xl font-bold text-green-400">3.5% CR</span>
+                          <span className="text-3xl font-bold text-green-600">3.5% CR</span>
                       </div>
                     </div>
                  </div>
