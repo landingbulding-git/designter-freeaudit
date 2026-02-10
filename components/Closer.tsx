@@ -86,7 +86,7 @@ const Closer: React.FC = () => {
           </div>
 
           {/* Form */}
-          <div className="bg-white rounded-2xl p-6 md:p-8 w-full shadow-2xl text-brand-900">
+          <div id="audit-form-container" className="bg-white rounded-2xl p-6 md:p-8 w-full shadow-2xl text-brand-900">
             <h3 className="text-2xl font-bold text-brand-900 mb-2">Ingyenes Audit</h3>
             <p className="text-gray-600 mb-6">Töltsd ki az űrlapot és 48 órán belül küldjük a videós elemzést.</p>
 
