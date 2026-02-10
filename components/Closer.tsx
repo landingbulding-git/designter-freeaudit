@@ -47,7 +47,7 @@ const Closer: React.FC = () => {
   ];
 
   return (
-    <section id="audit-section" className="py-24 bg-brand-900 text-white relative overflow-hidden">
+    <section className="py-24 bg-brand-900 text-white relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-brand-accent opacity-10 blur-3xl rounded-full transform translate-x-1/2 -translate-y-1/2"></div>
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-500 opacity-10 blur-3xl rounded-full transform -translate-x-1/2 translate-y-1/2"></div>
@@ -86,11 +86,11 @@ const Closer: React.FC = () => {
           </div>
 
           {/* Form */}
-          <div id="audit-form-container" className="bg-white rounded-2xl p-6 md:p-8 w-full shadow-2xl text-brand-900">
+          <div className="bg-white rounded-2xl p-6 md:p-8 w-full shadow-2xl text-brand-900">
             <h3 className="text-2xl font-bold text-brand-900 mb-2">Ingyenes Audit</h3>
             <p className="text-gray-600 mb-6">Töltsd ki az űrlapot és 48 órán belül küldjük a videós elemzést.</p>
 
-            <form id="audit-form" className="flex flex-col gap-4" onSubmit={handleSubmit}>
+            <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="firstname" className="block text-sm font-medium text-gray-700 mb-1">
                   Keresztnév
