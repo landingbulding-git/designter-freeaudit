@@ -14,7 +14,7 @@ const Navbar: React.FC = () => {
     <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100 py-4">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
         <div className="flex items-center">
-          <img src="https://xa5228yhxohqyplr.public.blob.vercel-storage.com/header%20text%2Bicon.webp" alt="DesignTér Logo" className="h-8 w-auto" />
+          <img src="https://xa5228yhxohqyplr.public.blob.vercel-storage.com/header%20text%2Bicon.webp" alt="DesignTér Logo" className="h-10 w-auto" />
         </div>
         <button 
           onClick={scrollToAudit}
