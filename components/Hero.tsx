@@ -31,7 +31,7 @@ const Hero: React.FC = () => {
             </div>
 
             <h1 className="text-4xl lg:text-6xl font-extrabold tracking-tight text-brand-900 leading-tight">
-            Tudd meg 48 órán belül, hogyan hozz ki <span className="text-brand-accent">3x több vásárlót</span> a mostani hirdetéseidből - extra költés nélkül.</h1>
+            Tudd meg 48 órán belül, hogyan szerezz <span className="text-brand-accent">3x több vásárlót</span> anélkül, hogy többet költenél marketingre.</h1>
             
             <p className="text-lg lg:text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto lg:mx-0 min-h-[6rem]">
 Hiába küldesz látogatókat az oldaladra drága hirdetésekkel, ha a kattintásokból végül nem lesz üzlet. Adatvezérelt oldakat készítünk, hogy a hirdetéseid végre ne költséget, hanem profitot termeljenek neked.            </p>
