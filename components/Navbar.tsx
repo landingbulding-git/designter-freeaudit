@@ -6,7 +6,7 @@ const Navbar: React.FC = () => {
     const isMobile = window.innerWidth < 768;
     const element = document.getElementById(isMobile ? 'audit-form' : 'audit-section');
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
 
