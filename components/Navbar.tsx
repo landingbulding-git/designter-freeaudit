@@ -6,7 +6,9 @@ const Navbar: React.FC = () => {
     const isMobile = window.innerWidth < 768;
     const element = document.getElementById(isMobile ? 'audit-form-container' : 'audit-section');
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      requestAnimationFrame(() => {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
     }
   };
 
