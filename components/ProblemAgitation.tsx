@@ -1,14 +1,11 @@
 import React from 'react';
 import { AlertCircle, ArrowRight } from 'lucide-react';
 
-const ProblemAgitation: React.FC = () => {
-  const scrollToAudit = () => {
-    const isMobile = window.innerWidth < 768;
-    const element = document.getElementById(isMobile ? 'audit-form' : 'audit-section');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-  };
+interface ProblemAgitationProps {
+  onCtaClick: () => void;
+}
+
+const ProblemAgitation: React.FC<ProblemAgitationProps> = ({ onCtaClick }) => {
 
   return (
     <section className="py-20 bg-slate-50 border-y border-gray-100">
@@ -26,7 +23,7 @@ const ProblemAgitation: React.FC = () => {
             A látogatóid <span className="font-bold text-brand-accent">5 másodperc alatt döntenek</span>. Ha nem értik azonnal a lényeget, akkor a konkurenciához mennek.
           </p>
           <p>
-            Több mint <span className="font-bold text-brand-accent">500 landing oldal</span> elemzése után tisztán látjuk a mintát: a <span className="font-semibold text-brand-900">profitábilis oldal nem a véletlenen múlik</span>. Amíg a vállalkozások 90%-a olyan felületekre irányítják a látogatóikat, amelyek apró, de végzetes hibákkal gyilkolják a konverziót, addig te egy <span className="font-bold text-brand-accent">értékesítésre optimalizált felülettel</span> érvényesülhetsz.
+            Több mint <span className="font-bold text-brand-accent">500 landing oldal</span> elemzése után tisztán látjuk a mintát: a <span className="font-semibold text-brand-900">profitábilis oldal nem a véletlen múlik</span>. Amíg a vállalkozások 90%-a olyan felületekre irányítják a látogatóikat, amelyek apró, de végzetes hibákkal gyilkolják a konverziót, addig te egy <span className="font-bold text-brand-accent">értékesítésre optimalizált felülettel</span> érvényesülhetsz.
           </p>
           <p className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm font-medium">
             Nem csak a hibákra mutatunk rá: egy olyan rendszert építünk neked, amely a <span className="text-brand-accent font-bold">látogatói pszichológiát</span> használja a meggyőzésre. Megszüntetjük a találgatást, és <span className="font-bold text-brand-900">tűpontos adatokkal</span> tesszük egyértelművé, miért éppen nálad kell elkölteniük a pénzüket.
@@ -34,7 +31,7 @@ const ProblemAgitation: React.FC = () => {
         </div>
 
         <button 
-          onClick={scrollToAudit}
+          onClick={onCtaClick}
           className="inline-flex items-center gap-2 bg-brand-accent hover:bg-brand-accentHover text-white text-lg font-bold py-4 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-1"
         >
           Kérem az ingyenes auditot

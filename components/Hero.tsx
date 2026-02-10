@@ -1,7 +1,11 @@
 import React from 'react';
 import { Star, TrendingUp } from 'lucide-react';
 
-const Hero: React.FC = () => {
+interface HeroProps {
+  onCtaClick: () => void;
+}
+
+const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
 
   return (
     <section className="relative pt-12 pb-20 lg:pt-24 lg:pb-28 bg-brand-900 text-white overflow-hidden">
@@ -35,6 +39,7 @@ Hiába küldesz látogatókat az oldaladra drága hirdetésekkel, ha a kattintá
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <button 
+                onClick={onCtaClick}
                 className="w-full sm:w-auto bg-brand-accent hover:bg-brand-accentHover text-white text-lg font-bold py-4 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-1"
               >
                 Nézd meg, hol veszítesz jelenleg pénzt

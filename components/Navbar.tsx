@@ -1,7 +1,11 @@
 import React from 'react';
 import { MousePointer2 } from 'lucide-react';
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+  onCtaClick: () => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
 
   return (
     <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100 py-4">
@@ -13,6 +17,7 @@ const Navbar: React.FC = () => {
           <span className="text-xl font-bold tracking-tight text-brand-900">DesignTér</span>
         </div>
         <button 
+          onClick={onCtaClick}
           className="bg-brand-accent hover:bg-brand-accentHover text-white font-semibold py-2 px-6 rounded-full transition-colors duration-200 text-sm md:text-base"
         >
           Ingyenes Audit

@@ -12,22 +12,31 @@ import Closer from './components/Closer';
 import Footer from './components/Footer';
 import ThankYou from './components/ThankYou';
 
-const MainLayout: React.FC = () => (
-  <div className="font-sans text-brand-900 bg-white">
-    <Navbar />
-    <main>
-      <Hero />
-      <ProblemAgitation />
-      <Testimonials />
-      <Process />
-      <ValueProps />
-      <Expert />
-      <FAQ />
-      <Closer />
-    </main>
-    <Footer />
-  </div>
-);
+const MainLayout: React.FC = () => {
+  const scrollToCloserAudit = () => {
+    const element = document.getElementById('closer-audit-heading');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  };
+
+  return (
+    <div className="font-sans text-brand-900 bg-white">
+      <Navbar onCtaClick={scrollToCloserAudit} />
+      <main>
+        <Hero onCtaClick={scrollToCloserAudit} />
+        <ProblemAgitation onCtaClick={scrollToCloserAudit} />
+        <Testimonials />
+        <Process />
+        <ValueProps />
+        <Expert onCtaClick={scrollToCloserAudit} />
+        <FAQ />
+        <Closer />
+      </main>
+      <Footer />
+    </div>
+  );
+};
 
 const App: React.FC = () => {
   return (

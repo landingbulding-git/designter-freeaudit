@@ -1,14 +1,11 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 
-const Expert: React.FC = () => {
-  const scrollToAudit = () => {
-    const isMobile = window.innerWidth < 768;
-    const element = document.getElementById(isMobile ? 'audit-form' : 'audit-section');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-  };
+interface ExpertProps {
+  onCtaClick: () => void;
+}
+
+const Expert: React.FC<ExpertProps> = ({ onCtaClick }) => {
 
   return (
     <section className="py-20 bg-white">
@@ -41,7 +38,7 @@ const Expert: React.FC = () => {
               </div>
               
               <button 
-                onClick={scrollToAudit}
+                onClick={onCtaClick}
                 className="inline-flex items-center gap-2 bg-brand-accent hover:bg-brand-accentHover text-white font-bold py-3 px-6 rounded-lg shadow-md transition-all duration-200 whitespace-nowrap"
               >
                 Kérem az ingyenes auditot

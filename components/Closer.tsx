@@ -87,7 +87,7 @@ const Closer: React.FC = () => {
 
           {/* Form */}
           <div className="bg-white rounded-2xl p-6 md:p-8 w-full shadow-2xl text-brand-900">
-            <h3 className="text-2xl font-bold text-brand-900 mb-2">Ingyenes Audit</h3>
+            <h3 id="closer-audit-heading" className="text-2xl font-bold text-brand-900 mb-2">Ingyenes Audit</h3>
             <p className="text-gray-600 mb-6">Töltsd ki az űrlapot és 48 órán belül küldjük a videós elemzést.</p>
 
             <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
