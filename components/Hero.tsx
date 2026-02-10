@@ -31,7 +31,7 @@ const Hero: React.FC = () => {
             </div>
 
             <h1 className="text-4xl lg:text-6xl font-extrabold tracking-tight text-brand-900 leading-tight">
-              Weboldalad csak egy digitális névjegykártya, vagy <span className="text-brand-accent">valódi ügyfeleket is szállít?</span>
+            Tudd meg 48 órán belül, miért nem konvertál az oldalad, és <span className="text-brand-accent">szerezz 3x több vásárlót a következő 30 napban</span>, anélkül, hogy többet költenél marketingre.
             </h1>
             
             <p className="text-lg lg:text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto lg:mx-0 min-h-[6rem]">
