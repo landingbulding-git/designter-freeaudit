@@ -1,3 +1,39 @@
 {
-  "outputDirectory": "apps/main-website/dist"
+  "builds": [
+    {
+      "src": "apps/main-website/package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist" }
+    },
+    {
+      "src": "apps/landing-pages/landing-ingyenes-audit/package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist" }
+    }
+  ],
+  "routes": [
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "landing.designter.hu"
+        }
+      ],
+      "dest": "/apps/landing-pages/landing-ingyenes-audit/$1"
+    },
+    {
+      "src": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "designter.hu"
+        }
+      ],
+      "dest": "/apps/main-website/$1"
+    }
+  ]
 }

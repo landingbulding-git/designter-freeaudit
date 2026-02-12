@@ -5,9 +5,7 @@
     "apps/*",
     "packages/*"
   ],
-  "scripts": {
-    "build": "cd apps/main-website && npm run build"
-  },
+
   "devDependencies": {
     "typescript": "~5.8.2",
     "vite": "^6.2.0"
