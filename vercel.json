@@ -13,6 +13,18 @@
   ],
   "routes": [
     {
+      "src": "/ingyenes-audit/assets/(.*)",
+      "has": [{ "type": "host", "value": "landing.designter.hu" }],
+      "headers": { "cache-control": "s-maxage=31536000,immutable" },
+      "dest": "/apps/landing-pages/landing-ingyenes-audit/assets/$1"
+    },
+    {
+      "src": "/assets/(.*)",
+      "has": [{ "type": "host", "value": "(www\\.)?designter.hu" }],
+      "headers": { "cache-control": "s-maxage=31536000,immutable" },
+      "dest": "/apps/main-website/assets/$1"
+    },
+    {
       "handle": "filesystem"
     },
     {
@@ -21,23 +33,8 @@
       "dest": "/apps/landing-pages/landing-ingyenes-audit/index.html"
     },
     {
-      "src": "/(.*)",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.designter.hu"
-        }
-      ],
-      "dest": "/apps/main-website/index.html"
-    },
-    {
-      "src": "/(.*)",
-      "has": [
-        {
-          "type": "host",
-          "value": "designter.hu"
-        }
-      ],
+      "src": "/.*",
+      "has": [{ "type": "host", "value": "(www\\.)?designter.hu" }],
       "dest": "/apps/main-website/index.html"
     }
   ]
