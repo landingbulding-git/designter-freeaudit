@@ -16,24 +16,9 @@
       "handle": "filesystem"
     },
     {
-      "src": "/ingyenes-audit/(.*)",
-      "has": [
-        {
-          "type": "host",
-          "value": "landing.designter.hu"
-        }
-      ],
-      "dest": "/apps/landing-pages/landing-ingyenes-audit/$1"
-    },
-    {
-      "src": "/(.*)",
-      "has": [
-        {
-          "type": "host",
-          "value": "designter.hu"
-        }
-      ],
-      "dest": "/apps/main-website/$1"
+      "src": "^/ingyenes-audit/.*",
+      "has": [{ "type": "host", "value": "landing.designter.hu" }],
+      "dest": "/apps/landing-pages/landing-ingyenes-audit/index.html"
     },
     {
       "src": "/(.*)",
@@ -43,7 +28,17 @@
           "value": "www.designter.hu"
         }
       ],
-      "dest": "/apps/main-website/$1"
+      "dest": "/apps/main-website/index.html"
+    },
+    {
+      "src": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "designter.hu"
+        }
+      ],
+      "dest": "/apps/main-website/index.html"
     }
   ]
 }
