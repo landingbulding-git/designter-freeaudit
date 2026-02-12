@@ -31,7 +31,7 @@ const Closer: React.FC = () => {
       });
       const result = await response.json();
       if (result.success) {
-        window.location.href = '/thank-you';
+        window.location.href = 'https://www.designter.hu/thank-you';
       } else {
         setStatus(result.message || 'An error occurred.');
       }
