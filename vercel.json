@@ -1,25 +1,31 @@
 {
-  "version": 2,
-  "builds": [
+  "buildCommand": "npm run build:all",
+  "outputDirectory": "dist",
+  "rewrites": [
     {
-      "src": "apps/main-website/package.json",
-      "use": "@vercel/static-build"
+      "source": "/ingyenes-audit",
+      "has": [{ "type": "host", "value": "landing.designter.hu" }],
+      "destination": "/landing-pages/ingyenes-audit/index.html"
     },
     {
-      "src": "apps/landing-pages/landing-ingyenes-audit/package.json",
-      "use": "@vercel/static-build"
-    }
-  ],
-  "rewrites": [
+      "source": "/ingyenes-audit/:path((?!assets).*)",
+      "has": [{ "type": "host", "value": "landing.designter.hu" }],
+      "destination": "/landing-pages/ingyenes-audit/index.html"
+    },
     {
       "source": "/ingyenes-audit/:path*",
       "has": [{ "type": "host", "value": "landing.designter.hu" }],
-      "destination": "/apps/landing-pages/landing-ingyenes-audit/:path*"
+      "destination": "/landing-pages/ingyenes-audit/:path*"
+    },
+    {
+      "source": "/:path((?!assets|favicon.svg|robots.txt|sitemap.xml).*)",
+      "has": [{ "type": "host", "value": "(www\\.)?designter\\.hu" }],
+      "destination": "/main-website/index.html"
     },
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "(www\\.)?designter.hu" }],
-      "destination": "/apps/main-website/:path*"
+      "has": [{ "type": "host", "value": "(www\\.)?designter\\.hu" }],
+      "destination": "/main-website/:path*"
     }
   ]
 }
