@@ -6,7 +6,7 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "cd apps/main-website && npm install && npm run build"
+    "build": "cd apps/main-website && npm run build"
   },
   "devDependencies": {
     "typescript": "~5.8.2",
