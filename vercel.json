@@ -34,6 +34,16 @@
         }
       ],
       "dest": "/apps/main-website/$1"
+    },
+    {
+      "src": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.designter.hu"
+        }
+      ],
+      "dest": "/apps/main-website/$1"
     }
   ]
 }
