@@ -2,40 +2,43 @@
   "builds": [
     {
       "src": "apps/main-website/package.json",
-      "use": "@vercel/static-build",
-      "config": { "distDir": "dist" }
+      "use": "@vercel/static-build"
     },
     {
       "src": "apps/landing-pages/landing-ingyenes-audit/package.json",
-      "use": "@vercel/static-build",
-      "config": { "distDir": "dist" }
+      "use": "@vercel/static-build"
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/ingyenes-audit/assets/(.*)",
-      "has": [{ "type": "host", "value": "landing.designter.hu" }],
-      "headers": { "cache-control": "s-maxage=31536000,immutable" },
-      "dest": "/apps/landing-pages/landing-ingyenes-audit/assets/$1"
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\\\.)?designter.hu"
+        }
+      ],
+      "destination": "/apps/main-website/"
     },
     {
-      "src": "/assets/(.*)",
-      "has": [{ "type": "host", "value": "(www\\.)?designter.hu" }],
-      "headers": { "cache-control": "s-maxage=31536000,immutable" },
-      "dest": "/apps/main-website/assets/$1"
+      "source": "/ingyenes-audit/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "landing.designter.hu"
+        }
+      ],
+      "destination": "/apps/landing-pages/landing-ingyenes-audit/"
     },
     {
-      "handle": "filesystem"
-    },
-    {
-      "src": "^/ingyenes-audit/.*",
-      "has": [{ "type": "host", "value": "landing.designter.hu" }],
-      "dest": "/apps/landing-pages/landing-ingyenes-audit/index.html"
-    },
-    {
-      "src": "/.*",
-      "has": [{ "type": "host", "value": "(www\\.)?designter.hu" }],
-      "dest": "/apps/main-website/index.html"
+      "source": "/ingyenes-audit",
+      "has": [
+        {
+          "type": "host",
+          "value": "landing.designter.hu"
+        }
+      ],
+      "destination": "/apps/landing-pages/landing-ingyenes-audit/"
     }
   ]
 }
