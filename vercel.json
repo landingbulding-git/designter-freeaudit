@@ -1,4 +1,5 @@
 {
+  "version": 2,
   "builds": [
     {
       "src": "apps/main-website/package.json",
@@ -11,34 +12,14 @@
   ],
   "rewrites": [
     {
-      "source": "/(.*)",
-      "has": [
-        {
-          "type": "host",
-          "value": "(www\\\\.)?designter.hu"
-        }
-      ],
-      "destination": "/apps/main-website/"
+      "source": "/ingyenes-audit/:path*",
+      "has": [{ "type": "host", "value": "landing.designter.hu" }],
+      "destination": "/apps/landing-pages/landing-ingyenes-audit/:path*"
     },
     {
-      "source": "/ingyenes-audit/(.*)",
-      "has": [
-        {
-          "type": "host",
-          "value": "landing.designter.hu"
-        }
-      ],
-      "destination": "/apps/landing-pages/landing-ingyenes-audit/"
-    },
-    {
-      "source": "/ingyenes-audit",
-      "has": [
-        {
-          "type": "host",
-          "value": "landing.designter.hu"
-        }
-      ],
-      "destination": "/apps/landing-pages/landing-ingyenes-audit/"
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "(www\\.)?designter.hu" }],
+      "destination": "/apps/main-website/:path*"
     }
   ]
 }
