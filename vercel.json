@@ -16,7 +16,7 @@
       "handle": "filesystem"
     },
     {
-      "src": "/(.*)",
+      "src": "/ingyenes-audit/(.*)",
       "has": [
         {
           "type": "host",
