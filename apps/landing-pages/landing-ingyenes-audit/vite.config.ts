@@ -8,10 +8,10 @@ export default defineConfig(({ mode }) => {
       server: {
         port: 3000,
         host: '0.0.0.0',
-        base: '/ingyenes-audit/'
+        base: '/'
       },
       plugins: [react()],
-      base: process.env.NODE_ENV === 'production' ? '/ingyenes-audit/' : '/ingyenes-audit/',
+      base: process.env.NODE_ENV === 'production' ? '/' : '/',
       build: {
         outDir: 'dist',
         emptyOutDir: true
