@@ -4,6 +4,7 @@
   "type": "module",
   "workspaces": [
     "apps/*",
+    "apps/landing-pages/*",
     "packages/*"
   ],
   "scripts": {
