@@ -3,28 +3,19 @@
   "outputDirectory": "dist",
   "rewrites": [
     {
-      "source": "/ingyenes-audit/assets/:path*",
-      "destination": "/landing-pages/ingyenes-audit/assets/:path*"
-    },
-    {
-      "source": "/ingyenes-audit/favicon.svg",
-      "destination": "/landing-pages/ingyenes-audit/favicon.svg"
-    },
-    {
-      "source": "/ingyenes-audit/robots.txt",
-      "destination": "/landing-pages/ingyenes-audit/robots.txt"
-    },
-    {
-      "source": "/ingyenes-audit/sitemap.xml",
-      "destination": "/landing-pages/ingyenes-audit/sitemap.xml"
-    },
-    {
       "source": "/ingyenes-audit",
+      "has": [{ "type": "host", "value": "landing.designter.hu" }],
+      "destination": "/landing-pages/ingyenes-audit/index.html"
+    },
+    {
+      "source": "/ingyenes-audit/:path((?!assets).*)",
+      "has": [{ "type": "host", "value": "landing.designter.hu" }],
       "destination": "/landing-pages/ingyenes-audit/index.html"
     },
     {
       "source": "/ingyenes-audit/:path*",
-      "destination": "/landing-pages/ingyenes-audit/index.html"
+      "has": [{ "type": "host", "value": "landing.designter.hu" }],
+      "destination": "/landing-pages/ingyenes-audit/:path*"
     },
     {
       "source": "/:path((?!assets|favicon.svg|robots.txt|sitemap.xml).*)",

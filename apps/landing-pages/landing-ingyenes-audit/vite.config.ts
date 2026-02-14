@@ -11,7 +11,7 @@ export default defineConfig(({ mode }) => {
         base: '/ingyenes-audit/'
       },
       plugins: [react()],
-      base: '/ingyenes-audit/',
+      base: process.env.NODE_ENV === 'production' ? '/ingyenes-audit/' : '/ingyenes-audit/',
       build: {
         outDir: 'dist',
         emptyOutDir: true

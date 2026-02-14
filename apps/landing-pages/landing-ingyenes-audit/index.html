@@ -49,11 +49,30 @@
     <meta property="twitter:description" content="Kérje ingyenes, adatvezérelt weboldal auditunkat, és tudja meg, hol veszíti el a potenciális ügyfeleket. Növelje konverzióját és profitját szakértői elemzésünkkel." />
     <meta property="twitter:image" content="https://xa5228yhxohqyplr.public.blob.vercel-storage.com/og-image-landing.png" />
 
+    <!-- Non-blocking Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com" media="print" onload="this.media='all'"></script>
     <!-- Non-blocking Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+            colors: {
+              brand: {
+                900: '#1e293b', // Slate 900
+                800: '#334155', // Slate 700
+                accent: '#ea580c', // Orange 600
+                accentHover: '#c2410c', // Orange 700
+              }
+            }
+          }
+        }
+      }
+    </script>
   <script type="importmap">
 {
   "imports": {
