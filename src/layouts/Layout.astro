@@ -1,0 +1,65 @@
+---
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="hu">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-LGXQ7Q6QMS"></script>
+		<script is:inline>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'G-LGXQ7Q6QMS');
+		</script>
+		
+		<script type="text/javascript" is:inline>
+			(function(c,l,a,r,i,t,y){
+				c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+				t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+				y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+			})(window, document, "clarity", "script", "vf5gpt3nx9");
+		</script>
+
+		<!-- Preconnect for Google Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<!-- Preconnect and DNS-prefetch for Vercel Blob Storage -->
+		<link rel="preconnect" href="https://xa5228yhxohqyplr.public.blob.vercel-storage.com">
+		<link rel="dns-prefetch" href="https://xa5228yhxohqyplr.public.blob.vercel-storage.com">
+
+		<title>{title}</title>
+		<meta name="description" content={description || "Ingyenes, adatvezérelt weboldal audit."} />
+		
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://designter-freeaudit.vercel.app/" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content="https://xa5228yhxohqyplr.public.blob.vercel-storage.com/og-image-landing.png" />
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content="https://designter-freeaudit.vercel.app/" />
+		<meta property="twitter:title" content={title} />
+		<meta property="twitter:description" content={description} />
+		<meta property="twitter:image" content="https://xa5228yhxohqyplr.public.blob.vercel-storage.com/og-image-landing.png" />
+
+		<!-- Fonts -->
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
