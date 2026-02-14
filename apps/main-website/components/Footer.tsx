@@ -8,7 +8,6 @@ const Footer: React.FC = () => {
         <p>&copy; {new Date().getFullYear()} DesignTér. Minden jog fenntartva.</p>
         <div className="flex gap-6">
           <Link to="/adatkezeles" className="hover:text-white transition-colors">Adatkezelés</Link>
-          <a href="#" className="hover:text-white transition-colors">ÁSZF</a>
         </div>
       </div>
     </footer>
