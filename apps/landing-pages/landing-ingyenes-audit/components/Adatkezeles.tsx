@@ -16,15 +16,15 @@ const Adatkezeles: React.FC = () => {
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 flex flex-col items-center p-4 md:p-8">
              <h1 className="text-3xl font-bold text-gray-900 mb-8 text-center">Adatkezelési Tájékoztató</h1>
              <div className="w-full flex justify-center">
-                <iframe 
-                    src="https://gamma.app/embed/v89fxvr4lo1owlu" 
-                    style={{ width: '700px', maxWidth: '100%', height: '800px', border: 'none' }} 
-                    allowFullScreen 
-                    title="Adatkezelési tájékoztató"
+                <embed 
+                    src="/ingyenes-audit/Adatkezelesi-tajekoztato.pdf" 
+                    type="application/pdf"
+                    width="100%" 
+                    height="1000px" 
                 />
              </div>
              <p className="text-sm text-gray-500 mt-4 text-center">
-                A dokumentum betöltése pár másodpercet vehet igénybe.
+                Ha a dokumentum nem jelenik meg, <a href="/ingyenes-audit/Adatkezelesi-tajekoztato.pdf" target="_blank" rel="noopener noreferrer" className="text-brand-accent underline">kattints ide a letöltéshez</a>.
              </p>
         </div>
       </div>
