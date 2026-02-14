@@ -3,19 +3,34 @@
   "outputDirectory": "dist",
   "rewrites": [
     {
-      "source": "/ingyenes-audit",
+      "source": "/ingyenes-audit/assets/:path*",
       "has": [{ "type": "host", "value": "landing.designter.hu" }],
-      "destination": "/landing-pages/ingyenes-audit/index.html"
+      "destination": "/landing-pages/ingyenes-audit/assets/:path*"
     },
     {
-      "source": "/ingyenes-audit/:path((?!assets).*)",
+      "source": "/ingyenes-audit/favicon.svg",
       "has": [{ "type": "host", "value": "landing.designter.hu" }],
-      "destination": "/landing-pages/ingyenes-audit/index.html"
+      "destination": "/landing-pages/ingyenes-audit/favicon.svg"
+    },
+    {
+      "source": "/ingyenes-audit/robots.txt",
+      "has": [{ "type": "host", "value": "landing.designter.hu" }],
+      "destination": "/landing-pages/ingyenes-audit/robots.txt"
+    },
+    {
+      "source": "/ingyenes-audit/sitemap.xml",
+      "has": [{ "type": "host", "value": "landing.designter.hu" }],
+      "destination": "/landing-pages/ingyenes-audit/sitemap.xml"
     },
     {
       "source": "/ingyenes-audit/:path*",
       "has": [{ "type": "host", "value": "landing.designter.hu" }],
-      "destination": "/landing-pages/ingyenes-audit/:path*"
+      "destination": "/landing-pages/ingyenes-audit/index.html"
+    },
+    {
+      "source": "/ingyenes-audit",
+      "has": [{ "type": "host", "value": "landing.designter.hu" }],
+      "destination": "/landing-pages/ingyenes-audit/index.html"
     },
     {
       "source": "/:path((?!assets|favicon.svg|robots.txt|sitemap.xml).*)",

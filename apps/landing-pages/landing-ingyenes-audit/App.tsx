@@ -40,7 +40,7 @@ const MainLayout: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    <Router>
+    <Router basename="/ingyenes-audit">
       <Routes>
         <Route path="/" element={<MainLayout />} />
         <Route path="/thank-you" element={<ThankYou />} />
