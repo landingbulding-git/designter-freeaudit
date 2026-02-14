@@ -11,6 +11,7 @@ import FAQ from './components/FAQ';
 import Closer from './components/Closer';
 import Footer from './components/Footer';
 import ThankYou from './components/ThankYou';
+import Adatkezeles from './components/Adatkezeles';
 
 const MainLayout: React.FC = () => {
   const scrollToCloserAudit = () => {
@@ -44,6 +45,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<MainLayout />} />
         <Route path="/thank-you" element={<ThankYou />} />
+        <Route path="/adatkezeles" element={<Adatkezeles />} />
       </Routes>
     </Router>
   );
