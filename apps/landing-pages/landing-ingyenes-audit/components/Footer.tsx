@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
         <p>&copy; {new Date().getFullYear()} DesignTér. Minden jog fenntartva.</p>
         <div className="flex gap-6">
-          <Link to="/adatkezeles" className="hover:text-white transition-colors">Adatkezelés</Link>
+          <a href="https://designter.hu/adatkezeles" className="hover:text-white transition-colors">Adatkezelés</a>
           <a href="#" className="hover:text-white transition-colors">ÁSZF</a>
         </div>
       </div>
