@@ -37,15 +37,4 @@
       "destination": "/main-website/:path*"
     }
   ]
-    {
-      "source": "/:path((?!assets|favicon.svg|robots.txt|sitemap.xml).*)",
-      "has": [{ "type": "host", "value": "(www\\.)?designter\\.hu" }],
-      "destination": "/main-website/index.html"
-    },
-    {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "(www\\.)?designter\\.hu" }],
-      "destination": "/main-website/:path*"
-    }
-  ]
 }
