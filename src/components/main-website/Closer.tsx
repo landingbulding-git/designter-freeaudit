@@ -6,7 +6,7 @@ const Closer: React.FC = () => {
     firstname: '',
     email: '',
     website: '',
-    access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY
+    access_key: 'aa9f8e62-b6f0-43c1-9ece-521ecbd1c23a'
   });
   const [status, setStatus] = useState('');
 
@@ -128,10 +128,10 @@ const Closer: React.FC = () => {
                   Weboldal URL
                 </label>
                 <input 
-                  type="url" 
+                  type="text" 
                   id="website" 
                   name="website"
-                  placeholder="https://www.weboldalad.hu" 
+                  placeholder="pl. weboldalad.hu vagy www.weboldalad.hu" 
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-accent focus:border-brand-accent outline-none text-brand-900 transition-all bg-gray-50"
                   required
                   value={formData.website}
