@@ -15,6 +15,12 @@ if (!notion) {
 if (!notion.databases) {
   console.error('Notion Client instance missing "databases" property:', notion);
   // Attempting to re-import or handle CJS/ESM interop if needed, but usually vite.ssr.noExternal fixes this.
+} else {
+  console.log('Notion databases property type:', typeof notion.databases);
+  if (notion.databases) {
+      console.log('Notion databases keys:', Object.keys(notion.databases));
+      console.log('Notion databases query type:', typeof notion.databases.query);
+  }
 }
 
 const n2m = new NotionToMarkdown({ notionClient: notion });
