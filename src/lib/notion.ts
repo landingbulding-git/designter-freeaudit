@@ -23,6 +23,20 @@ if (notion.blocks) {
 
 const n2m = new NotionToMarkdown({ notionClient: notion });
 
+n2m.setCustomTransformer('callout', async (block: any) => {
+  const { callout } = block as any;
+  const icon = callout.icon?.emoji || '💡';
+  
+  // Parse the rich text to keep basic formatting or fallback to plain text
+  const textContent = callout.rich_text?.map((t: any) => t.plain_text).join('') || '';
+  
+  // Return custom HTML styled with Tailwind
+  return `<div class="bg-orange-50 border-l-4 border-brand-accent p-4 rounded-r-lg shadow-sm flex items-start gap-3 my-6 not-prose">
+    <span class="text-xl leading-none mt-1">${icon}</span>
+    <div class="text-brand-900 font-medium leading-relaxed">${textContent}</div>
+  </div>`;
+});
+
 export async function getPublishedBlogPosts() {
   const rawDatabaseId = import.meta.env.NOTION_DATABASE_ID;
   
