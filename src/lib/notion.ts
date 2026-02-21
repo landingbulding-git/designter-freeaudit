@@ -24,11 +24,14 @@ if (notion.blocks) {
 const n2m = new NotionToMarkdown({ notionClient: notion });
 
 export async function getPublishedBlogPosts() {
-  const databaseId = import.meta.env.NOTION_DATABASE_ID;
+  const rawDatabaseId = import.meta.env.NOTION_DATABASE_ID;
   
-  if (!databaseId) {
+  if (!rawDatabaseId) {
     throw new Error('NOTION_DATABASE_ID environment variable is missing.');
   }
+
+  const databaseId = rawDatabaseId.replace(/["'\s\-]/g, '');
+  console.log('Cleaned Database ID:', databaseId);
 
   try {
     console.log('Fetching published blog posts...');
