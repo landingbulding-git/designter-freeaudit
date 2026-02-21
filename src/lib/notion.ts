@@ -46,7 +46,7 @@ export async function getPublishedBlogPosts() {
       body: JSON.stringify({
         filter: {
           property: "Status",
-          status: {
+          select: {
             equals: "Published",
           },
         },
