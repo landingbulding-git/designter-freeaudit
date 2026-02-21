@@ -110,6 +110,19 @@ const description = post.description;
       <div class="prose prose-lg prose-slate mx-auto max-w-none prose-headings:font-bold prose-headings:text-brand-900 prose-p:text-gray-700 prose-a:text-brand-accent prose-a:no-underline hover:prose-a:underline prose-strong:text-brand-900 prose-li:text-gray-700">
         <div set:html={optimizedContent} />
       </div>
+
+      <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": post.title,
+        "description": post.description,
+        "image": post.coverImage ? [post.coverImage] : [],
+        "datePublished": post.publishedDate.toISOString(),
+        "author": {
+          "@type": "Person",
+          "name": "Bogdán Norbert"
+        }
+      })} />
     </article>
   </main>
 
