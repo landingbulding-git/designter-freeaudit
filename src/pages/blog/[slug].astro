@@ -1,0 +1,126 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getPublishedBlogPosts } from '../../lib/notion';
+import { Image, getImage } from 'astro:assets';
+import { marked } from 'marked';
+import { load } from 'cheerio';
+
+export async function getStaticPaths() {
+  const posts = await getPublishedBlogPosts();
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const contentHtml = await marked.parse(post.content);
+
+// Process HTML to optimize images using Astro's getImage
+const $ = load(contentHtml);
+const imgElements = $('img');
+
+await Promise.all(imgElements.map(async (i, el) => {
+  const src = $(el).attr('src');
+  if (!src) return;
+
+  try {
+    const optimized = await getImage({
+      src: src,
+      format: 'webp',
+      width: 800, // Resize to a reasonable width for blog content
+      height: undefined, // Maintain aspect ratio
+    });
+    
+    $(el).attr('src', optimized.src);
+    $(el).attr('loading', 'lazy');
+    $(el).attr('decoding', 'async');
+    // Add Tailwind classes for styling
+    $(el).addClass('rounded-xl shadow-lg my-8 w-full h-auto object-cover');
+    // Remove fixed dimensions if any
+    $(el).removeAttr('width');
+    $(el).removeAttr('height');
+  } catch (e) {
+    console.error(`Failed to optimize image: ${src}`, e);
+    // Fallback: just add styling
+    $(el).attr('loading', 'lazy');
+    $(el).addClass('rounded-xl shadow-lg my-8 w-full h-auto object-cover');
+  }
+}).get());
+
+const optimizedContent = $('body').html() || contentHtml; // Extract body content or fallback
+
+const title = `${post.title} - DesignTér Blog`;
+const description = post.description;
+---
+
+<Layout title={title} description={description}>
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100 py-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+      <a href="/blog" class="flex items-center gap-2 group text-gray-600 hover:text-brand-900 transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        <span class="font-medium">Vissza a blogra</span>
+      </a>
+      <a href="/" class="flex items-center gap-2">
+        <div class="bg-brand-accent p-1.5 rounded-lg">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M13 5.12V2.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5v2.62c0 .83-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/><path d="M5 14H3a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1z"/><path d="M18.17 14H5"/><path d="M12 14v6"/><path d="M9 17v-3"/><path d="M15 20v-6"/><path d="M22 22a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2"/></svg>
+        </div>
+        <span class="text-lg font-bold tracking-tight text-brand-900 hidden sm:inline">DesignTér</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <article>
+      <header class="mb-8 text-center">
+        <div class="flex items-center justify-center gap-2 text-sm text-gray-500 mb-4">
+          <time datetime={post.publishedDate.toISOString()}>
+            {post.publishedDate.toLocaleDateString('hu-HU', { 
+              year: 'numeric', 
+              month: 'long', 
+              day: 'numeric' 
+            })}
+          </time>
+          <span>•</span>
+          <span>{Math.ceil(post.content.split(' ').length / 200)} perc olvasás</span>
+        </div>
+        <h1 class="text-3xl md:text-5xl font-extrabold text-brand-900 mb-6 leading-tight">
+          {post.title}
+        </h1>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          {post.description}
+        </p>
+      </header>
+
+      {post.coverImage && (
+        <div class="mb-12 rounded-2xl overflow-hidden shadow-lg aspect-video">
+          <Image 
+            src={post.coverImage} 
+            alt={post.title} 
+            width={1200} 
+            height={675} 
+            class="w-full h-full object-cover"
+            loading="eager" 
+          />
+        </div>
+      )}
+
+      <div class="prose prose-lg prose-slate mx-auto max-w-none prose-headings:font-bold prose-headings:text-brand-900 prose-p:text-gray-700 prose-a:text-brand-accent prose-a:no-underline hover:prose-a:underline prose-strong:text-brand-900 prose-li:text-gray-700">
+        <div set:html={optimizedContent} />
+      </div>
+    </article>
+
+    <div class="mt-16 pt-8 border-t border-gray-100 flex flex-col items-center">
+        <h3 class="text-2xl font-bold text-brand-900 mb-4">Tetszett a cikk?</h3>
+        <p class="text-gray-600 mb-6 text-center max-w-md">
+            Iratkozz fel, vagy kérj egy ingyenes weboldal auditot, hogy megtudd, hogyan növelheted bevételeidet.
+        </p>
+        <a 
+            href="/"
+            class="bg-brand-accent hover:bg-brand-accentHover text-white font-bold py-3 px-8 rounded-full transition-transform hover:scale-105 duration-200 shadow-lg hover:shadow-xl"
+        >
+            Ingyenes Audit Kérése
+        </a>
+    </div>
+  </main>
+</Layout>
