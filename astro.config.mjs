@@ -13,7 +13,7 @@ export default defineConfig({
   },
   vite: {
     ssr: {
-      noExternal: ['@notionhq/client', 'notion-to-md'],
+      noExternal: ['@notionhq/client', 'notion-to-md', 'markdown-table'],
     },
   },
 });
