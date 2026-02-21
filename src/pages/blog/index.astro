@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getPublishedBlogPosts } from '../../lib/notion';
+import { Image } from 'astro:assets';
 
 const posts = await getPublishedBlogPosts();
 
@@ -41,11 +42,12 @@ const description = "Olvass szakmai cikkeket weboldal készítésről, UX design
         <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100 flex flex-col h-full">
           <a href={`/blog/${post.slug}`} class="block aspect-video overflow-hidden">
             {post.coverImage ? (
-              <img 
+              <Image 
                 src={post.coverImage} 
-                alt={post.title} 
+                alt={post.title}
+                width={800}
+                height={450}
                 class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                loading="lazy"
               />
             ) : (
               <div class="w-full h-full bg-gray-100 flex items-center justify-center text-gray-400">
