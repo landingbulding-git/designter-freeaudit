@@ -74,10 +74,10 @@ export async function getPublishedBlogPosts() {
 
         return {
           id: page.id,
-          slug: page.properties.Slug.rich_text[0]?.plain_text,
-          title: page.properties.Name.title[0]?.plain_text,
-          description: page.properties.Description.rich_text[0]?.plain_text,
-          publishedDate: new Date(page.properties.PublishedDate.date?.start),
+          slug: page.properties.Slug?.rich_text?.[0]?.plain_text || '',
+          title: page.properties.Title?.title?.[0]?.plain_text || page.properties.Name?.title?.[0]?.plain_text || 'Untitled',
+          description: page.properties.Description?.rich_text?.[0]?.plain_text || '',
+          publishedDate: page.properties.PublishedDate?.date?.start ? new Date(page.properties.PublishedDate.date.start) : new Date(),
           status: 'Published',
           coverImage: page.cover?.external?.url || page.cover?.file?.url,
           content: mdString.parent,
