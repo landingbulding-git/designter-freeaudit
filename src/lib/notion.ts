@@ -79,7 +79,13 @@ export async function getPublishedBlogPosts() {
           description: page.properties.Description?.rich_text?.[0]?.plain_text || '',
           publishedDate: page.properties.PublishedDate?.date?.start ? new Date(page.properties.PublishedDate.date.start) : new Date(),
           status: 'Published',
-          coverImage: page.cover?.external?.url || page.cover?.file?.url,
+          coverImage: 
+            page.cover?.external?.url || 
+            page.cover?.file?.url || 
+            page.properties.CoverImage?.files?.[0]?.file?.url ||
+            page.properties.CoverImage?.files?.[0]?.external?.url ||
+            page.properties['Cover Image']?.files?.[0]?.file?.url ||
+            page.properties['Cover Image']?.files?.[0]?.external?.url,
           content: mdString?.parent || (typeof mdString === 'string' ? mdString : '') || '',
         };
       })
