@@ -34,52 +34,41 @@ export async function getPublishedBlogPosts() {
   console.log('Cleaned Database ID:', databaseId);
 
   try {
-    console.log('Fetching published blog posts...');
-    // Fallback to raw request if notion.databases.query is missing
-    let response;
+    console.log('Fetching published blog posts via fetch...');
     
-    if (typeof notion.databases?.query === 'function') {
-        response = await notion.databases.query({
-            database_id: databaseId,
-            filter: {
-                property: "Status",
-                status: {
-                    equals: "Published",
-                },
-            },
-            sorts: [
-                {
-                    property: "PublishedDate",
-                    direction: "descending",
-                },
-            ],
-        });
-    } else {
-        console.warn('notion.databases.query is missing, using notion.request fallback');
-        response = await notion.request({
-            path: `databases/${databaseId}/query`,
-            method: "post",
-            body: {
-                filter: {
-                    property: "Status",
-                    status: {
-                        equals: "Published",
-                    },
-                },
-                sorts: [
-                    {
-                        property: "PublishedDate",
-                        direction: "descending",
-                    },
-                ],
-            },
-        }) as any;
+    const response = await fetch(`https://api.notion.com/v1/databases/${databaseId}/query`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${import.meta.env.NOTION_API_KEY}`,
+        'Notion-Version': '2022-06-28',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        filter: {
+          property: "Status",
+          status: {
+            equals: "Published",
+          },
+        },
+        sorts: [
+          {
+            property: "PublishedDate",
+            direction: "descending",
+          },
+        ],
+      }),
+    });
+
+    if (!response.ok) {
+      const err = await response.text();
+      throw new Error('Notion API Error: ' + err);
     }
 
-    console.log(`Fetched ${response.results.length} posts.`);
+    const data = await response.json();
+    console.log(`Fetched ${data.results.length} posts.`);
 
     return Promise.all(
-      response.results.map(async (page: any) => {
+      data.results.map(async (page: any) => {
         const mdblocks = await n2m.pageToMarkdown(page.id);
         const mdString = n2m.toMarkdownString(mdblocks);
 
