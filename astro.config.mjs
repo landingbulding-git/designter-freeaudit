@@ -11,4 +11,9 @@ export default defineConfig({
   build: {
     inlineStylesheets: 'always',
   },
+  vite: {
+    ssr: {
+      noExternal: ['@notionhq/client', 'notion-to-md'],
+    },
+  },
 });
