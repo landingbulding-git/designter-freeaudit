@@ -80,7 +80,7 @@ export async function getPublishedBlogPosts() {
           publishedDate: page.properties.PublishedDate?.date?.start ? new Date(page.properties.PublishedDate.date.start) : new Date(),
           status: 'Published',
           coverImage: page.cover?.external?.url || page.cover?.file?.url,
-          content: mdString.parent,
+          content: mdString?.parent || (typeof mdString === 'string' ? mdString : '') || '',
         };
       })
     );

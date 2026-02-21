@@ -14,7 +14,7 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const contentHtml = await marked.parse(post.content);
+const contentHtml = await marked.parse(post.content || '');
 
 // Process HTML to optimize images using Astro's getImage
 const $ = load(contentHtml);
