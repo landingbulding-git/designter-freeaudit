@@ -5,6 +5,9 @@ import tailwind from '@astrojs/tailwind';
 // https://astro.build/config
 export default defineConfig({
   integrations: [react(), tailwind()],
+  image: {
+    domains: ['prod-files-secure.s3.us-west-2.amazonaws.com'],
+  },
   build: {
     inlineStylesheets: 'always',
   },
