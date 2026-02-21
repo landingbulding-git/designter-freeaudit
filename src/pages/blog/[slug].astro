@@ -4,6 +4,7 @@ import { getPublishedBlogPosts } from '../../lib/notion';
 import { Image, getImage } from 'astro:assets';
 import { marked } from 'marked';
 import { load } from 'cheerio';
+import { MousePointer2 } from 'lucide-react';
 
 export async function getStaticPaths() {
   const posts = await getPublishedBlogPosts();
@@ -63,7 +64,7 @@ const description = post.description;
       </a>
       <a href="/" class="flex items-center gap-2">
         <div class="bg-brand-accent p-1.5 rounded-lg">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="m22 14-5 5-5-5"/><path d="M17 19V3"/></svg>
+          <MousePointer2 className="w-5 h-5 text-white" />
         </div>
         <span class="text-lg font-bold tracking-tight text-brand-900 hidden sm:inline">DesignTér</span>
       </a>
@@ -116,7 +117,7 @@ const description = post.description;
             Iratkozz fel, vagy kérj egy ingyenes weboldal auditot, hogy megtudd, hogyan növelheted bevételeidet.
         </p>
         <a 
-            href="/ingyenes-audit"
+            href="/ingyenes-audit#closer-audit-heading"
             class="bg-brand-accent hover:bg-brand-accentHover text-white font-bold py-3 px-8 rounded-full transition-transform hover:scale-105 duration-200 shadow-lg hover:shadow-xl"
         >
             Ingyenes Audit Kérése

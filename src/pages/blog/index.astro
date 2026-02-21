@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import { getPublishedBlogPosts } from '../../lib/notion';
 import { Image } from 'astro:assets';
+import { MousePointer2 } from 'lucide-react';
 
 const posts = (await getPublishedBlogPosts()).sort((a, b) => 
   new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime()
@@ -16,12 +17,12 @@ const description = "Olvass szakmai cikkeket weboldal készítésről, UX design
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
       <a href="/" class="flex items-center gap-2 group">
         <div class="bg-[#ea580c] p-2 rounded-lg group-hover:bg-[#c2410c] transition-colors">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="m22 14-5 5-5-5"/><path d="M17 19V3"/></svg>
+          <MousePointer2 className="w-6 h-6 text-white" />
         </div>
         <span class="text-xl font-bold tracking-tight text-[#1e293b]">DesignTér</span>
       </a>
       <a 
-        href="/ingyenes-audit"
+        href="/ingyenes-audit#closer-audit-heading"
         class="bg-[#ea580c] hover:bg-[#c2410c] text-white font-semibold py-2 px-6 rounded-full transition-colors duration-200 text-sm md:text-base"
       >
         Ingyenes Audit
