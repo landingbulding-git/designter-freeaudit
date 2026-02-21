@@ -11,16 +11,14 @@ if (!notion) {
   throw new Error('Failed to initialize Notion Client');
 }
 
-// Ensure databases property exists (debugging step)
-if (!notion.databases) {
-  console.error('Notion Client instance missing "databases" property:', notion);
-  // Attempting to re-import or handle CJS/ESM interop if needed, but usually vite.ssr.noExternal fixes this.
-} else {
-  console.log('Notion databases property type:', typeof notion.databases);
-  if (notion.databases) {
-      console.log('Notion databases keys:', Object.keys(notion.databases));
-      console.log('Notion databases query type:', typeof notion.databases.query);
-  }
+// Debugging checks
+console.log('Notion request method type:', typeof notion.request);
+if (notion.databases) {
+    console.log('Notion databases keys:', Object.keys(notion.databases));
+    console.log('Notion databases query type:', typeof notion.databases.query);
+}
+if (notion.blocks) {
+    console.log('Notion blocks keys:', Object.keys(notion.blocks));
 }
 
 const n2m = new NotionToMarkdown({ notionClient: notion });
@@ -33,21 +31,49 @@ export async function getPublishedBlogPosts() {
   }
 
   try {
-    const response = await notion.databases.query({
-      database_id: databaseId,
-      filter: {
-        property: "Status",
-        status: {
-          equals: "Published",
-        },
-      },
-      sorts: [
-        {
-          property: "PublishedDate",
-          direction: "descending",
-        },
-      ],
-    });
+    console.log('Fetching published blog posts...');
+    // Fallback to raw request if notion.databases.query is missing
+    let response;
+    
+    if (typeof notion.databases?.query === 'function') {
+        response = await notion.databases.query({
+            database_id: databaseId,
+            filter: {
+                property: "Status",
+                status: {
+                    equals: "Published",
+                },
+            },
+            sorts: [
+                {
+                    property: "PublishedDate",
+                    direction: "descending",
+                },
+            ],
+        });
+    } else {
+        console.warn('notion.databases.query is missing, using notion.request fallback');
+        response = await notion.request({
+            path: `databases/${databaseId}/query`,
+            method: "post",
+            body: {
+                filter: {
+                    property: "Status",
+                    status: {
+                        equals: "Published",
+                    },
+                },
+                sorts: [
+                    {
+                        property: "PublishedDate",
+                        direction: "descending",
+                    },
+                ],
+            },
+        }) as any;
+    }
+
+    console.log(`Fetched ${response.results.length} posts.`);
 
     return Promise.all(
       response.results.map(async (page: any) => {
@@ -68,8 +94,6 @@ export async function getPublishedBlogPosts() {
     );
   } catch (error) {
     console.error('Error fetching blog posts from Notion:', error);
-    // Return empty array or re-throw depending on desired behavior.
-    // Re-throwing so build fails visibly but with more context.
     throw error;
   }
 }
