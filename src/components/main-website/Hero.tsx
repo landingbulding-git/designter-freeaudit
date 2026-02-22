@@ -48,7 +48,7 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
               </button>
             </div>
             
-            <div className="flex flex-wrap items-center justify-center gap-3 text-sm font-medium mt-2">
+            <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4 sm:gap-3 text-sm font-medium mt-2">
                <div className="flex items-center gap-2 bg-green-500/10 text-green-300 px-3 py-1.5 rounded-md border border-green-500/20">
                    <span className="relative flex h-2.5 w-2.5">
                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -57,13 +57,13 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
                    <span className="font-bold">Ingyenes konverziós audit</span>
                </div>
                
-               <span className="text-brand-700 text-lg font-light">|</span>
+               <span className="hidden sm:inline text-brand-700 text-lg font-light">|</span>
                
                <div className="bg-brand-800 text-gray-300 px-3 py-1.5 rounded-md border border-brand-700">
                    <span className="font-bold">Nincs kötelezettség</span>
                </div>
 
-               <span className="text-brand-700 text-lg font-light">|</span>
+               <span className="hidden sm:inline text-brand-700 text-lg font-light">|</span>
 
                <div className="flex items-center gap-2 bg-green-500/10 text-green-300 px-3 py-1.5 rounded-md border border-green-500/20">
                    <span className="relative flex h-2.5 w-2.5">

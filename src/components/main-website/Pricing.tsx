@@ -31,7 +31,7 @@ const Pricing: React.FC<PricingProps> = ({ onCtaClick }) => {
   ];
 
   return (
-    <section className="py-24 bg-[#0B0F19] overflow-hidden relative font-sans">
+    <section className="py-24 bg-brand-900 overflow-hidden relative font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <h2 className="text-3xl md:text-5xl font-bold text-center text-white mb-16 tracking-tight">
           Egyetlen előfizetés, végtelen lehetőség.
