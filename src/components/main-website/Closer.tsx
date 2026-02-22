@@ -1,44 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { Star, Check, Lock } from 'lucide-react';
+import Cal, { getCalApi } from "@calcom/embed-react";
 
 const Closer: React.FC = () => {
-  const [formData, setFormData] = useState({
-    firstname: '',
-    email: '',
-    website: '',
-    access_key: 'aa9f8e62-b6f0-43c1-9ece-521ecbd1c23a'
-  });
-  const [status, setStatus] = useState('');
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setStatus('Submitting...');
-    try {
-      const response = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json'
-        },
-        body: JSON.stringify(formData)
-      });
-      const result = await response.json();
-      if (result.success) {
-        window.location.href = '/thank-you';
-      } else {
-        setStatus(result.message || 'An error occurred.');
-      }
-    } catch (error) {
-      setStatus('An error occurred while submitting the form.');
-    }
-  };
+  useEffect(() => {
+    (async function () {
+      const cal = await getCalApi({"namespace":"15perc"});
+      cal("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
+    })();
+  }, []);
   
   const benefits = [
     "Ne hagyd, hogy a látogatóid vásárlás nélkül távozzanak.",
@@ -85,74 +55,26 @@ const Closer: React.FC = () => {
             </div>
           </div>
 
-          {/* Form */}
-          <div className="bg-white rounded-2xl p-6 md:p-8 w-full shadow-2xl text-brand-900">
-            <h3 id="closer-audit-heading" className="text-2xl font-bold text-brand-900 mb-2">Ingyenes Audit</h3>
-            <p className="text-gray-600 mb-6">Töltsd ki az űrlapot és 48 órán belül küldjük a videós elemzést.</p>
+          {/* Cal.com Embed */}
+          <div className="bg-white rounded-2xl p-4 md:p-6 w-full shadow-2xl text-brand-900 min-h-[600px] flex flex-col">
+            <h3 id="closer-audit-heading" className="text-2xl font-bold text-brand-900 mb-2 px-2">Beszéljünk 15 percet</h3>
+            <p className="text-gray-600 mb-6 px-2">Válassz egy neked megfelelő időpontot a lenti naptárból.</p>
 
-            <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-              <div>
-                <label htmlFor="firstname" className="block text-sm font-medium text-gray-700 mb-1">
-                  Keresztnév
-                </label>
-                <input 
-                  type="text" 
-                  id="firstname"
-                  name="firstname"
-                  placeholder="Keresztnév" 
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-accent focus:border-brand-accent outline-none text-brand-900 transition-all bg-gray-50"
-                  required
-                  value={formData.firstname}
-                  onChange={handleChange}
-                />
-              </div>
-
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                  E-mail cím
-                </label>
-                <input 
-                  type="email" 
-                  id="email" 
-                  name="email"
-                  placeholder="pelda@ceg.hu" 
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-accent focus:border-brand-accent outline-none text-brand-900 transition-all bg-gray-50"
-                  required
-                  value={formData.email}
-                  onChange={handleChange}
-                />
-              </div>
-              
-              <div>
-                <label htmlFor="website" className="block text-sm font-medium text-gray-700 mb-1">
-                  Weboldal URL
-                </label>
-                <input 
-                  type="text" 
-                  id="website" 
-                  name="website"
-                  placeholder="pl. weboldalad.hu vagy www.weboldalad.hu" 
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-accent focus:border-brand-accent outline-none text-brand-900 transition-all bg-gray-50"
-                  required
-                  value={formData.website}
-                  onChange={handleChange}
-                />
-              </div>
-
-              <button 
-                type="submit" 
-                className="w-full bg-brand-accent hover:bg-brand-accentHover text-white font-bold text-lg py-4 rounded-lg shadow-lg transition-all duration-200 mt-2"
-              >
-                Beszéljünk 15 percet
-              </button>
-              {status && <p className="text-center mt-2">{status}</p>}
-              <div className="flex items-center justify-center gap-2 mt-4 p-3 bg-green-50 rounded-lg border border-green-100">
-                <Lock className="w-4 h-4 text-brand-900" />
-                <p className="text-sm font-bold text-brand-900 text-center">
-                  Az audit 100%-ban ingyenes és kötelezettségmentes.
-                </p>
-              </div>
-            </form>
+            <div className="flex-grow overflow-hidden rounded-xl border border-gray-100">
+              <Cal 
+                namespace="15perc"
+                calLink="designter/15perc"
+                style={{width:"100%", height:"100%", minHeight: "500px", overflow:"scroll"}}
+                config={{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}}
+              />
+            </div>
+            
+            <div className="flex items-center justify-center gap-2 mt-4 p-3 bg-green-50 rounded-lg border border-green-100 mx-2">
+              <Lock className="w-4 h-4 text-brand-900" />
+              <p className="text-sm font-bold text-brand-900 text-center">
+                A konzultáció 100%-ban ingyenes és kötelezettségmentes.
+              </p>
+            </div>
           </div>
 
         </div>
