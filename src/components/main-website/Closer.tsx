@@ -56,11 +56,11 @@ const Closer: React.FC = () => {
           </div>
 
           {/* Cal.com Embed */}
-          <div className="bg-white rounded-2xl p-4 md:p-6 w-full shadow-2xl text-brand-900 min-h-[600px] flex flex-col">
-            <h3 id="closer-audit-heading" className="text-2xl font-bold text-brand-900 mb-2 px-2">Beszéljünk 15 percet</h3>
-            <p className="text-gray-600 mb-6 px-2">Válassz egy neked megfelelő időpontot a lenti naptárból.</p>
+          <div className="w-full text-brand-900 min-h-[600px] flex flex-col">
+            <h3 id="closer-audit-heading" className="text-2xl font-bold text-white mb-2 px-2">Beszéljünk 15 percet</h3>
+            <p className="text-gray-300 mb-6 px-2">Válassz egy neked megfelelő időpontot a lenti naptárból.</p>
 
-            <div className="flex-grow overflow-hidden rounded-xl border border-gray-100">
+            <div className="flex-grow overflow-hidden rounded-xl border border-gray-700 bg-white">
               <Cal 
                 namespace="15perc"
                 calLink="designter/15perc"
@@ -69,9 +69,9 @@ const Closer: React.FC = () => {
               />
             </div>
             
-            <div className="flex items-center justify-center gap-2 mt-4 p-3 bg-green-50 rounded-lg border border-green-100 mx-2">
-              <Lock className="w-4 h-4 text-brand-900" />
-              <p className="text-sm font-bold text-brand-900 text-center">
+            <div className="flex items-center justify-center gap-2 mt-4 p-3 bg-green-500/10 rounded-lg border border-green-500/20 mx-2">
+              <Lock className="w-4 h-4 text-green-400" />
+              <p className="text-sm font-bold text-green-300 text-center">
                 A konzultáció 100%-ban ingyenes és kötelezettségmentes.
               </p>
             </div>
