@@ -1,5 +1,5 @@
 import React from 'react';
-import { Smile, Calendar } from 'lucide-react';
+import { Check, Calendar } from 'lucide-react';
 
 interface PricingProps {
   onCtaClick: () => void;
@@ -44,9 +44,13 @@ const Pricing: React.FC<PricingProps> = ({ onCtaClick }) => {
                   <p className="text-gray-400 text-sm font-medium tracking-wide">DESIGNTÉR KLUB</p>
                 </div>
                 
-                {/* Pause/Cancel Badge */}
-                <div className="inline-flex items-center justify-center px-4 py-2 rounded-lg border border-white/10 bg-white/5 text-[10px] font-bold tracking-[0.2em] uppercase text-gray-400 hover:bg-white/10 transition-colors cursor-default">
-                  Szüneteltetés bármikor
+                {/* Pause/Cancel Badge - Styled like Hero Badge */}
+                <div className="flex items-center gap-2 bg-green-500/10 text-green-300 px-3 py-1.5 rounded-md border border-green-500/20 text-xs font-bold">
+                   <span className="relative flex h-2 w-2">
+                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                     <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                   </span>
+                   <span>Szüneteltetés bármikor</span>
                 </div>
               </div>
 
@@ -60,49 +64,43 @@ const Pricing: React.FC<PricingProps> = ({ onCtaClick }) => {
                   <span className="text-2xl text-white font-medium">Ft</span>
                   <span className="text-xl text-gray-500 ml-2">/ hó</span>
                 </div>
-                <p className="text-sm text-gray-500 mt-2 font-medium">+ ÁFA</p>
               </div>
 
               {/* Features Box */}
-              <div className="relative z-10 bg-[#1A1E29] rounded-2xl p-8 mb-12 border border-white/5 shadow-inner">
+              <div className="relative z-10 bg-[#1A1E29]/80 rounded-2xl p-8 mb-12 border border-white/5 shadow-inner overflow-hidden">
+                 {/* Inner Glow for Features */}
+                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-brand-accent/5 blur-[80px] pointer-events-none"></div>
                  
                  {/* "INCLUDED" Tab */}
                  <div className="absolute -top-3 left-8 bg-[#2A2E39] text-[10px] font-bold tracking-widest uppercase text-gray-400 px-3 py-1 rounded shadow-sm border border-white/5">
                     Tartalmazza
                  </div>
 
-                 <div className="grid md:grid-cols-2 gap-x-12 gap-y-4 pt-2">
+                 <div className="relative z-10 grid md:grid-cols-2 gap-x-12 gap-y-5 pt-2">
                     {features.map((feature, index) => (
-                      <div key={index} className="text-gray-300 text-sm md:text-[15px] leading-relaxed font-light">
-                        {feature}
+                      <div key={index} className="flex items-start gap-3 text-gray-200 text-base md:text-lg leading-relaxed font-medium">
+                        <Check className="w-5 h-5 text-green-400 flex-shrink-0 mt-1" strokeWidth={3} />
+                        <span>{feature}</span>
                       </div>
                     ))}
                  </div>
               </div>
 
-              {/* Bottom Section: Button & Decoration */}
+              {/* Bottom Section: Button */}
               <div className="relative z-10 flex items-center justify-between mt-8">
                 
                 {/* CTA Button */}
                 <button 
                   onClick={onCtaClick}
-                  className="group relative flex items-center bg-[#FF5500] hover:bg-[#FF6611] text-white rounded-xl pl-2 pr-8 py-2 transition-all duration-300 shadow-lg hover:shadow-orange-500/20 active:scale-[0.98]"
+                  className="group relative flex items-center bg-[#FF5500] hover:bg-[#FF6611] text-white rounded-xl pl-2 pr-8 py-2 transition-all duration-300 shadow-lg hover:shadow-orange-500/20 active:scale-[0.98] w-full md:w-auto"
                 >
                   <div className="w-12 h-12 bg-black/10 rounded-lg flex items-center justify-center mr-4 backdrop-blur-sm">
                     <Calendar className="w-6 h-6 text-white" />
                   </div>
-                  <span className="text-lg font-bold tracking-wide">Beszéljünk</span>
+                  <span className="text-lg font-bold tracking-wide">Csatlakozom a DesignTér Klubhoz</span>
                 </button>
-
-                {/* Decorative Smiley Sphere */}
-                <div className="hidden md:flex absolute -bottom-20 -right-20 w-64 h-64 bg-gradient-to-br from-white/10 to-white/0 rounded-full blur-sm border border-white/5 items-center justify-center overflow-hidden">
-                    <div className="absolute inset-0 bg-[#FF5500] opacity-20 rounded-full blur-2xl"></div>
-                    <div className="relative transform -rotate-12 translate-x-[-20px] translate-y-[-20px]">
-                        <Smile className="w-32 h-32 text-[#FF5500] opacity-80 drop-shadow-[0_0_15px_rgba(255,85,0,0.5)]" strokeWidth={1.5} />
-                    </div>
-                </div>
-
               </div>
+
             </div>
           </div>
         </div>
