@@ -32,7 +32,7 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
             </div>
 
             <h1 className="text-4xl lg:text-6xl font-extrabold tracking-tight leading-tight">
-              Alakítsd a látogatóidat <span className="text-brand-accent">3x több ügyféllé</span> adatvezérelt landing oldalakkal: Korlátlan design és fejlesztés fix havidíjért, 7 napos átfutással.
+              Alakítsd a látogatóidat <span className="text-brand-accent">3x több ügyféllé</span> adatvezérelt landing oldalakkal akár 7 napon belül.
             </h1>
             
             <p className="text-lg lg:text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto">

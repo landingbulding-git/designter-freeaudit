@@ -34,7 +34,7 @@ const ProblemAgitation: React.FC<ProblemAgitationProps> = ({ onCtaClick }) => {
           onClick={onCtaClick}
           className="inline-flex items-center gap-2 bg-brand-accent hover:bg-brand-accentHover text-white text-lg font-bold py-4 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-1"
         >
-          Kérem az ingyenes auditot
+          Beszéljünk 15 percet
           <ArrowRight className="w-5 h-5" />
         </button>
       </div>

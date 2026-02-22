@@ -143,7 +143,7 @@ const Closer: React.FC = () => {
                 type="submit" 
                 className="w-full bg-brand-accent hover:bg-brand-accentHover text-white font-bold text-lg py-4 rounded-lg shadow-lg transition-all duration-200 mt-2"
               >
-                Kérem az auditot
+                Beszéljünk 15 percet
               </button>
               {status && <p className="text-center mt-2">{status}</p>}
               <div className="flex items-center justify-center gap-2 mt-4 p-3 bg-green-50 rounded-lg border border-green-100">

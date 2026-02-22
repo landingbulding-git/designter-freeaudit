@@ -20,7 +20,7 @@ const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
           onClick={onCtaClick}
           className="bg-brand-accent hover:bg-brand-accentHover text-white font-semibold py-2 px-6 rounded-full transition-colors duration-200 text-sm md:text-base"
         >
-          Ingyenes Audit
+          Beszéljünk 15 percet
         </button>
       </div>
     </nav>

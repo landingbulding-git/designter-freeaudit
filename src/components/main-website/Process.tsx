@@ -6,26 +6,20 @@ const Process: React.FC = () => {
     {
       number: "01",
       icon: <Stethoscope className="w-6 h-6 text-white" />,
-      title: "Diagnózis",
-      desc: "Megkeressük a jelenlegi weboldalad gyenge pontjait és megnézzük hirdetési kampányaidat."
+      title: "Feliratkozás",
+      desc: "Iratkozz fel a csomagunkra, és 5 perc alatt mondd el, mit szeretnél hirdetni."
     },
     {
       number: "02",
       icon: <PenTool className="w-6 h-6 text-white" />,
-      title: "Üzenet-tervezés",
-      desc: "Elemezzük a célközönségedet, majd pedig felépítjük az ellenállhatatlan ajánlatot és megírjuk a letisztult üzenetet."
+      title: "Kérés",
+      desc: "Kérj annyi landing oldalt és módosítást, amennyit csak akarsz, egyetlen gombnyomással."
     },
     {
       number: "03",
       icon: <Layout className="w-6 h-6 text-white" />,
-      title: "Implementáció",
-      desc: "Megtervezzük és elkészítjük a professzionális, konverzió-fókuszú landing oldalt."
-    },
-    {
-      number: "04",
-      icon: <LineChart className="w-6 h-6 text-white" />,
-      title: "Tesztelés & Optimalizálás",
-      desc: "Egy jó landing sosincs ''kész''. Az adatok alapján finomítjuk a rendszert a maximum profitig."
+      title: "Átvétel",
+      desc: "Kapd kézhez a konverzióra kihegyezett oldaladat átlagosan 7 napon belül."
     }
   ];
 
@@ -33,10 +27,10 @@ const Process: React.FC = () => {
     <section className="py-20 bg-brand-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
-          A profitábilis oldal 4 egyszerű lépése.
+          3 lépés választ el attól, hogy a hirdetéseid eredményesebbek legyenek, mint eddig valaha.
         </h2>
 
-        <div className="grid md:grid-cols-4 gap-8 relative">
+        <div className="grid md:grid-cols-3 gap-8 relative">
           {/* Connector Line (Desktop only) */}
           <div className="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-brand-800 -z-0 transform translate-y-4"></div>
 
