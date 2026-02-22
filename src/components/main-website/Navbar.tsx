@@ -1,11 +1,7 @@
 import React from 'react';
 import { MousePointer2 } from 'lucide-react';
 
-interface NavbarProps {
-  onCtaClick: () => void;
-}
-
-const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
+const Navbar: React.FC = () => {
 
   return (
     <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100 py-4">
@@ -17,7 +13,9 @@ const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
           <span className="text-xl font-bold tracking-tight text-brand-900">DesignTér</span>
         </div>
         <button 
-          onClick={onCtaClick}
+          data-cal-namespace="15perc"
+          data-cal-link="designter/15perc"
+          data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"dark"}'
           className="bg-brand-accent hover:bg-brand-accentHover text-white font-semibold py-2 px-6 rounded-full transition-colors duration-200 text-sm md:text-base"
         >
           Beszéljünk 15 percet

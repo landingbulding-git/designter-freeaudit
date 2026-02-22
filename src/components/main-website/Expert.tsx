@@ -1,11 +1,7 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 
-interface ExpertProps {
-  onCtaClick: () => void;
-}
-
-const Expert: React.FC<ExpertProps> = ({ onCtaClick }) => {
+const Expert: React.FC = () => {
 
   return (
     <section className="py-20 bg-white">
@@ -38,7 +34,9 @@ const Expert: React.FC<ExpertProps> = ({ onCtaClick }) => {
               </div>
               
               <button 
-                onClick={onCtaClick}
+                data-cal-namespace="15perc"
+                data-cal-link="designter/15perc"
+                data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"dark"}'
                 className="inline-flex items-center gap-2 bg-brand-accent hover:bg-brand-accentHover text-white font-bold py-3 px-6 rounded-lg shadow-md transition-all duration-200 whitespace-nowrap"
               >
                 Beszéljünk 15 percet

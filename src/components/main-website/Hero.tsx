@@ -1,11 +1,7 @@
 import React from 'react';
 import { Star, TrendingUp } from 'lucide-react';
 
-interface HeroProps {
-  onCtaClick: () => void;
-}
-
-const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
+const Hero: React.FC = () => {
 
   return (
     <section className="relative pt-12 pb-20 lg:pt-24 lg:pb-28 bg-brand-900 text-white overflow-hidden">
@@ -41,7 +37,9 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button 
-                onClick={onCtaClick}
+                data-cal-namespace="15perc"
+                data-cal-link="designter/15perc"
+                data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"dark"}'
                 className="w-full sm:w-auto bg-brand-accent hover:bg-brand-accentHover text-white text-lg font-bold py-4 px-12 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-1"
               >
                 Beszéljünk 15 percet
