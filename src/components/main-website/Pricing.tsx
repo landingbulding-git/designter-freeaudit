@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Check } from 'lucide-react';
+import { Smile, Calendar } from 'lucide-react';
 
 interface PricingProps {
   onCtaClick: () => void;
@@ -19,82 +19,90 @@ const Pricing: React.FC<PricingProps> = ({ onCtaClick }) => {
   ];
 
   return (
-    <section className="py-24 bg-brand-900 overflow-hidden relative">
-      {/* Background decoration */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-accent/20 blur-[120px] rounded-full pointer-events-none"></div>
-
+    <section className="py-24 bg-[#0B0F19] overflow-hidden relative font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <h2 className="text-3xl md:text-5xl font-bold text-center text-white mb-16">
+        <h2 className="text-3xl md:text-5xl font-bold text-center text-white mb-16 tracking-tight">
           Egyetlen előfizetés, végtelen lehetőség.
         </h2>
 
-        <div className="max-w-2xl mx-auto">
-          <div className="relative group">
-            {/* Glow effect */}
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-brand-accent to-brand-accent rounded-3xl opacity-50 blur group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
-            
-            <div className="relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-12 text-white overflow-hidden shadow-2xl">
+        <div className="max-w-3xl mx-auto">
+          {/* Main Card */}
+          <div className="relative group rounded-[3rem] p-[1px] bg-gradient-to-b from-gray-800 to-gray-900 shadow-[0_0_80px_-20px_rgba(255,100,0,0.3)]">
+             
+            {/* Orange Glow Effect behind the card */}
+            <div className="absolute -inset-1 bg-brand-accent/20 rounded-[3rem] blur-xl opacity-50 group-hover:opacity-75 transition duration-500"></div>
+
+            <div className="relative bg-[#131722] rounded-[3rem] p-8 md:p-12 h-full overflow-hidden">
               
-              {/* Header */}
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+              {/* Background gradient overlay for depth */}
+              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/5 to-transparent pointer-events-none"></div>
+
+              {/* Header Section */}
+              <div className="relative z-10 flex flex-col md:flex-row md:items-start justify-between gap-6 mb-10">
                 <div>
-                  <h3 className="text-3xl font-bold mb-1">Havi tagság</h3>
-                  <p className="text-gray-400 text-sm">Nincs rejtett költség, nincs hűségidő.</p>
+                  <h3 className="text-4xl font-bold text-white mb-2">Havi tagság</h3>
+                  <p className="text-gray-400 text-sm font-medium tracking-wide">DESIGNTÉR KLUB</p>
                 </div>
-                <div className="bg-white/10 border border-white/10 rounded-lg px-4 py-2 text-xs font-semibold tracking-wider uppercase text-brand-accent">
-                  Szüneteltetés vagy lemondás bármikor
+                
+                {/* Pause/Cancel Badge */}
+                <div className="inline-flex items-center justify-center px-4 py-2 rounded-lg border border-white/10 bg-white/5 text-[10px] font-bold tracking-[0.2em] uppercase text-gray-400 hover:bg-white/10 transition-colors cursor-default">
+                  Szüneteltetés bármikor
                 </div>
               </div>
 
-              {/* Divider */}
-              <div className="w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent border-t border-dashed border-white/20 mb-8"></div>
+              {/* Dashed Divider */}
+              <div className="relative z-10 w-full h-px border-t border-dashed border-gray-700 mb-10"></div>
 
-              {/* Price */}
-              <div className="mb-10">
-                <div className="flex items-baseline gap-2">
-                  <span className="text-5xl md:text-6xl font-black text-white">690.000 Ft</span>
-                  <span className="text-xl text-gray-400 font-medium">/ hó</span>
+              {/* Price Section */}
+              <div className="relative z-10 mb-12">
+                <div className="flex items-baseline gap-1">
+                  <span className="text-6xl md:text-7xl font-medium text-white tracking-tighter">690.000</span>
+                  <span className="text-2xl text-white font-medium">Ft</span>
+                  <span className="text-xl text-gray-500 ml-2">/ hó</span>
                 </div>
-                <p className="text-sm text-gray-400 mt-2">+ ÁFA</p>
+                <p className="text-sm text-gray-500 mt-2 font-medium">+ ÁFA</p>
               </div>
 
-              {/* Features Container */}
-              <div className="bg-brand-900/50 rounded-2xl p-6 md:p-8 border border-white/5 mb-10 relative overflow-hidden">
-                 {/* "INCLUDED" label */}
-                 <div className="absolute top-0 left-8 -translate-y-1/2 bg-brand-800 text-[10px] font-bold tracking-widest uppercase text-gray-400 px-3 py-1 rounded border border-white/10 shadow-sm">
+              {/* Features Box */}
+              <div className="relative z-10 bg-[#1A1E29] rounded-2xl p-8 mb-12 border border-white/5 shadow-inner">
+                 
+                 {/* "INCLUDED" Tab */}
+                 <div className="absolute -top-3 left-8 bg-[#2A2E39] text-[10px] font-bold tracking-widest uppercase text-gray-400 px-3 py-1 rounded shadow-sm border border-white/5">
                     Tartalmazza
                  </div>
 
-                 <div className="grid md:grid-cols-2 gap-x-8 gap-y-4 mt-2">
+                 <div className="grid md:grid-cols-2 gap-x-12 gap-y-4 pt-2">
                     {features.map((feature, index) => (
-                      <div key={index} className="flex items-start gap-3 text-gray-300 text-sm md:text-base">
-                        <Check className="w-5 h-5 text-brand-accent flex-shrink-0 mt-0.5" />
-                        <span>{feature}</span>
+                      <div key={index} className="text-gray-300 text-sm md:text-[15px] leading-relaxed font-light">
+                        {feature}
                       </div>
                     ))}
                  </div>
               </div>
 
-              {/* CTA */}
-              <button 
-                onClick={onCtaClick}
-                className="w-full sm:w-auto bg-brand-accent hover:bg-brand-accentHover text-white text-lg font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-3 group/btn"
-              >
-                <span>Beszéljünk 15 percet</span>
-                <ArrowRight className="w-5 h-5 transition-transform group-hover/btn:translate-x-1" />
-              </button>
+              {/* Bottom Section: Button & Decoration */}
+              <div className="relative z-10 flex items-center justify-between mt-8">
+                
+                {/* CTA Button */}
+                <button 
+                  onClick={onCtaClick}
+                  className="group relative flex items-center bg-[#FF5500] hover:bg-[#FF6611] text-white rounded-xl pl-2 pr-8 py-2 transition-all duration-300 shadow-lg hover:shadow-orange-500/20 active:scale-[0.98]"
+                >
+                  <div className="w-12 h-12 bg-black/10 rounded-lg flex items-center justify-center mr-4 backdrop-blur-sm">
+                    <Calendar className="w-6 h-6 text-white" />
+                  </div>
+                  <span className="text-lg font-bold tracking-wide">Beszéljünk</span>
+                </button>
 
-              {/* Decorative Element - Bottom Right */}
-              <div className="absolute -bottom-12 -right-12 w-48 h-48 bg-brand-accent/20 rounded-full blur-3xl pointer-events-none"></div>
-              <div className="absolute bottom-6 right-6 opacity-20 pointer-events-none hidden md:block">
-                  <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-brand-accent">
-                    <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" strokeWidth="1.5"/>
-                    <path d="M8 14C8 14 9.5 16 12 16C14.5 16 16 14 16 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M9 9H9.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M15 9H15.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
+                {/* Decorative Smiley Sphere */}
+                <div className="hidden md:flex absolute -bottom-20 -right-20 w-64 h-64 bg-gradient-to-br from-white/10 to-white/0 rounded-full blur-sm border border-white/5 items-center justify-center overflow-hidden">
+                    <div className="absolute inset-0 bg-[#FF5500] opacity-20 rounded-full blur-2xl"></div>
+                    <div className="relative transform -rotate-12 translate-x-[-20px] translate-y-[-20px]">
+                        <Smile className="w-32 h-32 text-[#FF5500] opacity-80 drop-shadow-[0_0_15px_rgba(255,85,0,0.5)]" strokeWidth={1.5} />
+                    </div>
+                </div>
+
               </div>
-
             </div>
           </div>
         </div>
