@@ -9,6 +9,7 @@ import Testimonials from './Testimonials';
 import Pricing from './Pricing';
 import FAQ from './FAQ';
 import Closer from './Closer';
+import Footer from './Footer';
 
 const HomePageContent: React.FC = () => {
   const scrollToCloserAudit = () => {
