@@ -6,7 +6,7 @@ const Closer: React.FC = () => {
   useEffect(() => {
     (async function () {
       const cal = await getCalApi({"namespace":"15perc"});
-      cal("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
+      cal("ui", {"theme":"light","hideEventTypeDetails":false,"layout":"week_view"});
     })();
   }, []);
   
@@ -65,7 +65,7 @@ const Closer: React.FC = () => {
                 namespace="15perc"
                 calLink="designter/15perc"
                 style={{width:"100%", height:"100%", minHeight: "500px", overflow:"scroll"}}
-                config={{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}}
+                config={{"layout":"week_view","useSlotsViewOnSmallScreen":"true","theme":"light"}}
               />
             </div>
             
