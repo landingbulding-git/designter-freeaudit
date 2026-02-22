@@ -101,7 +101,7 @@ const Pricing: React.FC<PricingProps> = ({ onCtaClick }) => {
               </div>
 
               {/* Bottom Section: Centered Button */}
-              <div className="relative z-10 flex flex-col items-center mt-8">
+              <div className="relative z-10 flex flex-col items-center mt-8 space-y-6">
                 
                 {/* CTA Button */}
                 <button 
@@ -113,6 +113,22 @@ const Pricing: React.FC<PricingProps> = ({ onCtaClick }) => {
                   </div>
                   <span className="text-lg font-bold tracking-wide">Csatlakozom a DesignTér Klubhoz</span>
                 </button>
+
+                {/* Risk Reducing Labels */}
+                <div className="flex flex-col items-center space-y-3 text-center w-full">
+                   <div className="flex flex-col items-center p-3 rounded-lg bg-green-500/10 border border-green-500/20 w-full">
+                      <span className="text-green-400 font-bold text-sm uppercase tracking-wide mb-1">30 napos tesztidőszak</span>
+                      <p className="text-gray-400 text-xs leading-snug max-w-sm">
+                        Ha egy hónap után nem látod az értéket, a befizetett összeg felét azonnal visszautaljuk.
+                      </p>
+                   </div>
+                   
+                   <div className="flex items-center gap-2 text-gray-500 text-xs font-medium">
+                      <div className="w-1.5 h-1.5 rounded-full bg-gray-600"></div>
+                      <span>Bármikor szüneteltetheted vagy lemondhatod</span>
+                      <div className="w-1.5 h-1.5 rounded-full bg-gray-600"></div>
+                   </div>
+                </div>
               </div>
             </div>
           </div>
