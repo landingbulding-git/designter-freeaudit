@@ -6,9 +6,9 @@ import ValueProps from './ValueProps';
 import Process from './Process';
 import Expert from './Expert';
 import Testimonials from './Testimonials';
+import Pricing from './Pricing';
 import FAQ from './FAQ';
 import Closer from './Closer';
-import Footer from './Footer';
 
 const HomePageContent: React.FC = () => {
   const scrollToCloserAudit = () => {
@@ -28,6 +28,7 @@ const HomePageContent: React.FC = () => {
         <Process />
         <ValueProps />
         <Expert onCtaClick={scrollToCloserAudit} />
+        <Pricing onCtaClick={scrollToCloserAudit} />
         <FAQ />
         <Closer />
       </main>
