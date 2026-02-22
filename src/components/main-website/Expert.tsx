@@ -33,15 +33,15 @@ const Expert: React.FC = () => {
                 <p className="text-sm text-gray-500">Tulajdonos</p>
               </div>
               
-              <button 
-                data-cal-namespace="15perc"
-                data-cal-link="designter/15perc"
-                data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"dark"}'
+              <a 
+                href="https://cal.com/designter/15perc"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-brand-accent hover:bg-brand-accentHover text-white font-bold py-3 px-6 rounded-lg shadow-md transition-all duration-200 whitespace-nowrap"
               >
                 Beszéljünk 15 percet
                 <ArrowRight className="w-4 h-4" />
-              </button>
+              </a>
             </div>
           </div>
 

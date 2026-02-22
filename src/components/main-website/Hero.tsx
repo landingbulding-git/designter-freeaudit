@@ -36,14 +36,14 @@ const Hero: React.FC = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button 
-                data-cal-namespace="15perc"
-                data-cal-link="designter/15perc"
-                data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"dark"}'
-                className="w-full sm:w-auto bg-brand-accent hover:bg-brand-accentHover text-white text-lg font-bold py-4 px-12 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-1"
+              <a 
+                href="https://cal.com/designter/15perc"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto bg-brand-accent hover:bg-brand-accentHover text-white text-lg font-bold py-4 px-12 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-1 inline-block text-center"
               >
                 Beszéljünk 15 percet
-              </button>
+              </a>
             </div>
             
             <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4 sm:gap-3 text-sm font-medium mt-2">

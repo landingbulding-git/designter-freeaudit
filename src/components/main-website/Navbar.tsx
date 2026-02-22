@@ -12,14 +12,14 @@ const Navbar: React.FC = () => {
           </div>
           <span className="text-xl font-bold tracking-tight text-brand-900">DesignTér</span>
         </div>
-        <button 
-          data-cal-namespace="15perc"
-          data-cal-link="designter/15perc"
-          data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"dark"}'
+        <a 
+          href="https://cal.com/designter/15perc"
+          target="_blank"
+          rel="noopener noreferrer"
           className="bg-brand-accent hover:bg-brand-accentHover text-white font-semibold py-2 px-6 rounded-full transition-colors duration-200 text-sm md:text-base"
         >
           Beszéljünk 15 percet
-        </button>
+        </a>
       </div>
     </nav>
   );

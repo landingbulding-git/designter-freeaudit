@@ -26,15 +26,15 @@ const ProblemAgitation: React.FC = () => {
           </p>
         </div>
 
-        <button 
-          data-cal-namespace="15perc"
-          data-cal-link="designter/15perc"
-          data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"dark"}'
+        <a 
+          href="https://cal.com/designter/15perc"
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-flex items-center gap-2 bg-brand-accent hover:bg-brand-accentHover text-white text-lg font-bold py-4 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-1"
         >
           Beszéljünk 15 percet
           <ArrowRight className="w-5 h-5" />
-        </button>
+        </a>
       </div>
     </section>
   );

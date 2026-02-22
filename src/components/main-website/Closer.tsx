@@ -44,14 +44,14 @@ const Closer: React.FC = () => {
         </div>
 
         <div className="flex flex-col items-center gap-4">
-          <button 
-            data-cal-namespace="15perc"
-            data-cal-link="designter/15perc"
-            data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"dark"}'
-            className="w-full sm:w-auto bg-brand-accent hover:bg-brand-accentHover text-white font-bold text-lg py-4 px-12 rounded-lg shadow-lg transition-all duration-200"
+          <a 
+            href="https://cal.com/designter/15perc"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full sm:w-auto bg-brand-accent hover:bg-brand-accentHover text-white font-bold text-lg py-4 px-12 rounded-lg shadow-lg transition-all duration-200 inline-block text-center"
           >
             Beszéljünk 15 percet
-          </button>
+          </a>
           
           <div className="flex items-center justify-center gap-2 mt-2 p-3 bg-green-500/10 rounded-lg border border-green-500/20">
             <Lock className="w-4 h-4 text-green-400" />
