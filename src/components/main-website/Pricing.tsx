@@ -27,10 +27,10 @@ const Pricing: React.FC<PricingProps> = ({ onCtaClick }) => {
 
         <div className="max-w-3xl mx-auto">
           {/* Main Card */}
-          <div className="relative group rounded-[3rem] p-[1px] bg-gradient-to-b from-gray-800 to-gray-900 shadow-[0_0_80px_-20px_rgba(255,100,0,0.3)]">
+          <div className="relative group rounded-[3rem] p-[1px] bg-gradient-to-b from-gray-800 to-gray-900 shadow-[0_0_80px_-20px_rgba(255,255,255,0.1)]">
              
-            {/* Orange Glow Effect behind the card */}
-            <div className="absolute -inset-1 bg-brand-accent/20 rounded-[3rem] blur-xl opacity-50 group-hover:opacity-75 transition duration-500"></div>
+            {/* Soft White Glow Effect behind the card */}
+            <div className="absolute -inset-1 bg-white/5 rounded-[3rem] blur-2xl opacity-50 group-hover:opacity-75 transition duration-500"></div>
 
             <div className="relative bg-[#131722] rounded-[3rem] p-8 md:p-12 h-full overflow-hidden">
               
@@ -38,14 +38,15 @@ const Pricing: React.FC<PricingProps> = ({ onCtaClick }) => {
               <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/5 to-transparent pointer-events-none"></div>
 
               {/* Header Section */}
-              <div className="relative z-10 flex flex-col md:flex-row md:items-start justify-between gap-6 mb-10">
+              <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
                 <div>
-                  <h3 className="text-4xl font-bold text-white mb-2">Havi tagság</h3>
-                  <p className="text-gray-400 text-sm font-medium tracking-wide">DESIGNTÉR KLUB</p>
+                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 uppercase tracking-tight">
+                    DESIGNTÉR KLUB HAVI TAGSÁG
+                  </h3>
                 </div>
                 
                 {/* Pause/Cancel Badge - Styled like Hero Badge */}
-                <div className="flex items-center gap-2 bg-green-500/10 text-green-300 px-3 py-1.5 rounded-md border border-green-500/20 text-xs font-bold">
+                <div className="flex items-center gap-2 bg-green-500/10 text-green-300 px-3 py-1.5 rounded-md border border-green-500/20 text-xs font-bold whitespace-nowrap">
                    <span className="relative flex h-2 w-2">
                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                      <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
@@ -67,16 +68,16 @@ const Pricing: React.FC<PricingProps> = ({ onCtaClick }) => {
               </div>
 
               {/* Features Box */}
-              <div className="relative z-10 bg-[#1A1E29]/80 rounded-2xl p-8 mb-12 border border-white/5 shadow-inner overflow-hidden">
-                 {/* Inner Glow for Features */}
-                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-brand-accent/5 blur-[80px] pointer-events-none"></div>
+              <div className="relative z-10 bg-[#1A1E29]/80 rounded-2xl p-8 mb-12 border border-white/5 shadow-inner">
+                 {/* Soft White Inner Glow for Features */}
+                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-white/5 blur-[80px] pointer-events-none"></div>
                  
                  {/* "INCLUDED" Tab */}
-                 <div className="absolute -top-3 left-8 bg-[#2A2E39] text-[10px] font-bold tracking-widest uppercase text-gray-400 px-3 py-1 rounded shadow-sm border border-white/5">
+                 <div className="absolute -top-3 left-8 bg-[#2A2E39] text-[10px] font-bold tracking-widest uppercase text-gray-400 px-3 py-1 rounded shadow-sm border border-white/5 z-20">
                     Tartalmazza
                  </div>
 
-                 <div className="relative z-10 grid md:grid-cols-2 gap-x-12 gap-y-5 pt-2">
+                 <div className="relative z-10 grid md:grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-5 pt-2">
                     {features.map((feature, index) => (
                       <div key={index} className="flex items-start gap-3 text-gray-200 text-base md:text-lg leading-relaxed font-medium">
                         <Check className="w-5 h-5 text-green-400 flex-shrink-0 mt-1" strokeWidth={3} />
@@ -86,13 +87,13 @@ const Pricing: React.FC<PricingProps> = ({ onCtaClick }) => {
                  </div>
               </div>
 
-              {/* Bottom Section: Button */}
-              <div className="relative z-10 flex items-center justify-between mt-8">
+              {/* Bottom Section: Centered Button */}
+              <div className="relative z-10 flex flex-col items-center mt-8">
                 
                 {/* CTA Button */}
                 <button 
                   onClick={onCtaClick}
-                  className="group relative flex items-center bg-[#FF5500] hover:bg-[#FF6611] text-white rounded-xl pl-2 pr-8 py-2 transition-all duration-300 shadow-lg hover:shadow-orange-500/20 active:scale-[0.98] w-full md:w-auto"
+                  className="group relative flex items-center bg-[#FF5500] hover:bg-[#FF6611] text-white rounded-xl pl-2 pr-8 py-2 transition-all duration-300 shadow-lg hover:shadow-orange-500/20 active:scale-[0.98] w-full sm:w-auto"
                 >
                   <div className="w-12 h-12 bg-black/10 rounded-lg flex items-center justify-center mr-4 backdrop-blur-sm">
                     <Calendar className="w-6 h-6 text-white" />
