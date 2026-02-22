@@ -14,13 +14,13 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-500 opacity-10 blur-3xl rounded-full transform -translate-x-1/2 translate-y-1/2"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+        <div className="flex flex-col items-center gap-12 lg:gap-16">
           
           {/* Text Content */}
-          <div className="flex flex-col space-y-8 text-center lg:text-left">
+          <div className="flex flex-col space-y-8 text-center items-center max-w-4xl">
             
             {/* Social Proof Badge */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 text-sm font-medium text-gray-300 bg-brand-800 w-fit mx-auto lg:mx-0 px-4 py-2 rounded-full border border-brand-700">
+            <div className="flex flex-wrap items-center justify-center gap-4 text-sm font-medium text-gray-300 bg-brand-800 w-fit mx-auto px-4 py-2 rounded-full border border-brand-700">
               <div className="flex items-center text-yellow-500">
                 <Star className="w-4 h-4 fill-current" />
                 <Star className="w-4 h-4 fill-current" />
@@ -32,21 +32,23 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
             </div>
 
             <h1 className="text-4xl lg:text-6xl font-extrabold tracking-tight leading-tight">
-            Tudd meg 48 órán belül, hogyan szerezz <span className="text-brand-accent">3x több vásárlót</span> anélkül, hogy többet költenél marketingre.</h1>
+              Alakítsd a látogatóidat <span className="text-brand-accent">3x több ügyféllé</span> adatvezérelt landing oldalakkal: Korlátlan design és fejlesztés fix havidíjért, 7 napos átfutással.
+            </h1>
             
-            <p className="text-lg lg:text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto lg:mx-0 min-h-[6rem]">
-Hiába küldesz látogatókat az oldaladra drága hirdetésekkel, ha a kattintásokból végül nem lesz üzlet. Adatvezérelt oldakat készítünk, hogy a hirdetéseid végre ne költséget, hanem profitot termeljenek neked.            </p>
+            <p className="text-lg lg:text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto">
+              A rossz weboldal drága mulatság. Adatokra alapozva olyan magas konverziójú oldalakat építünk, amik maximalizálják a megtérülésed. Fix havi díjért annyi landing oldalt és módosítást kérhetsz, amennyire a skálázáshoz szükséged van.
+            </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button 
                 onClick={onCtaClick}
-                className="w-full sm:w-auto bg-brand-accent hover:bg-brand-accentHover text-white text-lg font-bold py-4 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-1"
+                className="w-full sm:w-auto bg-brand-accent hover:bg-brand-accentHover text-white text-lg font-bold py-4 px-12 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-1"
               >
-                Nézd meg, hol veszítesz jelenleg pénzt
+                Beszéljünk 15 percet
               </button>
             </div>
             
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 text-sm font-medium mt-2">
+            <div className="flex flex-wrap items-center justify-center gap-3 text-sm font-medium mt-2">
                <div className="flex items-center gap-2 bg-green-500/10 text-green-300 px-3 py-1.5 rounded-md border border-green-500/20">
                    <span className="relative flex h-2.5 w-2.5">
                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -64,7 +66,7 @@ Hiába küldesz látogatókat az oldaladra drága hirdetésekkel, ha a kattintá
           </div>
 
           {/* Visual Strategy */}
-          <div className="relative">
+          <div className="relative w-full max-w-4xl mx-auto">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-brand-accent/20 border border-brand-700 bg-brand-800/50 backdrop-blur-sm">
                {/* Concept: Before/After Infographic */}
                <div className="grid grid-cols-2">
