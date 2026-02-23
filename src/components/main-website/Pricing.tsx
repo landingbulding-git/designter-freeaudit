@@ -40,7 +40,7 @@ const Pricing: React.FC<PricingProps> = ({ onCtaClick }) => {
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-start">
           
           {/* Main Card */}
-          <div className="relative group rounded-[3rem] p-[1px] bg-gradient-to-b from-gray-800 to-gray-900 shadow-[0_0_80px_-20px_rgba(255,255,255,0.1)] order-1 lg:order-2">
+          <div className="relative group rounded-[3rem] p-[1px] bg-gradient-to-b from-gray-800 to-gray-900 shadow-[0_0_80px_-20px_rgba(255,255,255,0.1)] order-2 lg:order-2">
              
             {/* Soft White Glow Effect behind the card */}
             <div className="absolute -inset-1 bg-white/5 rounded-[3rem] blur-2xl opacity-50 group-hover:opacity-75 transition duration-500"></div>
@@ -134,7 +134,7 @@ const Pricing: React.FC<PricingProps> = ({ onCtaClick }) => {
           </div>
 
           {/* Comparison Card */}
-          <div className="order-2 lg:order-1 flex flex-col justify-center h-full py-8 lg:py-12 px-6">
+          <div className="order-1 lg:order-1 flex flex-col justify-center h-full py-8 lg:py-12 px-6">
             <h3 className="text-2xl font-bold text-gray-400 mb-8 uppercase tracking-wide">
               A piacon elérhető szabadúszók és ügynökségek
             </h3>
