@@ -40,20 +40,20 @@ const { title, description } = Astro.props;
 		<link rel="dns-prefetch" href="https://xa5228yhxohqyplr.public.blob.vercel-storage.com">
 
 		<title>{title}</title>
-		<meta name="description" content={description || "Ingyenes, adatvezérelt weboldal audit."} />
+		<meta name="description" content={description || "Előfizetéses landing page készítés: korlátlan kérés, gyors átfutás és konverzió optimalizált design. 30 napos tesztidőszak."} />
 		
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content={Astro.url.href} />
 		<meta property="og:title" content={title} />
-		<meta property="og:description" content={description} />
+		<meta property="og:description" content={description || "Előfizetéses landing page készítés: korlátlan kérés, gyors átfutás és konverzió optimalizált design."} />
 		<meta property="og:image" content="https://xa5228yhxohqyplr.public.blob.vercel-storage.com/og-image-landing.png" />
 
 		<!-- Twitter -->
 		<meta property="twitter:card" content="summary_large_image" />
 		<meta property="twitter:url" content={Astro.url.href} />
 		<meta property="twitter:title" content={title} />
-		<meta property="twitter:description" content={description} />
+		<meta property="twitter:description" content={description || "Előfizetéses landing page készítés: korlátlan kérés, gyors átfutás és konverzió optimalizált design."} />
 		<meta property="twitter:image" content="https://xa5228yhxohqyplr.public.blob.vercel-storage.com/og-image-landing.png" />
 	</head>
 	<body>
