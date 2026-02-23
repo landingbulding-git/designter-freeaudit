@@ -73,8 +73,8 @@ const Hero: React.FC = () => {
             </div>
           </div>
 
-          {/* Visual Strategy - Hidden on mobile/tablet to ensure CTA is above fold */}
-          <div className="relative w-full max-w-4xl mx-auto hidden lg:block mt-4">
+          {/* Visual Strategy */}
+          <div className="relative w-full max-w-4xl mx-auto mt-4">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-brand-accent/20 border border-brand-700 bg-brand-800/50 backdrop-blur-sm">
                {/* Concept: Before/After Infographic */}
                <div className="grid grid-cols-2">
