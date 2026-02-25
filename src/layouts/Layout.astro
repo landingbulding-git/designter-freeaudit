@@ -59,10 +59,12 @@ const { title, description } = Astro.props;
 		<!-- Formbricks -->
 		<script>
 			import formbricks from "@formbricks/js";
-			formbricks.init({
-				environmentId: "cmm2cqqk3000ap101v2lahxx2",
-				apiHost: "http://157.230.218.65:3000",
-			});
+			if (typeof window !== "undefined") {
+				formbricks.setup({
+					environmentId: "cmm2cqqk3000ap101v2lahxx2",
+					appUrl: "http://157.230.218.65:3000",
+				});
+			}
 		</script>
 	</head>
 	<body>
