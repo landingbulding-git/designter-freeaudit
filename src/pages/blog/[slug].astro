@@ -306,11 +306,23 @@ const description = post.description;
       background-color: transparent !important;
       border: none !important;
       color-scheme: light; /* Helps Formbricks know to stay transparent/light */
+      max-width: 100%;
+      height: auto;
+      min-height: 400px; /* Give it enough space to render but not infinite */
     }
     
-    /* Target Formbricks specific container if it exists */
-    #formbricks-container {
+    /* Target Formbricks specific elements to remove background and extra spacing */
+    div#formbricks-container, 
+    div#formbricks-container > iframe,
+    .formbricks-form-container {
       background-color: transparent !important;
+      background: transparent !important;
+    }
+
+    /* Remove extra margins from the embed container if it's nested in prose */
+    .prose > div:has(iframe) {
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
     }
   </style>
 </Layout>
