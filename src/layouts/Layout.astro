@@ -55,6 +55,15 @@ const { title, description } = Astro.props;
 		<meta property="twitter:title" content={title} />
 		<meta property="twitter:description" content={description || "Előfizetéses landing page készítés: korlátlan kérés, gyors átfutás és konverzió optimalizált design."} />
 		<meta property="twitter:image" content="https://xa5228yhxohqyplr.public.blob.vercel-storage.com/og-image-landing.png" />
+
+		<!-- Formbricks -->
+		<script>
+			import formbricks from "@formbricks/js";
+			formbricks.init({
+				environmentId: "cmm2cqqk3000ap101v2lahxx2",
+				apiHost: "http://157.230.218.65:3000",
+			});
+		</script>
 	</head>
 	<body>
 		<slot />
