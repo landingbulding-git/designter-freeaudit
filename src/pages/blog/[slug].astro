@@ -27,7 +27,15 @@ if (post.type === 'Audit') {
   // 2. Embed HTML blocks
   $('pre code.language-html').each((i, el) => {
     const rawHtml = $(el).text();
-    $(el).parent().replaceWith(rawHtml);
+    const $embedded = $(`<div class="my-12 w-full flex justify-center overflow-hidden rounded-2xl">${rawHtml}</div>`);
+    
+    // Find iframes in the embedded HTML and make them transparent
+    $embedded.find('iframe').each((j, iframe) => {
+      $(iframe).attr('style', ($(iframe).attr('style') || '') + '; background: transparent !important; border: none !important;');
+      $(iframe).attr('allowtransparency', 'true');
+    });
+
+    $(el).parent().replaceWith($embedded);
   });
 
   // 4. Extract reading time
