@@ -4,9 +4,11 @@ import { getPublishedBlogPosts } from '../../lib/notion';
 import { Image } from 'astro:assets';
 import { MousePointer2 } from 'lucide-react';
 
-const posts = (await getPublishedBlogPosts()).sort((a, b) => 
-  new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime()
-);
+const posts = (await getPublishedBlogPosts())
+  .filter(post => post.type !== 'Audit')
+  .sort((a, b) => 
+    new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime()
+  );
 
 const title = "DesignTér Blog - Landing Page Készítés & Design Tippek";
 const description = "Olvass szakmai cikkeket landing page készítésről, UX designról és konverzió optimalizálásról.";
