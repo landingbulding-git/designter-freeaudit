@@ -27,15 +27,7 @@ if (post.type === 'Audit') {
   // 2. Embed HTML blocks
   $('pre code.language-html').each((i, el) => {
     const rawHtml = $(el).text();
-    const $embedded = $(`<div class="my-12 w-full flex justify-center overflow-hidden rounded-2xl">${rawHtml}</div>`);
-    
-    // Find iframes in the embedded HTML and make them transparent
-    $embedded.find('iframe').each((j, iframe) => {
-      $(iframe).attr('style', ($(iframe).attr('style') || '') + '; background: transparent !important; border: none !important;');
-      $(iframe).attr('allowtransparency', 'true');
-    });
-
-    $(el).parent().replaceWith($embedded);
+    $(el).parent().replaceWith(rawHtml);
   });
 
   // 4. Extract reading time
@@ -307,4 +299,18 @@ const description = post.description;
   ) : (
     <DefaultCloser client:visible />
   )}
+
+  <style is:global>
+    /* Ensure any embedded forms/iframes (like Formbricks) have a transparent background */
+    .prose iframe {
+      background-color: transparent !important;
+      border: none !important;
+      color-scheme: light; /* Helps Formbricks know to stay transparent/light */
+    }
+    
+    /* Target Formbricks specific container if it exists */
+    #formbricks-container {
+      background-color: transparent !important;
+    }
+  </style>
 </Layout>
