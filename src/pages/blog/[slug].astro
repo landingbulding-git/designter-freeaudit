@@ -20,6 +20,7 @@ const contentHtml = await marked.parse(post.content || '');
 
 // Process HTML to optimize images using Astro's getImage
 const $ = load(contentHtml);
+let customReadingTime = null;
 
 if (post.type === 'Audit') {
   // 2. Embed HTML blocks
@@ -28,11 +29,12 @@ if (post.type === 'Audit') {
     $(el).parent().replaceWith(rawHtml);
   });
 
-  // 4. Highlight reading time
+  // 4. Extract reading time
   $('p').each((i, el) => {
     const text = $(el).text();
     if (text.includes('Olvasási idő:')) {
-      $(el).replaceWith(`<div class="inline-flex items-center gap-2 bg-brand-accent/10 text-brand-900 font-medium px-4 py-2 rounded-full text-sm mb-6">${text}</div>`);
+      customReadingTime = text;
+      $(el).remove();
     }
   });
 
@@ -62,7 +64,7 @@ if (post.type === 'Audit') {
        $img = $('img').last(); 
     }
 
-    const $signatureContainer = $('<div class="not-prose mt-16 p-8 bg-gray-50 rounded-3xl flex flex-col sm:flex-row items-center sm:items-start gap-6 border border-gray-100 shadow-sm w-full max-w-2xl"></div>');
+    const $signatureContainer = $('<div class="not-prose mt-8 mb-16 p-8 bg-gray-50 rounded-3xl flex flex-col sm:flex-row items-center sm:items-start gap-6 border border-gray-100 shadow-sm w-full max-w-2xl"></div>');
     const $signatureContent = $('<div class="flex flex-col items-center sm:items-start text-center sm:text-left w-full"></div>');
 
     if ($img.length) {
@@ -97,7 +99,21 @@ if (post.type === 'Audit') {
     }
 
     $signatureContainer.append($signatureContent);
-    $('body').append($signatureContainer);
+    
+    // Move signature below the specific intro sentence
+    let $introSentence = null;
+    $('p, strong').each((i, el) => {
+      if ($(el).text().includes('vizuális prototípust is kifejezetten nektek')) {
+        $introSentence = $(el).closest('p');
+        return false;
+      }
+    });
+
+    if ($introSentence && $introSentence.length) {
+      $signatureContainer.insertAfter($introSentence);
+    } else {
+      $('body').append($signatureContainer);
+    }
   }
 
   // 6. Format FAQ Toggles (H3 followed by indented text parsed as code block)
@@ -195,7 +211,7 @@ const description = post.description;
   <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <article>
       <header class={`mb-8 ${post.type === 'Audit' ? 'text-left' : 'text-center'}`}>
-        <div class={`flex items-center ${post.type === 'Audit' ? 'justify-start' : 'justify-center'} gap-2 text-sm text-gray-500 mb-4`}>
+        <div class={`flex items-center ${post.type === 'Audit' ? 'justify-start' : 'justify-center'} gap-4 text-sm text-gray-500 mb-4`}>
           <time datetime={post.publishedDate.toISOString()}>
             {post.publishedDate.toLocaleDateString('hu-HU', { 
               year: 'numeric', 
@@ -203,11 +219,17 @@ const description = post.description;
               day: 'numeric' 
             })}
           </time>
-          {post.type !== 'Audit' && (
+          {post.type !== 'Audit' ? (
             <>
               <span>•</span>
               <span>{Math.ceil(post.content.split(' ').length / 200)} perc olvasás</span>
             </>
+          ) : (
+            customReadingTime && (
+              <span class="bg-brand-accent/10 text-brand-900 font-medium px-3 py-1 rounded-full text-xs">
+                {customReadingTime}
+              </span>
+            )
           )}
         </div>
         <h1 class={`text-3xl md:text-5xl font-extrabold text-brand-900 mb-6 leading-tight ${post.type === 'Audit' ? 'text-left' : ''}`}>
