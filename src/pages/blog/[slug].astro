@@ -99,6 +99,35 @@ if (post.type === 'Audit') {
     $signatureContainer.append($signatureContent);
     $('body').append($signatureContainer);
   }
+
+  // 6. Format FAQ Toggles (H3 followed by indented text parsed as code block)
+  $('h3').each((i, el) => {
+    const $h3 = $(el);
+    const $next = $h3.next();
+    
+    // Check if the next element is a code block
+    if ($next.is('pre') && $next.find('code').length > 0) {
+      const questionHtml = $h3.html();
+      const answerText = $next.find('code').text().trim();
+      
+      const $details = $(`
+        <details class="group bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-4 cursor-pointer [&_summary::-webkit-details-marker]:hidden not-prose">
+          <summary class="flex items-center justify-between font-bold text-lg text-brand-900 list-none hover:text-brand-accent transition-colors outline-none">
+            <span class="pr-4">${questionHtml}</span>
+            <span class="flex-shrink-0 transition-transform duration-300 group-open:-rotate-180 bg-gray-50 p-2 rounded-full group-hover:bg-brand-50">
+              <svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="20" class="text-brand-accent"><path d="M6 9l6 6 6-6"></path></svg>
+            </span>
+          </summary>
+          <div class="text-gray-600 mt-4 leading-relaxed pl-2 border-l-2 border-brand-accent/20">
+            ${answerText}
+          </div>
+        </details>
+      `);
+      
+      $h3.replaceWith($details);
+      $next.remove();
+    }
+  });
 }
 
 const imgElements = $('img');
