@@ -77,10 +77,9 @@ if (post.type === 'Audit') {
       $img.remove(); // Remove original
     }
 
-    const $contentWrapper = $('<div class="flex flex-col w-full gap-6"></div>');
-    const $topRow = $('<div class="flex flex-col lg:flex-row lg:items-center justify-between w-full gap-6"></div>');
+    const $contentWrapper = $('<div class="flex flex-col lg:flex-row lg:items-center justify-between w-full gap-6"></div>');
     const $textWrapper = $('<div class="flex flex-col items-center sm:items-start text-center sm:text-left"></div>');
-    const $buttonWrapper = $('<div class="flex flex-col items-center lg:items-end w-full lg:w-auto"></div>');
+    const $rightColumn = $('<div class="flex flex-col items-center lg:items-end gap-3 w-full lg:w-auto"></div>');
 
     if ($name) {
       $name.addClass('text-2xl font-bold text-gray-900 mb-1 mt-0');
@@ -97,16 +96,13 @@ if (post.type === 'Audit') {
       const $a = $button.find('a').length ? $button.find('a') : $button;
       $a.addClass('inline-flex justify-center items-center w-full lg:w-auto bg-brand-accent text-white font-semibold px-8 py-3.5 rounded-xl hover:bg-brand-900 transition-colors shadow-sm decoration-transparent');
       if ($button.is('p') && $button.find('a').length) {
-        $buttonWrapper.append($a.clone());
+        $rightColumn.append($a.clone());
         $button.remove();
       } else {
-        $buttonWrapper.append($a.clone());
+        $rightColumn.append($a.clone());
         $button.remove();
       }
     }
-
-    $topRow.append($textWrapper);
-    $topRow.append($buttonWrapper);
 
     // Add the highlighted free consultation text with light mode friendly green colors
     const $guarantee = $(`
@@ -116,8 +112,10 @@ if (post.type === 'Audit') {
       </div>
     `);
 
-    $contentWrapper.append($topRow);
-    $contentWrapper.append($guarantee);
+    $rightColumn.append($guarantee);
+
+    $contentWrapper.append($textWrapper);
+    $contentWrapper.append($rightColumn);
     
     $signatureInner.append($contentWrapper);
     $signatureContainer.append($signatureInner);
