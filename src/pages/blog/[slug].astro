@@ -295,10 +295,17 @@ const description = post.description;
     .prose iframe {
       background-color: transparent !important;
       border: none !important;
-      color-scheme: light; /* Helps Formbricks know to stay transparent/light */
+      color-scheme: light;
       max-width: 100%;
-      min-height: 400px; /* Give it enough space to render but not infinite */
-      overflow: hidden; /* Prevent internal scrollbars */
+      min-height: 450px; 
+      width: 100%;
+      overflow: hidden;
+    }
+
+    @media (max-width: 640px) {
+      .prose iframe {
+        min-height: 550px; /* Larger fallback for mobile */
+      }
     }
     
     /* Target Formbricks specific elements to remove background and extra spacing */
@@ -309,41 +316,56 @@ const description = post.description;
       background: transparent !important;
     }
 
-    /* Remove extra margins from the embed container if it's nested in prose */
-    .prose > div:has(iframe) {
-      margin-top: 0 !important;
-      margin-bottom: 0 !important;
+    /* Ensure the container injected from Notion doesn't restrict height */
+    .prose div:has(> iframe) {
+      height: auto !important;
+      min-height: min-content !important;
+      overflow: visible !important;
     }
   </style>
 
   <script is:inline>
-    // Listen for height messages from Formbricks iframes
+    // Robust listener for height messages from Formbricks
     window.addEventListener('message', (event) => {
-      // Check if the message is from your Formbricks instance
+      // Security: Only listen to your own form domain
       if (!event.origin.includes('form.designter.hu')) return;
       
       try {
         const data = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
         
-        if (data && (data.type === 'formbricks-height' || data.height)) {
-          const height = data.height || data.data?.height;
-          if (!height) return;
+        // Formbricks sends height in various message types
+        const height = data.height || 
+                       (data.data && data.data.height) || 
+                       (data.payload && data.payload.height);
 
+        if (height && height > 0) {
           const iframes = document.querySelectorAll('iframe');
           for (const iframe of iframes) {
-            // Identify the correct iframe by checking its contentWindow
-            if (iframe.contentWindow === event.source) {
-              // Add a small buffer to prevent cutting off shadows/borders
-              iframe.style.setProperty('height', (height + 20) + 'px', 'important');
-              // Ensure scrolling is disabled on the iframe itself
+            // Check if this is the iframe that sent the message
+            if (iframe.contentWindow === event.source || iframe.src.includes(event.origin)) {
+              // Apply height with a generous buffer for mobile (60px)
+              const newHeight = (height + 60) + 'px';
+              iframe.style.setProperty('height', newHeight, 'important');
+              
+              // Force parent containers to expand
+              let parent = iframe.parentElement;
+              while (parent && parent !== document.body) {
+                if (parent.tagName === 'DIV') {
+                  parent.style.setProperty('height', 'auto', 'important');
+                  parent.style.setProperty('min-height', newHeight, 'important');
+                }
+                parent = parent.parentElement;
+              }
+              
+              // Ensure scrolling is disabled to force the height to be correct
               iframe.scrolling = 'no';
               iframe.style.overflow = 'hidden';
             }
           }
         }
       } catch (e) {
-        // Not a JSON message or other error, ignore
+        // Not a valid JSON or other message, ignore silently
       }
-    });
+    }, false);
   </script>
 </Layout>
