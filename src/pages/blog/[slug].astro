@@ -297,8 +297,8 @@ const description = post.description;
       border: none !important;
       color-scheme: light; /* Helps Formbricks know to stay transparent/light */
       max-width: 100%;
-      height: auto;
       min-height: 400px; /* Give it enough space to render but not infinite */
+      overflow: hidden; /* Prevent internal scrollbars */
     }
     
     /* Target Formbricks specific elements to remove background and extra spacing */
@@ -319,16 +319,30 @@ const description = post.description;
   <script is:inline>
     // Listen for height messages from Formbricks iframes
     window.addEventListener('message', (event) => {
-      if (event.origin !== 'https://form.designter.hu') return;
+      // Check if the message is from your Formbricks instance
+      if (!event.origin.includes('form.designter.hu')) return;
       
-      if (event.data && event.data.type === 'formbricks-height') {
-        const iframes = document.querySelectorAll('iframe');
-        for (const iframe of iframes) {
-          // Identify the correct iframe by checking its contentWindow
-          if (iframe.contentWindow === event.source) {
-            iframe.style.height = event.data.height + 'px';
+      try {
+        const data = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
+        
+        if (data && (data.type === 'formbricks-height' || data.height)) {
+          const height = data.height || data.data?.height;
+          if (!height) return;
+
+          const iframes = document.querySelectorAll('iframe');
+          for (const iframe of iframes) {
+            // Identify the correct iframe by checking its contentWindow
+            if (iframe.contentWindow === event.source) {
+              // Add a small buffer to prevent cutting off shadows/borders
+              iframe.style.setProperty('height', (height + 20) + 'px', 'important');
+              // Ensure scrolling is disabled on the iframe itself
+              iframe.scrolling = 'no';
+              iframe.style.overflow = 'hidden';
+            }
           }
         }
+      } catch (e) {
+        // Not a JSON message or other error, ignore
       }
     });
   </script>
