@@ -4,9 +4,10 @@ import '@fontsource-variable/inter';
 interface Props {
 	title: string;
 	description?: string;
+	image?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, image = "https://xa5228yhxohqyplr.public.blob.vercel-storage.com/og-image-landing.png" } = Astro.props;
 ---
 
 <!doctype html>
@@ -47,14 +48,14 @@ const { title, description } = Astro.props;
 		<meta property="og:url" content={Astro.url.href} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description || "Előfizetéses landing page készítés: korlátlan kérés, gyors átfutás és konverzió optimalizált design."} />
-		<meta property="og:image" content="https://xa5228yhxohqyplr.public.blob.vercel-storage.com/og-image-landing.png" />
+		<meta property="og:image" content={image} />
 
 		<!-- Twitter -->
 		<meta property="twitter:card" content="summary_large_image" />
 		<meta property="twitter:url" content={Astro.url.href} />
 		<meta property="twitter:title" content={title} />
 		<meta property="twitter:description" content={description || "Előfizetéses landing page készítés: korlátlan kérés, gyors átfutás és konverzió optimalizált design."} />
-		<meta property="twitter:image" content="https://xa5228yhxohqyplr.public.blob.vercel-storage.com/og-image-landing.png" />
+		<meta property="twitter:image" content={image} />
 
 		<!-- Formbricks -->
 		<script type="text/javascript" is:inline>

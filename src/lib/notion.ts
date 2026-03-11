@@ -100,6 +100,13 @@ export async function getPublishedBlogPosts() {
             page.properties.CoverImage?.files?.[0]?.external?.url ||
             page.properties['Cover Image']?.files?.[0]?.file?.url ||
             page.properties['Cover Image']?.files?.[0]?.external?.url,
+          previewImage:
+            page.properties.previewimage?.files?.[0]?.file?.url ||
+            page.properties.previewimage?.files?.[0]?.external?.url ||
+            page.properties.PreviewImage?.files?.[0]?.file?.url ||
+            page.properties.PreviewImage?.files?.[0]?.external?.url ||
+            page.properties['Preview Image']?.files?.[0]?.file?.url ||
+            page.properties['Preview Image']?.files?.[0]?.external?.url,
           content: mdString?.parent || (typeof mdString === 'string' ? mdString : '') || '',
           type: page.properties.Type?.select?.name || 'Blog',
         };
