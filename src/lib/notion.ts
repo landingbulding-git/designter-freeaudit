@@ -103,10 +103,20 @@ export async function getPublishedBlogPosts() {
           previewImage:
             page.properties.previewimage?.files?.[0]?.file?.url ||
             page.properties.previewimage?.files?.[0]?.external?.url ||
+            page.properties.previewimage?.url ||
+            page.properties.previewimage?.rich_text?.[0]?.plain_text ||
             page.properties.PreviewImage?.files?.[0]?.file?.url ||
             page.properties.PreviewImage?.files?.[0]?.external?.url ||
+            page.properties.PreviewImage?.url ||
+            page.properties.PreviewImage?.rich_text?.[0]?.plain_text ||
             page.properties['Preview Image']?.files?.[0]?.file?.url ||
-            page.properties['Preview Image']?.files?.[0]?.external?.url,
+            page.properties['Preview Image']?.files?.[0]?.external?.url ||
+            page.properties['Preview Image']?.url ||
+            page.properties['Preview Image']?.rich_text?.[0]?.plain_text ||
+            page.properties['previewImage']?.files?.[0]?.file?.url ||
+            page.properties['previewImage']?.files?.[0]?.external?.url ||
+            page.properties['previewImage']?.url ||
+            page.properties['previewImage']?.rich_text?.[0]?.plain_text,
           content: mdString?.parent || (typeof mdString === 'string' ? mdString : '') || '',
           type: page.properties.Type?.select?.name || 'Blog',
         };
