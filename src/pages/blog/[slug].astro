@@ -164,11 +164,11 @@ if (post.type === 'Audit') {
     ];
 
     const $testimonials = $(`
-      <div class="not-prose bg-gray-50/50 p-6 sm:p-10 rounded-3xl border border-gray-100/50">
-        <h2 class="text-2xl sm:text-3xl font-bold text-center text-brand-900 mb-10">
-          Vállalkozók, aki már nem aggódnak a következő ügyfél miatt.
+      <div class="not-prose p-0 rounded-3xl border-0">
+        <h2 class="text-2xl sm:text-3xl font-bold text-left text-brand-900 mb-10">
+          Vállalkozók, akik már nem aggódnak a következő ügyfél miatt.
         </h2>
-        <div class="grid md:grid-cols-3 gap-6">
+        <div class="flex flex-col gap-6">
           ${reviews.map(review => `
             <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
               <div class="flex items-center gap-1 mb-3 text-yellow-500">
