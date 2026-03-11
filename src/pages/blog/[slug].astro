@@ -82,16 +82,18 @@ if (post.type === 'Audit') {
        $img = $('img').last(); 
     }
 
-    const $signatureContainer = $('<div class="not-prose my-16 p-6 sm:p-8 bg-gray-50 rounded-3xl border border-gray-100 shadow-sm w-full flex flex-col gap-8 sm:gap-10"></div>');
+    const $outerContainer = $('<div class="my-16 flex flex-col gap-8 w-full"></div>');
     
     // Add Offer Headline and Subheadline
     const $offerHeader = $(`
-      <div class="flex flex-col gap-4 text-center sm:text-left">
+      <div class="not-prose flex flex-col gap-4 text-center sm:text-left">
         <h2 class="text-2xl sm:text-3xl font-bold text-brand-900 leading-tight m-0">Szeretnéd, hogy elkészítsem neked azt az optimalizált verziót, amivel akár 3x több leadet szerezhetsz?</h2>
         <p class="text-lg text-gray-600 leading-relaxed m-0">A kész tervet 48 órán belül átadom. Ha nem vagy elégedett az eredménnyel, nem fizetsz semmit. Ez 0 rizikó számodra, csak tiszta profit-potenciál.</p>
       </div>
     `);
-    $signatureContainer.append($offerHeader);
+    $outerContainer.append($offerHeader);
+
+    const $signatureContainer = $('<div class="not-prose p-6 sm:p-8 bg-gray-50 rounded-3xl border border-gray-100 shadow-sm w-full flex flex-col gap-8 sm:gap-10"></div>');
 
     const $mainRow = $('<div class="flex flex-col lg:flex-row items-center justify-between gap-6 w-full"></div>');
     const $profileGroup = $('<div class="flex flex-col sm:flex-row items-center gap-6 sm:gap-8"></div>');
@@ -149,6 +151,7 @@ if (post.type === 'Audit') {
     `);
 
     $signatureContainer.append($fudSection);
+    $outerContainer.append($signatureContainer);
     
     // Move signature above the FAQ or below the specific intro sentence
     let $faqHeading = null;
@@ -170,21 +173,27 @@ if (post.type === 'Audit') {
     });
 
     if ($faqHeading) {
-      $signatureContainer.insertBefore($faqHeading);
+      $outerContainer.insertBefore($faqHeading);
     } else if ($introSentence && $introSentence.length) {
-      $signatureContainer.insertAfter($introSentence);
+      $outerContainer.insertAfter($introSentence);
     } else {
-      $('body').append($signatureContainer);
+      $('body').append($outerContainer);
     }
   }
 
   // 6. Format FAQ Toggles (H3 followed by indented text parsed as code block)
+  let faqHeadingAdded = false;
   $('h3').each((i, el) => {
     const $h3 = $(el);
     const $next = $h3.next();
     
     // Check if the next element is a code block
     if ($next.is('pre') && $next.find('code').length > 0) {
+      if (!faqHeadingAdded) {
+        $h3.before('<h2 class="not-prose text-2xl sm:text-3xl font-bold text-brand-900 leading-tight mb-8 mt-12 text-center sm:text-left">Valamit nem értettél? Talán itt választ kapsz rá:</h2>');
+        faqHeadingAdded = true;
+      }
+      
       const questionHtml = $h3.html();
       const answerText = $next.find('code').text().trim();
       
