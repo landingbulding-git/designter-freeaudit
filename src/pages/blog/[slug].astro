@@ -82,7 +82,17 @@ if (post.type === 'Audit') {
        $img = $('img').last(); 
     }
 
-    const $signatureContainer = $('<div class="not-prose my-16 p-6 sm:p-8 bg-gray-50 rounded-3xl border border-gray-100 shadow-sm w-full flex flex-col gap-6 sm:gap-8"></div>');
+    const $signatureContainer = $('<div class="not-prose my-16 p-6 sm:p-8 bg-gray-50 rounded-3xl border border-gray-100 shadow-sm w-full flex flex-col gap-8 sm:gap-10"></div>');
+    
+    // Add Offer Headline and Subheadline
+    const $offerHeader = $(`
+      <div class="flex flex-col gap-4 text-center sm:text-left">
+        <h2 class="text-2xl sm:text-3xl font-bold text-brand-900 leading-tight m-0">Szeretnéd, hogy elkészítsem neked azt az optimalizált verziót, amivel akár 3x több leadet szerezhetsz?</h2>
+        <p class="text-lg text-gray-600 leading-relaxed m-0">A kész tervet 48 órán belül átadom. Ha nem vagy elégedett az eredménnyel, nem fizetsz semmit. Ez 0 rizikó számodra, csak tiszta profit-potenciál.</p>
+      </div>
+    `);
+    $signatureContainer.append($offerHeader);
+
     const $mainRow = $('<div class="flex flex-col lg:flex-row items-center justify-between gap-6 w-full"></div>');
     const $profileGroup = $('<div class="flex flex-col sm:flex-row items-center gap-6 sm:gap-8"></div>');
 
@@ -118,18 +128,39 @@ if (post.type === 'Audit') {
       $button.remove();
     }
 
-    // Add the highlighted free consultation text with light mode friendly green colors
-    const $guarantee = $(`
-      <div class="flex items-center justify-center sm:justify-start gap-2 p-3 bg-green-500/10 rounded-lg border border-green-500/20 w-full">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-green-600 flex-shrink-0"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        <p class="text-xs sm:text-sm font-bold text-green-700 text-center m-0">A konzultáció 100%-ban ingyenes és kötelezettségmentes.</p>
+    $signatureContainer.append($mainRow);
+
+    // Add multiple FUD reductions
+    const $fudSection = $(`
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
+        <div class="flex items-center gap-3 p-4 bg-green-500/10 rounded-xl border border-green-500/20">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-600 flex-shrink-0"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <p class="text-sm font-bold text-green-700 m-0 leading-tight">100% ingyenes konzultáció</p>
+        </div>
+        <div class="flex items-center gap-3 p-4 bg-green-500/10 rounded-xl border border-green-500/20">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-600 flex-shrink-0"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <p class="text-sm font-bold text-green-700 m-0 leading-tight">100% elégedettségi garancia</p>
+        </div>
+        <div class="flex items-center gap-3 p-4 bg-green-500/10 rounded-xl border border-green-500/20">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-600 flex-shrink-0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <p class="text-sm font-bold text-green-700 m-0 leading-tight">48 órás szállítás</p>
+        </div>
       </div>
     `);
 
-    $signatureContainer.append($mainRow);
-    $signatureContainer.append($guarantee);
+    $signatureContainer.append($fudSection);
     
-    // Move signature below the specific intro sentence
+    // Move signature above the FAQ or below the specific intro sentence
+    let $faqHeading = null;
+    $('h3').each((i, el) => {
+      const $h3 = $(el);
+      const $next = $h3.next();
+      if ($next.is('pre') && $next.find('code').length > 0) {
+        $faqHeading = $h3;
+        return false;
+      }
+    });
+
     let $introSentence = null;
     $('p, strong').each((i, el) => {
       if ($(el).text().includes('vizuális prototípust is kifejezetten nektek')) {
@@ -138,7 +169,9 @@ if (post.type === 'Audit') {
       }
     });
 
-    if ($introSentence && $introSentence.length) {
+    if ($faqHeading) {
+      $signatureContainer.insertBefore($faqHeading);
+    } else if ($introSentence && $introSentence.length) {
       $signatureContainer.insertAfter($introSentence);
     } else {
       $('body').append($signatureContainer);
