@@ -43,15 +43,32 @@ if (post.type === 'Audit') {
   let signatureTextsFound = false;
   let $name, $role, $button, $img;
 
-  $('p').each((i, el) => {
-    const text = $(el).text().trim();
+  $('p, a').each((i, el) => {
+    const $el = $(el);
+    const text = $el.text().trim();
     if (text === 'Bogdán Norbert') {
-      $name = $(el);
+      $name = $el;
       signatureTextsFound = true;
     } else if (text === 'CRO Specialista | DesignTér') {
-      $role = $(el);
+      $role = $el;
     } else if (text.includes('Beszéljünk 15 percet')) {
-      $button = $(el);
+      $button = $el;
+      // If it's a paragraph containing the text, or a link, we want to make sure it looks like a button
+      const $a = $el.is('a') ? $el : ($el.find('a').length ? $el.find('a').first() : null);
+      
+      if ($a) {
+        $a.addClass('inline-flex justify-center items-center w-full lg:w-auto bg-brand-accent text-white font-semibold px-8 py-3.5 rounded-xl hover:bg-brand-900 transition-colors shadow-sm decoration-transparent');
+        if (!$a.attr('href')) {
+          $a.attr('href', 'https://cal.com/designter/15perc');
+          $a.attr('target', '_blank');
+          $a.attr('rel', 'noopener noreferrer');
+        }
+      } else {
+        // Create a link if it doesn't exist
+        const $newLink = $(`<a href="https://cal.com/designter/15perc" target="_blank" rel="noopener noreferrer" class="inline-flex justify-center items-center w-full lg:w-auto bg-brand-accent text-white font-semibold px-8 py-3.5 rounded-xl hover:bg-brand-900 transition-colors shadow-sm decoration-transparent">${text}</a>`);
+        $el.replaceWith($newLink);
+        $button = $newLink;
+      }
     }
   });
 
@@ -95,9 +112,9 @@ if (post.type === 'Audit') {
     $mainRow.append($profileGroup);
     
     if ($button) {
-      const $a = $button.find('a').length ? $button.find('a') : $button;
-      $a.addClass('inline-flex justify-center items-center w-full lg:w-auto bg-brand-accent text-white font-semibold px-8 py-3.5 rounded-xl hover:bg-brand-900 transition-colors shadow-sm decoration-transparent');
-      $mainRow.append($a.clone());
+      // $button is already the link or a styled element from the loop above
+      const $finalButton = $button.is('a') ? $button : ($button.find('a').length ? $button.find('a').first() : $button);
+      $mainRow.append($finalButton.clone());
       $button.remove();
     }
 
