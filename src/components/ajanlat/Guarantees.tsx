@@ -4,10 +4,10 @@ export default function Guarantees() {
   return (
     <section className="bg-[#1e293b] rounded-[2rem] shadow-[0_0.5rem_0_0_#ea580c] p-10 md:p-16 space-y-16">
       <div className="space-y-4">
-        <h2 className="text-3xl md:text-[2.5rem] font-extrabold text-[#ea580c] font-heading">
+        <h2 className="text-4xl md:text-[2.85rem] font-extrabold text-[#ea580c] font-heading">
           Mit tudunk garantálni számodra?
         </h2>
-        <p className="text-xl font-bold text-[#e5dce6] font-heading">Teljeskörű kivitelezést…</p>
+        <p className="text-2xl font-bold text-[#e5dce6] font-heading">Teljeskörű kivitelezést…</p>
       </div>
 
       <div className="grid md:grid-cols-2 gap-x-12 gap-y-16 pt-12">
@@ -35,12 +35,12 @@ export default function Guarantees() {
         ].map((item, idx) => (
           <div key={idx} className="relative bg-transparent border-t-2 border-[#ea580c] pt-12">
             {/* Number Circle */}
-            <div className="absolute -top-7 left-1/2 -translate-x-1/2 w-14 h-14 bg-[#1e293b] rounded-full flex items-center justify-center font-bold text-white text-[1.2em] shadow-[0_0_0_8px_#1e293b] border-2 border-[#ea580c] font-heading">
+            <div className="absolute -top-7 left-1/2 -translate-x-1/2 w-14 h-14 bg-[#1e293b] rounded-full flex items-center justify-center font-bold text-white text-[1.4em] shadow-[0_0_0_8px_#1e293b] border-2 border-[#ea580c] font-heading">
               {item.num}
             </div>
             
-            <h3 className="text-xl font-extrabold text-white mb-4 leading-[1.4] font-heading">{item.title}</h3>
-            <p className="text-[#e5dce6] leading-[1.6] font-medium">
+            <h3 className="text-2xl font-extrabold text-white mb-4 leading-[1.4] font-heading">{item.title}</h3>
+            <p className="text-[#e5dce6] leading-[1.6] font-medium text-lg">
               {item.desc}
             </p>
           </div>

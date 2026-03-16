@@ -4,10 +4,10 @@ export default function Hero({ clientName, companyName }: { clientName: string, 
   return (
     <section className="bg-[#1e293b] rounded-[2rem] overflow-hidden flex flex-col md:flex-row min-h-[60vh] md:min-h-[40rem] shadow-[0_0.5rem_0_0_#ea580c]">
       <div className="flex-[1.2] p-10 md:p-16 flex flex-col justify-center">
-        <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-extrabold text-[#ea580c] leading-[1.15] mb-8 font-heading">
+        <h1 className="text-5xl md:text-6xl lg:text-[4rem] font-extrabold text-[#ea580c] leading-[1.15] mb-8 font-heading">
           Hogyan hozzunk ki maximumot a hirdetési keretedből?
         </h1>
-        <p className="text-lg md:text-xl text-[#e5dce6] font-medium">
+        <p className="text-xl md:text-2xl text-[#e5dce6] font-medium">
           Személyre szabott CRO ajánlat {clientName} ({companyName}) részére.
         </p>
       </div>
