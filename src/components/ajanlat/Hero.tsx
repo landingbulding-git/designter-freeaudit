@@ -10,7 +10,7 @@ export default function Hero({ clientName, companyName, heroImage }: { clientNam
           Hogyan hozzunk ki maximumot a hirdetési keretedből?
         </h1>
         <p className="text-xl md:text-2xl text-[#e5dce6] font-medium">
-          Személyre szabott CRO ajánlat {clientName} ({companyName}) részére.
+          Személyre szabott CRO ajánlat {clientName} részére.
         </p>
       </div>
       <div 

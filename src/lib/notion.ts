@@ -172,25 +172,27 @@ export async function getOffers() {
         return num || 0;
       };
 
-      const adspendText = properties.adspend?.rich_text?.map((t: any) => t.plain_text).join('') || '';
+      const adspendText = properties.adspend?.rich_text?.map((t: any) => t.plain_text).join('') || properties.Adspend?.rich_text?.map((t: any) => t.plain_text).join('') || '';
 
       return {
         id: page.id,
-        slug: properties.slug?.rich_text?.[0]?.plain_text || '',
+        slug: properties.slug?.rich_text?.[0]?.plain_text || properties.Slug?.rich_text?.[0]?.plain_text || '',
         clientName: properties.Name?.title?.[0]?.plain_text || 'Unknown',
-        companyName: properties.companyname?.rich_text?.map((t: any) => t.plain_text).join('') || 'Unknown',
-        visitors: properties.visitors?.number || 0,
-        customers: properties.customers?.number || 0,
+        companyName: properties.companyname?.rich_text?.map((t: any) => t.plain_text).join('') || properties.Companyname?.rich_text?.map((t: any) => t.plain_text).join('') || 'Unknown',
+        visitors: properties.visitors?.number || properties.Visitors?.number || 0,
+        customers: properties.customers?.number || properties.Customers?.number || 0,
         avgOrderValue: properties.AOV?.number || 0,
         adSpend: parseAdSpend(adspendText),
-        address: properties.address?.rich_text?.map((t: any) => t.plain_text).join('') || '',
-        taxnumber: properties.taxnumber?.rich_text?.map((t: any) => t.plain_text).join('') || '',
-        contact: properties.Contact?.rich_text?.map((t: any) => t.plain_text).join('') || '',
+        address: properties.address?.rich_text?.map((t: any) => t.plain_text).join('') || properties.Address?.rich_text?.map((t: any) => t.plain_text).join('') || '',
+        taxnumber: properties.taxnumber?.rich_text?.map((t: any) => t.plain_text).join('') || properties.Taxnumber?.rich_text?.map((t: any) => t.plain_text).join('') || '',
+        contact: properties.Contact?.rich_text?.map((t: any) => t.plain_text).join('') || properties.contact?.rich_text?.map((t: any) => t.plain_text).join('') || '',
         heroImage: 
             page.cover?.external?.url || 
             page.cover?.file?.url || 
             properties.image?.files?.[0]?.file?.url ||
             properties.image?.files?.[0]?.external?.url || 
+            properties.Image?.files?.[0]?.file?.url ||
+            properties.Image?.files?.[0]?.external?.url || 
             null
       };
     });
