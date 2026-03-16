@@ -1,5 +1,4 @@
 import React from 'react';
-import { Check } from 'lucide-react';
 
 export default function Process() {
   const steps = [
@@ -11,45 +10,47 @@ export default function Process() {
   ];
 
   return (
-    <section className="space-y-16">
-      <h2 className="text-3xl md:text-4xl font-bold text-[#ef5a28]">
+    <section className="bg-[#1e293b] rounded-[2rem] shadow-[0_0.5rem_0_0_#ea580c] p-10 md:p-16 space-y-16">
+      <h2 className="text-3xl md:text-[2.5rem] font-extrabold text-[#ea580c] font-heading">
         Hogyan fog kinézni a következő 1 hét?
       </h2>
 
-      <div className="grid md:grid-cols-3 gap-x-12 gap-y-16">
+      <div className="grid md:grid-cols-3 gap-x-12 gap-y-12">
         {steps.slice(0, 3).map((step, i) => (
-          <div key={i} className="space-y-4">
-            <span className="text-slate-300 font-mono text-lg">{step.num}</span>
-            <div className="h-0.5 w-full bg-[#ef5a28]"></div>
-            <h3 className="text-xl font-bold text-white pt-2">{step.title}</h3>
-            <p className="text-slate-300 leading-relaxed font-light text-[15px]">{step.desc}</p>
+          <div key={i} className="space-y-3">
+            <span className="text-white font-light text-lg font-heading">{step.num}</span>
+            <div className="h-[2px] w-full bg-[#ea580c]"></div>
+            <h3 className="text-lg font-extrabold text-white pt-1 font-heading">{step.title}</h3>
+            <p className="text-[#e5dce6] leading-[1.6] font-medium text-[15px]">{step.desc}</p>
           </div>
         ))}
       </div>
       
-      <div className="grid md:grid-cols-2 gap-x-12 gap-y-16 md:w-2/3">
+      <div className="grid md:grid-cols-2 gap-x-12 gap-y-12 md:w-2/3">
         {steps.slice(3, 5).map((step, i) => (
-          <div key={i} className="space-y-4">
-            <span className="text-slate-300 font-mono text-lg">{step.num}</span>
-            <div className="h-0.5 w-full bg-[#ef5a28]"></div>
-            <h3 className="text-xl font-bold text-white pt-2">{step.title}</h3>
-            <p className="text-slate-300 leading-relaxed font-light text-[15px]">{step.desc}</p>
+          <div key={i} className="space-y-3">
+            <span className="text-white font-light text-lg font-heading">{step.num}</span>
+            <div className="h-[2px] w-full bg-[#ea580c]"></div>
+            <h3 className="text-lg font-extrabold text-white pt-1 font-heading">{step.title}</h3>
+            <p className="text-[#e5dce6] leading-[1.6] font-medium text-[15px]">{step.desc}</p>
           </div>
         ))}
       </div>
 
       <div className="text-center pt-8">
-        <a href="#contact" className="inline-block bg-[#ef5a28] hover:bg-[#d94f1f] text-white font-semibold py-4 px-8 rounded-md transition-colors text-lg">
+        <a href="#contact" className="inline-block bg-[#ea580c] hover:bg-[#d03e00] text-white font-semibold py-4 px-10 rounded-md transition-colors text-lg">
           Készítsetek nekem profi landing oldalt!
         </a>
       </div>
 
-      <div className="mt-12 bg-[#c2e5c8] rounded-xl p-8 flex flex-col md:flex-row items-center md:items-start gap-6">
-        <div className="w-8 h-8 rounded-full border-2 border-[#166534] flex items-center justify-center shrink-0">
-          <Check className="w-5 h-5 text-[#166534]" strokeWidth={2} />
+      <div className="mt-8 bg-[#AEE4BD] rounded-xl p-8 flex items-start gap-4 shadow-sm">
+        <div className="text-[#26733b] shrink-0 mt-0.5">
+          <svg className="w-[1em] h-[1em] text-[1.2em]" fill="currentColor" viewBox="0 0 512 512">
+            <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z" />
+          </svg>
         </div>
-        <p className="text-[#064e3b] font-medium leading-relaxed text-[15px]">
-          <strong>A konverzió optimalizált oldalak átlagosan 30-35%-al jobban teljesítenek.</strong> Az első lépés mindig a legnehezebb, de a legfontosabb is.
+        <p className="text-black font-bold leading-relaxed text-[15px]">
+          A konverzió optimalizált oldalak átlagosan 30-35%-al jobban teljesítenek. Az első lépés mindig a legnehezebb, de a legfontosabb is.
         </p>
       </div>
     </section>

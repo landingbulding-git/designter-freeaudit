@@ -37,7 +37,7 @@ export function getStaticPaths() {
             "Analitikai eszközök telepítése és monitoring",
             "90 napig havi 1 statisztikai riport és fejlesztési javaslat",
             "Ingyenes és korlátlan tárhely 12 hónapig",
-            "Korlátalan módosítás, egyszerre egy aktív kérés",
+            "Korlátalan módosítás 90 napig, egyszerre egy aktív kérés",
             "Átlagosan 3 munkanapon belüli módosítás"
           ]
         }
@@ -50,8 +50,19 @@ const { clientName, companyName, stats, pricing } = Astro.props;
 ---
 
 <Layout title={`Személyre szabott CRO ajánlat - ${clientName} (${companyName})`}>
-  <div class="bg-[#1c2431] min-h-screen text-slate-100 font-sans selection:bg-[#ef5a28]/30">
-    <main class="max-w-5xl mx-auto px-6 py-16 md:py-24 space-y-32 md:space-y-40">
+  <style is:global>
+    @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Montserrat:wght@100..900&display=swap');
+    
+    .font-heading {
+      font-family: 'Bricolage Grotesque', sans-serif;
+    }
+    .font-body {
+      font-family: 'Montserrat', sans-serif;
+    }
+  </style>
+
+  <div class="bg-[#000002] min-h-screen text-[#e5dce6] font-body selection:bg-[#ea580c]/30">
+    <main class="max-w-[65rem] mx-auto px-4 py-8 md:py-16 space-y-12 md:space-y-16">
       <Hero clientName={clientName} companyName={companyName} />
       <Stats stats={stats} />
       <Guarantees />

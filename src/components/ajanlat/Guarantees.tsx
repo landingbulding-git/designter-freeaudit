@@ -2,15 +2,15 @@ import React from 'react';
 
 export default function Guarantees() {
   return (
-    <section className="space-y-12">
-      <div className="space-y-2">
-        <h2 className="text-3xl md:text-4xl font-bold text-[#ef5a28]">
+    <section className="bg-[#1e293b] rounded-[2rem] shadow-[0_0.5rem_0_0_#ea580c] p-10 md:p-16 space-y-16">
+      <div className="space-y-4">
+        <h2 className="text-3xl md:text-[2.5rem] font-extrabold text-[#ea580c] font-heading">
           Mit tudunk garantálni számodra?
         </h2>
-        <p className="text-xl font-bold text-[#ef5a28]">Teljeskörű kivitelezést...</p>
+        <p className="text-xl font-bold text-[#e5dce6] font-heading">Teljeskörű kivitelezést…</p>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+      <div className="grid md:grid-cols-2 gap-x-12 gap-y-16 pt-12">
         {[
           {
             num: "1",
@@ -33,16 +33,14 @@ export default function Guarantees() {
             desc: "Egyedi kódolású landing oldalaink extrém gyorsak, minden mutatójuk 90-95% feletti. Emellett részletes analitikai eszközöket építünk be, így tudjuk elemezni a látogatók reakcióit. Erről 90 napig havonta 1x jelentést küldünk és automatikusan elvégezzük az optimalizálásokat."
           }
         ].map((item, idx) => (
-          <div key={idx} className="bg-[#242e3e] rounded-lg p-8 pt-10 relative">
-            {/* Top Border */}
-            <div className="absolute top-0 left-0 right-0 h-1.5 bg-[#ef5a28] rounded-t-lg"></div>
+          <div key={idx} className="relative bg-transparent border-t-2 border-[#ea580c] pt-12">
             {/* Number Circle */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-[#ef5a28] rounded-full flex items-center justify-center font-bold text-white text-sm ring-4 ring-[#242e3e]">
+            <div className="absolute -top-7 left-1/2 -translate-x-1/2 w-14 h-14 bg-[#1e293b] rounded-full flex items-center justify-center font-bold text-white text-[1.2em] shadow-[0_0_0_8px_#1e293b] border-2 border-[#ea580c] font-heading">
               {item.num}
             </div>
             
-            <h3 className="text-xl font-bold text-white mb-4 leading-snug">{item.title}</h3>
-            <p className="text-slate-300 leading-relaxed font-light text-[15px]">
+            <h3 className="text-xl font-extrabold text-white mb-4 leading-[1.4] font-heading">{item.title}</h3>
+            <p className="text-[#e5dce6] leading-[1.6] font-medium">
               {item.desc}
             </p>
           </div>
