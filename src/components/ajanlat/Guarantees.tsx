@@ -2,15 +2,15 @@ import React from 'react';
 
 export default function Guarantees() {
   return (
-    <section className="bg-[#1e293b] rounded-[2rem] shadow-[0_0.5rem_0_0_#ea580c] p-10 md:p-16 space-y-16">
+    <section className="bg-[#1e293b] rounded-[2rem] shadow-[0_0.5rem_0_0_#ea580c] p-8 md:p-16 space-y-16 text-center md:text-left">
       <div className="space-y-4">
-        <h2 className="text-4xl md:text-[2.85rem] font-extrabold text-[#ea580c] font-heading">
+        <h2 className="text-3xl md:text-[2.85rem] font-extrabold text-[#ea580c] font-heading">
           Mit tudunk garantálni számodra?
         </h2>
         <p className="text-2xl font-bold text-[#e5dce6] font-heading">Teljeskörű kivitelezést…</p>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-x-12 gap-y-16 pt-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-20 pt-12">
         {[
           {
             num: "1",

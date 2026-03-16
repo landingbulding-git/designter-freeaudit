@@ -3,8 +3,8 @@ import React from 'react';
 export default function Hero({ clientName, companyName }: { clientName: string, companyName: string }) {
   return (
     <section className="bg-[#1e293b] rounded-[2rem] overflow-hidden flex flex-col md:flex-row min-h-[60vh] md:min-h-[40rem] shadow-[0_0.5rem_0_0_#ea580c]">
-      <div className="flex-[1.2] p-10 md:p-16 flex flex-col justify-center">
-        <h1 className="text-5xl md:text-6xl lg:text-[4rem] font-extrabold text-[#ea580c] leading-[1.15] mb-8 font-heading">
+      <div className="flex-[1.2] p-8 md:p-16 flex flex-col justify-center text-center md:text-left">
+        <h1 className="text-4xl md:text-6xl lg:text-[4rem] font-extrabold text-[#ea580c] leading-[1.15] mb-8 font-heading">
           Hogyan hozzunk ki maximumot a hirdetési keretedből?
         </h1>
         <p className="text-xl md:text-2xl text-[#e5dce6] font-medium">
