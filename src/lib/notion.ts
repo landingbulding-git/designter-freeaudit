@@ -127,3 +127,72 @@ export async function getPublishedBlogPosts() {
     throw error;
   }
 }
+
+export async function getOffers() {
+  const rawDatabaseId = import.meta.env.NOTION_OFFER_DATABASE_ID;
+  
+  if (!rawDatabaseId) {
+    throw new Error('NOTION_OFFER_DATABASE_ID environment variable is missing.');
+  }
+
+  const databaseId = rawDatabaseId.replace(/["'\s\-]/g, '');
+  console.log('Cleaned Offer Database ID:', databaseId);
+
+  try {
+    const response = await fetch(`https://api.notion.com/v1/databases/${databaseId}/query`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${import.meta.env.NOTION_API_KEY}`,
+        'Notion-Version': '2022-06-28',
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      const err = await response.text();
+      throw new Error('Notion API Error: ' + err);
+    }
+
+    const data = await response.json();
+    console.log(`Fetched ${data.results.length} offers.`);
+
+    return data.results.map((page: any) => {
+      const properties = page.properties;
+      
+      const parseAdSpend = (val: string) => {
+        if (!val) return 0;
+        const normalized = val.toLowerCase().replace(/\\s/g, '');
+        const num = parseFloat(normalized.replace(/[^0-9.]/g, ''));
+        if (normalized.includes('k')) {
+          return num * 1000;
+        }
+        if (normalized.includes('m')) {
+          return num * 1000000;
+        }
+        return num || 0;
+      };
+
+      const adspendText = properties.adspend?.rich_text?.map((t: any) => t.plain_text).join('') || '';
+
+      return {
+        id: page.id,
+        slug: properties.slug?.rich_text?.[0]?.plain_text || '',
+        clientName: properties.Name?.title?.[0]?.plain_text || 'Unknown',
+        companyName: properties.companyname?.rich_text?.map((t: any) => t.plain_text).join('') || 'Unknown',
+        visitors: properties.visitors?.number || 0,
+        customers: properties.customers?.number || 0,
+        avgOrderValue: properties.AOV?.number || 0,
+        adSpend: parseAdSpend(adspendText),
+        heroImage: 
+            page.cover?.external?.url || 
+            page.cover?.file?.url || 
+            properties.image?.files?.[0]?.file?.url ||
+            properties.image?.files?.[0]?.external?.url || 
+            null
+      };
+    });
+  } catch (error) {
+    console.error('Error fetching offers from Notion:', error);
+    throw error;
+  }
+}

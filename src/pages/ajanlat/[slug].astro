@@ -5,27 +5,51 @@ import Stats from '../../components/ajanlat/Stats';
 import Guarantees from '../../components/ajanlat/Guarantees';
 import Pricing from '../../components/ajanlat/Pricing';
 import Process from '../../components/ajanlat/Process';
+import { getOffers } from '../../lib/notion';
 
-export function getStaticPaths() {
-  return [
-    {
-      params: { slug: 'balazs-viktor-mindmode' },
+export async function getStaticPaths() {
+  const offers = await getOffers();
+
+  return offers.map((offer) => {
+    const { visitors, customers, avgOrderValue, adSpend } = offer;
+    
+    // CR Calculation
+    const currentCR = visitors > 0 ? (customers / visitors) * 100 : 0;
+    const lostSales = visitors - customers;
+    const currentRevenue = customers * avgOrderValue;
+
+    const projections = [1, 3, 5, 10].map(increasePct => {
+      const newCR = currentCR + increasePct;
+      const newCustomers = Math.round(visitors * (newCR / 100));
+      const newTotalRevenue = newCustomers * avgOrderValue;
+      const extraRevenue = newTotalRevenue - currentRevenue;
+
+      return {
+        increase: `+${increasePct}%`,
+        extraRevenue: new Intl.NumberFormat('hu-HU', { style: 'currency', currency: 'HUF', maximumFractionDigits: 0 }).format(extraRevenue),
+        total: new Intl.NumberFormat('hu-HU', { style: 'currency', currency: 'HUF', maximumFractionDigits: 0 }).format(newTotalRevenue)
+      };
+    });
+
+    // Calculate ROI for +1% scenario
+    // Projections[0] is +1%
+    const extraRev1Pct = Math.round(visitors * ((currentCR + 1) / 100)) * avgOrderValue - currentRevenue;
+    const roi = adSpend > 0 ? Math.round((extraRev1Pct / adSpend) * 100) : 0;
+
+    return {
+      params: { slug: offer.slug },
       props: {
-        clientName: "Balázs Viktor",
-        companyName: "MINDMODE",
+        clientName: offer.clientName,
+        companyName: offer.companyName,
+        heroImage: offer.heroImage,
         stats: {
-          visitors: 9000,
-          conversionRate: 5.9,
-          avgOrderValue: 9500,
-          adSpend: 200000,
-          lostSales: 8463,
-          projections: [
-            { increase: "+1%", extraRevenue: "855.000 Ft", total: "5.959.350 Ft" },
-            { increase: "+3%", extraRevenue: "2.565.000 Ft", total: "7.669.350 Ft" },
-            { increase: "+5%", extraRevenue: "4.275.000 Ft", total: "9.379.350 Ft" },
-            { increase: "+10%", extraRevenue: "8.550.000 Ft", total: "13.654.350 Ft" }
-          ],
-          roi: "269%"
+          visitors: visitors,
+          conversionRate: Number(currentCR.toFixed(1)),
+          avgOrderValue: avgOrderValue,
+          adSpend: adSpend,
+          lostSales: lostSales,
+          projections: projections,
+          roi: `${roi}%`
         },
         pricing: {
           upfront: "158.500 Ft",
@@ -41,12 +65,12 @@ export function getStaticPaths() {
             "Átlagosan 3 munkanapon belüli módosítás"
           ]
         }
-      }
-    }
-  ];
+      };
+    });
+  }
 }
 
-const { clientName, companyName, stats, pricing } = Astro.props;
+const { clientName, companyName, heroImage, stats, pricing } = Astro.props;
 ---
 
 <Layout title={`Személyre szabott CRO ajánlat - ${clientName} (${companyName})`}>
@@ -63,7 +87,7 @@ const { clientName, companyName, stats, pricing } = Astro.props;
 
   <div class="bg-[#000002] min-h-screen text-[#e5dce6] font-body selection:bg-[#ea580c]/30">
     <main class="w-[95%] md:w-[70%] max-w-none mx-auto px-4 py-8 md:py-16 space-y-12 md:space-y-16">
-      <Hero clientName={clientName} companyName={companyName} />
+      <Hero clientName={clientName} companyName={companyName} heroImage={heroImage} />
       <Stats stats={stats} />
       <Guarantees />
       <Pricing pricing={pricing} />
