@@ -9,7 +9,7 @@ interface PricingProps {
   };
 }
 
-export default function Pricing({ pricing }: PricingProps) {
+export default function Pricing({ pricing, slug }: PricingProps & { slug?: string }) {
   return (
     <section id="pricing" className="bg-[#1e293b] rounded-[2rem] shadow-[0_0.5rem_0_0_#ea580c] p-8 md:p-16 space-y-16 scroll-mt-24 text-center md:text-left">
       <h2 className="text-3xl md:text-[2.85rem] font-extrabold text-[#ea580c] leading-tight font-heading">
@@ -39,7 +39,7 @@ export default function Pricing({ pricing }: PricingProps) {
       </div>
 
       <div className="text-center pt-8">
-        <a href="#contact" className="inline-block w-full md:w-auto bg-[#ea580c] hover:bg-[#d03e00] text-white font-semibold py-4 px-10 rounded-md transition-colors text-xl">
+        <a href={`/contract/${slug}`} className="inline-block w-full md:w-auto bg-[#ea580c] hover:bg-[#d03e00] !text-white font-semibold py-4 px-10 rounded-md transition-colors text-xl">
           Készítsetek nekem profi landing oldalt!
         </a>
       </div>

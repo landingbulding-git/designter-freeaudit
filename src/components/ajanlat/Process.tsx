@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Process() {
+export default function Process({ slug }: { slug?: string }) {
   const steps = [
     { num: "01", title: "Szerződéskötés és előleg", desc: "Az előleg kifizetésével szerződés jön létre közöttünk és el is kezdődik a közös munkánk." },
     { num: "02", title: "Részletes felmérés és onboarding", desc: "24 órán belül kapsz egy személyre szabott kérdőívet és egy rövid videóban megnézheted, hogyan dolgozunk együtt a leghatékonyabban." },
@@ -38,7 +38,7 @@ export default function Process() {
       </div>
 
       <div className="text-center pt-8">
-        <a href="#contact" className="inline-block w-full md:w-auto bg-[#ea580c] hover:bg-[#d03e00] text-white font-semibold py-4 px-10 rounded-md transition-colors text-xl">
+        <a href={`/contract/${slug}`} className="inline-block w-full md:w-auto bg-[#ea580c] hover:bg-[#d03e00] !text-white font-semibold py-4 px-10 rounded-md transition-colors text-xl">
           Készítsetek nekem profi landing oldalt!
         </a>
       </div>

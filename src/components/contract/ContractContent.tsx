@@ -65,7 +65,7 @@ export default function ContractContent({ companyName, address, taxnumber, conta
         <p><strong>A részletes feltételeket és a pontos jogi megfogalmazásokat a következő oldalakon találod.</strong></p>
       </blockquote>
 
-      <div className="bg-[#AEE4BD] rounded-xl p-8 flex items-start gap-4 shadow-sm my-12 text-[#064e3b]">
+      <div className="not-prose bg-[#AEE4BD] rounded-xl p-8 flex items-start gap-4 shadow-sm my-12 text-[#064e3b]">
         <span className="text-2xl leading-none mt-1">💡</span>
         <p className="m-0 font-bold text-[17px]">
           Amennyiben a szerződés teljes tartalmával egyetértesz, az alábbi linkre kattintva tudod rendezni az előleget, amivel a közös munkánk azonnal kezdetét veszi.
@@ -73,7 +73,7 @@ export default function ContractContent({ companyName, address, taxnumber, conta
       </div>
 
       <div className="text-left mb-16">
-        <a href="https://buy.stripe.com/aFa7sK2AzenY3hBcbA6J200" className="inline-block bg-[#ea580c] hover:bg-[#d03e00] text-white font-semibold py-4 px-10 rounded-md transition-colors text-xl !no-underline">
+        <a href="https://buy.stripe.com/aFa7sK2AzenY3hBcbA6J200" className="inline-block bg-[#ea580c] hover:bg-[#d03e00] !text-white font-semibold py-4 px-10 rounded-md transition-colors text-xl !no-underline">
           Elfogadom a szerződést és kifizetem az előleget
         </a>
       </div>
@@ -362,8 +362,8 @@ export default function ContractContent({ companyName, address, taxnumber, conta
       <h1 className="font-extrabold mt-16 mb-8 text-center md:text-left">Záró nyilatkozat és projektindítás</h1>
       <p className="mb-8">Amennyiben a fenti szerződés minden pontját megismerted, és azokat magadra nézve kötelezőnek fogadod el, kérlek, kattints az alábbi linkre a díjelőleg rendezéséhez:</p>
       
-      <div className="text-left mb-8">
-        <a href="https://buy.stripe.com/aFa7sK2AzenY3hBcbA6J200" className="inline-block w-full md:w-auto text-center bg-[#ea580c] hover:bg-[#d03e00] text-white font-semibold py-4 px-10 rounded-md transition-colors text-xl !no-underline">
+      <div className="not-prose text-left mb-8">
+        <a href="https://buy.stripe.com/aFa7sK2AzenY3hBcbA6J200" className="inline-block w-full md:w-auto text-center bg-[#ea580c] hover:bg-[#d03e00] !text-white font-semibold py-4 px-10 rounded-md transition-colors text-xl !no-underline">
           Elfogadom a szerződést és kifizetem az előleget
         </a>
       </div>

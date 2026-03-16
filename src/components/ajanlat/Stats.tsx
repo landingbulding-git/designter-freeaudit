@@ -12,7 +12,7 @@ interface StatsProps {
   };
 }
 
-export default function Stats({ stats }: StatsProps) {
+export default function Stats({ stats, slug }: StatsProps & { slug?: string }) {
   return (
     <section className="bg-[#1e293b] rounded-[2rem] p-8 md:p-16 shadow-[0_0.5rem_0_0_#ea580c] space-y-16 text-center md:text-left">
       <h2 className="text-3xl md:text-[2.85rem] font-extrabold text-[#ea580c] leading-tight font-heading">
@@ -71,7 +71,7 @@ export default function Stats({ stats }: StatsProps) {
       </div>
 
       <div className="text-center md:text-left pt-4">
-        <a href="#pricing" className="inline-block w-full md:w-auto bg-[#ea580c] hover:bg-[#d03e00] text-white font-semibold py-4 px-10 rounded-md transition-colors text-xl">
+        <a href={`/contract/${slug}`} className="inline-block w-full md:w-auto bg-[#ea580c] hover:bg-[#d03e00] !text-white font-semibold py-4 px-10 rounded-md transition-colors text-xl">
           Készítsetek nekem profi landing oldalt!
         </a>
       </div>
