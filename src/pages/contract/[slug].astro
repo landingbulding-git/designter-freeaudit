@@ -1,0 +1,48 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ContractContent from '../../components/contract/ContractContent';
+import { getOffers } from '../../lib/notion';
+
+export async function getStaticPaths() {
+  const offers = await getOffers();
+
+  return offers.map((offer) => {
+    return {
+      params: { slug: offer.slug },
+      props: {
+        clientName: offer.clientName,
+        companyName: offer.companyName,
+        address: offer.address,
+        taxnumber: offer.taxnumber,
+        contact: offer.contact
+      }
+    };
+  });
+}
+
+const { clientName, companyName, address, taxnumber, contact } = Astro.props;
+---
+
+<Layout title={`Vállalkozási Szerződés - ${clientName} (${companyName})`}>
+  <style is:global>
+    @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Montserrat:wght@100..900&display=swap');
+    
+    .font-heading {
+      font-family: 'Bricolage Grotesque', sans-serif;
+    }
+    .font-body {
+      font-family: 'Montserrat', sans-serif;
+    }
+  </style>
+
+  <div class="bg-[#000002] min-h-screen text-[#e5dce6] font-body selection:bg-[#ea580c]/30">
+    <main class="w-[95%] md:w-[70%] max-w-none mx-auto px-4 py-8 md:py-16">
+      <ContractContent 
+        companyName={companyName}
+        address={address}
+        taxnumber={taxnumber}
+        contact={contact}
+      />
+    </main>
+  </div>
+</Layout>

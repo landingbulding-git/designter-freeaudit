@@ -183,6 +183,9 @@ export async function getOffers() {
         customers: properties.customers?.number || 0,
         avgOrderValue: properties.AOV?.number || 0,
         adSpend: parseAdSpend(adspendText),
+        address: properties.address?.rich_text?.map((t: any) => t.plain_text).join('') || '',
+        taxnumber: properties.taxnumber?.rich_text?.map((t: any) => t.plain_text).join('') || '',
+        contact: properties.Contact?.rich_text?.map((t: any) => t.plain_text).join('') || '',
         heroImage: 
             page.cover?.external?.url || 
             page.cover?.file?.url || 
