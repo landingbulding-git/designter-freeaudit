@@ -37,7 +37,7 @@ export function getStaticPaths() {
             "Analitikai eszközök telepítése és monitoring",
             "90 napig havi 1 statisztikai riport és fejlesztési javaslat",
             "Ingyenes és korlátlan tárhely 12 hónapig",
-            "Korlátlan módosítás, egyszerre egy aktív kérés",
+            "Korlátalan módosítás, egyszerre egy aktív kérés",
             "Átlagosan 3 munkanapon belüli módosítás"
           ]
         }
@@ -50,8 +50,8 @@ const { clientName, companyName, stats, pricing } = Astro.props;
 ---
 
 <Layout title={`Személyre szabott CRO ajánlat - ${clientName} (${companyName})`}>
-  <div class="bg-slate-900 min-h-screen text-slate-100 font-sans selection:bg-orange-500/30">
-    <main class="max-w-4xl mx-auto px-6 py-12 md:py-24 space-y-24 md:space-y-32">
+  <div class="bg-[#1c2431] min-h-screen text-slate-100 font-sans selection:bg-[#ef5a28]/30">
+    <main class="max-w-5xl mx-auto px-6 py-16 md:py-24 space-y-32 md:space-y-40">
       <Hero clientName={clientName} companyName={companyName} />
       <Stats stats={stats} />
       <Guarantees />
