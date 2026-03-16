@@ -34,7 +34,8 @@ export async function getStaticPaths() {
     // Calculate ROI for +1% scenario
     // Projections[0] is +1%
     const extraRev1Pct = Math.round(visitors * ((currentCR + 1) / 100)) * avgOrderValue - currentRevenue;
-    const roi = adSpend > 0 ? Math.round((extraRev1Pct / adSpend) * 100) : 0;
+    const investmentCost = 317000;
+    const roi = Math.floor((extraRev1Pct / investmentCost) * 100);
 
     return {
       params: { slug: offer.slug },
