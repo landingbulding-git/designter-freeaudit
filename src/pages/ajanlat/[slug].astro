@@ -1,0 +1,62 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/ajanlat/Hero';
+import Stats from '../../components/ajanlat/Stats';
+import Guarantees from '../../components/ajanlat/Guarantees';
+import Pricing from '../../components/ajanlat/Pricing';
+import Process from '../../components/ajanlat/Process';
+
+export function getStaticPaths() {
+  return [
+    {
+      params: { slug: 'balazs-viktor-mindmode' },
+      props: {
+        clientName: "Balázs Viktor",
+        companyName: "MINDMODE",
+        stats: {
+          visitors: 9000,
+          conversionRate: 5.9,
+          avgOrderValue: 9500,
+          adSpend: 200000,
+          lostSales: 8463,
+          projections: [
+            { increase: "+1%", extraRevenue: "855.000 Ft", total: "5.959.350 Ft" },
+            { increase: "+3%", extraRevenue: "2.565.000 Ft", total: "7.669.350 Ft" },
+            { increase: "+5%", extraRevenue: "4.275.000 Ft", total: "9.379.350 Ft" },
+            { increase: "+10%", extraRevenue: "8.550.000 Ft", total: "13.654.350 Ft" }
+          ],
+          roi: "269%"
+        },
+        pricing: {
+          upfront: "158.500 Ft",
+          delivery: "158.500 Ft",
+          timeline: "7 munkanapon belül",
+          features: [
+            "1 komplett landing oldal",
+            "Profi, konverzió-fókuszú szövegírás",
+            "Analitikai eszközök telepítése és monitoring",
+            "90 napig havi 1 statisztikai riport és fejlesztési javaslat",
+            "Ingyenes és korlátlan tárhely 12 hónapig",
+            "Korlátlan módosítás, egyszerre egy aktív kérés",
+            "Átlagosan 3 munkanapon belüli módosítás"
+          ]
+        }
+      }
+    }
+  ];
+}
+
+const { clientName, companyName, stats, pricing } = Astro.props;
+---
+
+<Layout title={`Személyre szabott CRO ajánlat - ${clientName} (${companyName})`}>
+  <div class="bg-slate-900 min-h-screen text-slate-100 font-sans selection:bg-orange-500/30">
+    <main class="max-w-4xl mx-auto px-6 py-12 md:py-24 space-y-24 md:space-y-32">
+      <Hero clientName={clientName} companyName={companyName} />
+      <Stats stats={stats} />
+      <Guarantees />
+      <Pricing pricing={pricing} />
+      <Process />
+    </main>
+  </div>
+</Layout>
