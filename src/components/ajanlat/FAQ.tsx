@@ -50,10 +50,10 @@ export default function FAQ() {
     <section className="bg-[#1e293b] rounded-[2rem] shadow-[0_0.5rem_0_0_#ea580c] p-8 md:p-16 space-y-12 text-center md:text-left">
       <div className="space-y-4">
         <h2 className="text-3xl md:text-[2.85rem] font-extrabold text-[#ea580c] font-heading">
-          Gyakori kérdések
+          Benned is felmerültek ezek a kérdések?
         </h2>
         <p className="text-xl md:text-2xl font-bold text-[#e5dce6] font-heading">
-          Minden, amit tudnod kell
+          Itt minden bizonnyal megtalálod a választ.
         </p>
       </div>
       

@@ -90,7 +90,7 @@ const { clientName, companyName, heroImage, stats, pricing } = Astro.props;
     <main class="w-[95%] md:w-[70%] max-w-none mx-auto px-4 py-8 md:py-16 space-y-12 md:space-y-16">
       <Hero clientName={clientName} companyName={companyName} heroImage={heroImage} />
       <Stats stats={stats} slug={Astro.params.slug} />
-      <FAQ />
+      <FAQ client:visible />
       <Pricing pricing={pricing} slug={Astro.params.slug} />
       <Process slug={Astro.params.slug} />
     </main>
