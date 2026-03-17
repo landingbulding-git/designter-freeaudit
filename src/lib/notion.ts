@@ -44,8 +44,8 @@ n2m.setCustomTransformer('callout', async (block: any) => {
 async function downloadNotionImage(url: string | null | undefined, filenamePrefix: string): Promise<string | null> {
   if (!url) return null;
 
-  // If it's an external image (e.g. Unsplash) or not AWS S3, return as is
-  if (!url.includes('amazonaws.com') && !url.includes('secure.notion-static.com')) {
+  // If it's an external image (e.g. Unsplash) or not AWS S3/Notion, return as is
+  if (!url.includes('amazonaws.com') && !url.includes('notion-static.com') && !url.includes('notion.so')) {
     return url;
   }
 
@@ -56,7 +56,10 @@ async function downloadNotionImage(url: string | null | undefined, filenamePrefi
     }
 
     const cleanUrl = url.split('?')[0];
-    const ext = cleanUrl.split('.').pop() || 'jpg';
+    let ext = cleanUrl.split('.').pop() || 'jpg';
+    if (ext.length > 4 || !/^[a-zA-Z0-9]+$/.test(ext)) {
+        ext = 'jpg'; // Fallback if no valid extension found
+    }
     // Clean extension
     const cleanExt = ext.replace(/[^a-zA-Z0-9]/g, '').substring(0, 4);
     
@@ -234,13 +237,21 @@ export async function getOffers() {
 
       const adspendText = properties.adspend?.rich_text?.map((t: any) => t.plain_text).join('') || properties.Adspend?.rich_text?.map((t: any) => t.plain_text).join('') || '';
 
-      const rawHeroImage = page.cover?.external?.url || 
+      const imagePropKey = Object.keys(properties).find(k => k.toLowerCase().trim() === 'image');
+      const imageProp = imagePropKey ? properties[imagePropKey] : null;
+
+      let rawHeroImage = page.cover?.external?.url || 
             page.cover?.file?.url || 
-            properties.image?.files?.[0]?.file?.url ||
-            properties.image?.files?.[0]?.external?.url || 
-            properties.Image?.files?.[0]?.file?.url ||
-            properties.Image?.files?.[0]?.external?.url || 
+            imageProp?.files?.[0]?.file?.url ||
+            imageProp?.files?.[0]?.external?.url || 
             null;
+
+      if (!rawHeroImage) {
+        const fallbackImgKey = Object.keys(properties).find(k => k.toLowerCase().includes('image') && properties[k]?.type === 'files');
+        if (fallbackImgKey && properties[fallbackImgKey]?.files?.length > 0) {
+           rawHeroImage = properties[fallbackImgKey].files[0].file?.url || properties[fallbackImgKey].files[0].external?.url;
+        }
+      }
             
       const heroImage = await downloadNotionImage(rawHeroImage, `offer_${page.id}_hero`);
 
