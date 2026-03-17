@@ -237,14 +237,26 @@ export async function getOffers() {
 
       const adspendText = properties.adspend?.rich_text?.map((t: any) => t.plain_text).join('') || properties.Adspend?.rich_text?.map((t: any) => t.plain_text).join('') || '';
 
+      const heroImagePropKey = Object.keys(properties).find(k => k.toLowerCase().trim() === 'heroimage');
+      const heroImageProp = heroImagePropKey ? properties[heroImagePropKey] : null;
+      
       const imagePropKey = Object.keys(properties).find(k => k.toLowerCase().trim() === 'image');
       const imageProp = imagePropKey ? properties[imagePropKey] : null;
 
-      let rawHeroImage = page.cover?.external?.url || 
+      let rawHeroImage = null;
+      if (heroImageProp?.type === 'url') {
+        rawHeroImage = heroImageProp.url;
+      } else if (heroImageProp?.type === 'rich_text') {
+        rawHeroImage = heroImageProp.rich_text?.[0]?.plain_text || null;
+      }
+      
+      if (!rawHeroImage) {
+        rawHeroImage = page.cover?.external?.url || 
             page.cover?.file?.url || 
             imageProp?.files?.[0]?.file?.url ||
             imageProp?.files?.[0]?.external?.url || 
             null;
+      }
 
       if (!rawHeroImage) {
         const fallbackImgKey = Object.keys(properties).find(k => k.toLowerCase().includes('image') && properties[k]?.type === 'files');
