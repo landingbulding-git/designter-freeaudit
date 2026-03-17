@@ -1,5 +1,8 @@
 import { Client } from "@notionhq/client";
 import { NotionToMarkdown } from "notion-to-md";
+import fs from 'fs';
+import path from 'path';
+import axios from 'axios';
 
 console.log('Initializing Notion Client with API Key:', import.meta.env.NOTION_API_KEY ? 'Present' : 'Missing');
 
@@ -36,6 +39,56 @@ n2m.setCustomTransformer('callout', async (block: any) => {
     <div class="text-brand-900 font-medium leading-relaxed">${textContent}</div>
   </div>`;
 });
+
+// Helper function to download Notion images
+async function downloadNotionImage(url: string | null | undefined, filenamePrefix: string): Promise<string | null> {
+  if (!url) return null;
+
+  // If it's an external image (e.g. Unsplash) or not AWS S3, return as is
+  if (!url.includes('amazonaws.com') && !url.includes('secure.notion-static.com')) {
+    return url;
+  }
+
+  try {
+    const pubDir = path.join(process.cwd(), 'public', 'images', 'notion');
+    if (!fs.existsSync(pubDir)) {
+      fs.mkdirSync(pubDir, { recursive: true });
+    }
+
+    const cleanUrl = url.split('?')[0];
+    const ext = cleanUrl.split('.').pop() || 'jpg';
+    // Clean extension
+    const cleanExt = ext.replace(/[^a-zA-Z0-9]/g, '').substring(0, 4);
+    
+    // Hash the URL or use prefix for unique filename
+    const urlHash = Buffer.from(cleanUrl).toString('base64').replace(/[^a-zA-Z0-9]/g, '').substring(0, 10);
+    const fileName = `${filenamePrefix}_${urlHash}.${cleanExt}`;
+    const filePath = path.join(pubDir, fileName);
+
+    // Download only if it doesn't exist (to speed up subsequent builds)
+    if (!fs.existsSync(filePath)) {
+      console.log(`Downloading Notion image to ${filePath}`);
+      const response = await axios({
+        url,
+        method: 'GET',
+        responseType: 'stream'
+      });
+
+      const writer = fs.createWriteStream(filePath);
+      response.data.pipe(writer);
+
+      await new Promise((resolve, reject) => {
+        writer.on('finish', resolve);
+        writer.on('error', reject);
+      });
+    }
+
+    return `/images/notion/${fileName}`;
+  } catch (error) {
+    console.error('Failed to download Notion image:', error);
+    return url; // fallback to original
+  }
+}
 
 export async function getPublishedBlogPosts() {
   const rawDatabaseId = import.meta.env.NOTION_DATABASE_ID;
@@ -85,23 +138,17 @@ export async function getPublishedBlogPosts() {
       data.results.map(async (page: any) => {
         const mdblocks = await n2m.pageToMarkdown(page.id);
         const mdString = n2m.toMarkdownString(mdblocks);
+        
+        const slug = page.properties.Slug?.rich_text?.[0]?.plain_text || '';
 
-        return {
-          id: page.id,
-          slug: page.properties.Slug?.rich_text?.[0]?.plain_text || '',
-          title: page.properties.Title?.title?.[0]?.plain_text || page.properties.Name?.title?.[0]?.plain_text || 'Untitled',
-          description: page.properties.Description?.rich_text?.map((t: any) => t.plain_text).join('') || '',
-          publishedDate: page.properties.PublishedDate?.date?.start ? new Date(page.properties.PublishedDate.date.start) : new Date(),
-          status: 'Published',
-          coverImage: 
-            page.cover?.external?.url || 
+        const rawCoverImage = page.cover?.external?.url || 
             page.cover?.file?.url || 
             page.properties.CoverImage?.files?.[0]?.file?.url ||
             page.properties.CoverImage?.files?.[0]?.external?.url ||
             page.properties['Cover Image']?.files?.[0]?.file?.url ||
-            page.properties['Cover Image']?.files?.[0]?.external?.url,
-          previewImage:
-            page.properties.previewimage?.files?.[0]?.file?.url ||
+            page.properties['Cover Image']?.files?.[0]?.external?.url;
+
+        const rawPreviewImage = page.properties.previewimage?.files?.[0]?.file?.url ||
             page.properties.previewimage?.files?.[0]?.external?.url ||
             page.properties.previewimage?.url ||
             page.properties.previewimage?.rich_text?.[0]?.plain_text ||
@@ -116,7 +163,20 @@ export async function getPublishedBlogPosts() {
             page.properties['previewImage']?.files?.[0]?.file?.url ||
             page.properties['previewImage']?.files?.[0]?.external?.url ||
             page.properties['previewImage']?.url ||
-            page.properties['previewImage']?.rich_text?.[0]?.plain_text,
+            page.properties['previewImage']?.rich_text?.[0]?.plain_text;
+
+        const coverImage = await downloadNotionImage(rawCoverImage, `blog_${page.id}_cover`);
+        const previewImage = await downloadNotionImage(rawPreviewImage, `blog_${page.id}_preview`);
+
+        return {
+          id: page.id,
+          slug,
+          title: page.properties.Title?.title?.[0]?.plain_text || page.properties.Name?.title?.[0]?.plain_text || 'Untitled',
+          description: page.properties.Description?.rich_text?.map((t: any) => t.plain_text).join('') || '',
+          publishedDate: page.properties.PublishedDate?.date?.start ? new Date(page.properties.PublishedDate.date.start) : new Date(),
+          status: 'Published',
+          coverImage,
+          previewImage,
           content: mdString?.parent || (typeof mdString === 'string' ? mdString : '') || '',
           type: page.properties.Type?.select?.name || 'Blog',
         };
@@ -156,7 +216,7 @@ export async function getOffers() {
     const data = await response.json();
     console.log(`Fetched ${data.results.length} offers.`);
 
-    return data.results.map((page: any) => {
+    return Promise.all(data.results.map(async (page: any) => {
       const properties = page.properties;
       
       const parseAdSpend = (val: string) => {
@@ -174,6 +234,16 @@ export async function getOffers() {
 
       const adspendText = properties.adspend?.rich_text?.map((t: any) => t.plain_text).join('') || properties.Adspend?.rich_text?.map((t: any) => t.plain_text).join('') || '';
 
+      const rawHeroImage = page.cover?.external?.url || 
+            page.cover?.file?.url || 
+            properties.image?.files?.[0]?.file?.url ||
+            properties.image?.files?.[0]?.external?.url || 
+            properties.Image?.files?.[0]?.file?.url ||
+            properties.Image?.files?.[0]?.external?.url || 
+            null;
+            
+      const heroImage = await downloadNotionImage(rawHeroImage, `offer_${page.id}_hero`);
+
       return {
         id: page.id,
         slug: properties.slug?.rich_text?.[0]?.plain_text || properties.Slug?.rich_text?.[0]?.plain_text || '',
@@ -186,16 +256,9 @@ export async function getOffers() {
         address: properties.address?.rich_text?.map((t: any) => t.plain_text).join('') || properties.Address?.rich_text?.map((t: any) => t.plain_text).join('') || '',
         taxnumber: properties.taxnumber?.rich_text?.map((t: any) => t.plain_text).join('') || properties.Taxnumber?.rich_text?.map((t: any) => t.plain_text).join('') || '',
         contact: properties.Contact?.rich_text?.map((t: any) => t.plain_text).join('') || properties.contact?.rich_text?.map((t: any) => t.plain_text).join('') || '',
-        heroImage: 
-            page.cover?.external?.url || 
-            page.cover?.file?.url || 
-            properties.image?.files?.[0]?.file?.url ||
-            properties.image?.files?.[0]?.external?.url || 
-            properties.Image?.files?.[0]?.file?.url ||
-            properties.Image?.files?.[0]?.external?.url || 
-            null
+        heroImage
       };
-    });
+    }));
   } catch (error) {
     console.error('Error fetching offers from Notion:', error);
     throw error;
