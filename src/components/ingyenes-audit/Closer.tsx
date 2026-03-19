@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowRight, ArrowLeft, Lock } from 'lucide-react';
 
 const QUESTIONS = [
@@ -87,6 +87,20 @@ const Closer: React.FC = () => {
     email: ''
   });
   const [status, setStatus] = useState('');
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get('name');
+    const domain = params.get('domain');
+
+    if (name || domain) {
+      setFormData(prev => ({
+        ...prev,
+        firstname: name ? (name.charAt(0).toUpperCase() + name.slice(1)) : prev.firstname,
+        website: domain || prev.website
+      }));
+    }
+  }, []);
 
   const calculateScore = () => {
     let score = 0;
