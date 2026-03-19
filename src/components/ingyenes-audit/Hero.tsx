@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Star, CheckCircle2 } from 'lucide-react';
+import { REVIEWS } from '../../constants/testimonials';
 
 interface HeroProps {
   onCtaClick: () => void;
@@ -26,32 +27,8 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
     }
   }, []);
 
-  const reviews = [
-    {
-      name: "E. Renáta.",
-      company: "Terápiás szakember",
-      result: "6x CR",
-      text: "Nem csak egy gyönyörű weboldalt kaptam, hanem egy rendszert, ami helyettem dolgozik. Az ügyfeleim maguktól foglalnak és fizetnek. Én pedig végre csak a munkámra figyelhetek. Imádom! Köszönöm.",
-      source: "Google"
-    },
-    {
-      name: "M. Edit.",
-      company: "Kozmetikai szalon tulajdonos",
-      result: "Tele naptár",
-      text: "Fogalmam sem volt, hogy hogyan működik egy weboldal, de Norbi és Lili úgy vittek végig mindenen, hogy egy percig sem stresszeltem. Tényleg figyeltek rám, és az eredmény is ezt tükrözi.",
-      source: "Google"
-    },
-    {
-      name: "Ő. Szilvia",
-      company: "Magántanár",
-      result: "3,5x CR",
-      text: "Egyedi ötlettel jöttem, nem sablonos weboldalt akartam. A folyamat során mindig tudtam, hogy hol tartunk, mit kell tennem és minden részlet a helyére került, pedig egyáltalán nem értek ezekhez a dolgokhoz. Remek élmény volt.",
-      source: "Google"
-    }
-  ];
-
   // We duplicate the array multiple times to create a seamless loop
-  const infiniteReviews = [...reviews, ...reviews, ...reviews, ...reviews];
+  const infiniteReviews = [...REVIEWS, ...REVIEWS, ...REVIEWS, ...REVIEWS];
 
   return (
     <section className="relative pt-12 pb-8 lg:pt-32 lg:pb-24 bg-brand-900 text-white overflow-hidden min-h-[100dvh] lg:min-h-screen flex items-center">

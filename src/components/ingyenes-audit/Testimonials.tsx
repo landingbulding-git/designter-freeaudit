@@ -1,5 +1,6 @@
 import React from 'react';
 import { Star } from 'lucide-react';
+import { REVIEWS } from '../../constants/testimonials';
 
 const GoogleLogo = () => (
   <svg viewBox="0 0 24 24" className="w-4 h-4 mr-1" xmlns="http://www.w3.org/2000/svg">
@@ -11,30 +12,6 @@ const GoogleLogo = () => (
 );
 
 const Testimonials: React.FC = () => {
-  const reviews = [
-    {
-      name: "E. Renáta.",
-      company: "Terápiás szakember",
-      result: "6x CR",
-      text: "Nem csak egy gyönyörű weboldalt kaptam, hanem egy rendszert, ami helyettem dolgozik. Az ügyfeleim maguktól foglalnak és fizetnek. Én pedig végre csak a munkámra figyelhetek. Imádom! Köszönöm.",
-      source: "Google"
-    },
-    {
-      name: "M. Edit.",
-      company: "Kozmetikai szalon tulajdonos",
-      result: "Tele naptár",
-      text: "Fogalmam sem volt, hogy hogyan működik egy weboldal, de Norbi és Lili úgy vittek végig mindenen, hogy egy percig sem stresszeltem. Tényleg figyeltek rám, és az eredmény is ezt tükrözi.",
-      source: "Google"
-    },
-    {
-      name: "Ő. Szilvia",
-      company: "Magántanár",
-      result: "3,5x CR",
-      text: "Egyedi ötlettel jöttem, nem sablonos weboldalt akartam. A folyamat során mindig tudtam, hogy hol tartunk, mit kell tennem és minden részlet a helyére került, pedig egyáltalán nem értek ezekhez a dolgokhoz. Remek élmény volt.",
-      source: "Google"
-    }
-  ];
-
   return (
     <section className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -42,9 +19,9 @@ const Testimonials: React.FC = () => {
         Ők is úgy érezték, hogy a hirdetéseik nem térülnek meg. Aztán ez történt:
         </h2>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {reviews.map((review, index) => (
-            <div key={index} className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {REVIEWS.map((review, index) => (
+            <div key={index} className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow flex flex-col h-full">
               <div className="flex items-center gap-1 mb-3 text-yellow-500">
                 <Star className="w-4 h-4 fill-current" />
                 <Star className="w-4 h-4 fill-current" />
@@ -52,15 +29,15 @@ const Testimonials: React.FC = () => {
                 <Star className="w-4 h-4 fill-current" />
                 <Star className="w-4 h-4 fill-current" />
               </div>
-              <p className="text-gray-700 mb-6 font-medium">"{review.text}"</p>
+              <p className="text-gray-700 mb-6 font-medium flex-grow">"{review.text}"</p>
               
-              <div className="flex items-center justify-between border-t border-gray-100 pt-4">
+              <div className="flex items-center justify-between border-t border-gray-100 pt-4 mt-auto">
                 <div>
                   <p className="font-bold text-brand-900 text-sm">{review.name}</p>
                   <p className="text-xs text-gray-500">{review.company}</p>
                 </div>
                 <div className="text-right flex flex-col items-end">
-                  <span className="block text-green-600 font-bold text-sm bg-green-50 px-2 py-1 rounded mb-2">
+                  <span className="block text-green-600 font-bold text-xs bg-green-50 px-2 py-1 rounded mb-2 whitespace-nowrap">
                     {review.result}
                   </span>
                   <div className="flex items-center bg-white border border-gray-200 rounded-full px-2 py-0.5 shadow-sm">
