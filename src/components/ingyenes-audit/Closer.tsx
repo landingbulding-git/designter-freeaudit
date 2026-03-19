@@ -1,30 +1,184 @@
 import React, { useState } from 'react';
-import { Star, Check, Lock } from 'lucide-react';
+import { ArrowRight, ArrowLeft, Lock } from 'lucide-react';
+
+const QUESTIONS = [
+  {
+    id: 'website',
+    type: 'text',
+    label: 'Mi az oldalad linkje?',
+    sublabel: 'Ha hirdetsz, akkor azt add meg, amit a hirdetéseidnél is megszoktál.'
+  },
+  {
+    id: 'visitors',
+    type: 'radio',
+    label: 'Hány látogatód van átlagosan egy hónapban?',
+    options: [
+      { id: 'assmof0ch2sec28ttogabfnr', label: '0 - 1.000', points: 1 },
+      { id: 'o3uh1sdfpb8k09ge4sfkq9zx', label: '1.000 - 5.000', points: 4 },
+      { id: 'f0ds8d21vt4thjjgc1wwwiqj', label: '5.000 - 20.000', points: 8 },
+      { id: 'j2pzkotze87rcyggdkf96xar', label: '20.000+', points: 10 }
+    ]
+  },
+  {
+    id: 'customers',
+    type: 'radio',
+    label: 'Hány vásárlás/lead érkezik havonta az oldalon keresztül?',
+    options: [
+      { id: 'i7j4qjjj1pce2kew573g0i1t', label: '0 - 10', points: 1 },
+      { id: 'g9l88autmpov7gh851x7l4h2', label: '10 - 50', points: 4 },
+      { id: 'zms6ln1qwn2ecqczxz7okiq7', label: '50 - 200', points: 7 },
+      { id: 'wsgd5xi6frevd9nqbnalg4we', label: '200 - 500', points: 9 },
+      { id: 'e5zuhqvjcwktcovm8wmap2fv', label: '500+', points: 10 }
+    ]
+  },
+  {
+    id: 'adcost',
+    type: 'radio',
+    label: 'Mennyit költesz havonta hirdetésre?',
+    options: [
+      { id: 'bmlc078so958fex7unur1rpz', label: '0 Ft', points: 0 },
+      { id: 'sn0jev8qakmh6y6ubceqpx1l', label: '100.000 Ft alatt', points: 2 },
+      { id: 'n50xmdtt1bv6q6r2ff67bztk', label: '100.000 - 300.000 Ft', points: 5 },
+      { id: 'jmhcnl5oohwppp43lkbg7y4u', label: '300.000 - 1.000.000 Ft', points: 8 },
+      { id: 'h8iou3vpm1cvk098i5cpb9n0', label: '1.000.000 - 3.000.000 Ft', points: 10 },
+      { id: 'nmbrfo1v3d0icgt3zy3gbt5p', label: '3.000.000 Ft felett', points: 12 }
+    ]
+  },
+  {
+    id: 'AOV',
+    type: 'radio',
+    label: 'Mennyi egy átlagos vásárlás értéke (AOV / LTV)?',
+    options: [
+      { id: 'n3vt24drwc99u4d52mlqpams', label: '10.000 Ft alatt', points: 2 },
+      { id: 'x5wsqgc0pgitpmak8q6tpy34', label: '10.000 - 50.000 Ft', points: 5 },
+      { id: 'vh0brm90p8hhxzbojoneftvv', label: '50.000 - 200.000 Ft', points: 8 },
+      { id: 'xu4y5iu8w9264tq6p07wj4im', label: '200.000 Ft felett', points: 10 }
+    ]
+  },
+  {
+    id: 'fromwhere',
+    type: 'radio',
+    label: 'Mi a legfőbb forgalmi forrásod?',
+    options: [
+      { id: 'g7vami2mg3fjptttvgt46o2r', label: 'Meta hirdetések', points: 5 },
+      { id: 'mf4mgr6hf42tq9c73lr3v67f', label: 'Google Ads', points: 5 },
+      { id: 'tlc0s2pkmmb1wx4ccu0y0nwb', label: 'Influenszerek', points: 4 },
+      { id: 'dad500hjo2enyvitf6fwklp0', label: 'Organikus közösségi média', points: 2 },
+      { id: 'yghsi7ggk1m4p8ljraq5grjt', label: 'Google keresés (SEO)', points: 2 }
+    ]
+  },
+  {
+    id: 'contact',
+    type: 'contact',
+    label: 'Hova küldhetjük az ingyenes auditot?'
+  }
+];
 
 const Closer: React.FC = () => {
-  const [formData, setFormData] = useState({
-    firstname: '',
-    email: '',
+  const [currentStep, setCurrentStep] = useState(0);
+  const [formData, setFormData] = useState<Record<string, string>>({
     website: '',
     visitors: '',
-    conversions: '',
-    ad_spend: '',
-    aov: '',
-    traffic_source: '',
-    access_key: 'aa9f8e62-b6f0-43c1-9ece-521ecbd1c23a'
+    customers: '',
+    adcost: '',
+    AOV: '',
+    fromwhere: '',
+    firstname: '',
+    email: ''
   });
   const [status, setStatus] = useState('');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const calculateScore = () => {
+    let score = 0;
+    QUESTIONS.forEach(q => {
+      if (q.type === 'radio' && q.options) {
+        const selectedId = formData[q.id];
+        const option = q.options.find(o => o.id === selectedId);
+        if (option) {
+          score += option.points;
+        }
+      }
+    });
+    return score;
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleRadioSelect = (questionId: string, optionId: string) => {
+    setFormData({
+      ...formData,
+      [questionId]: optionId
+    });
+    
+    // Auto-advance on radio select after a short delay
+    setTimeout(() => {
+      if (currentStep < QUESTIONS.length - 1) {
+        setCurrentStep(currentStep + 1);
+      }
+    }, 300);
+  };
+
+  const handleNext = () => {
+    if (currentStep < QUESTIONS.length - 1) {
+      setCurrentStep(currentStep + 1);
+    }
+  };
+
+  const handleBack = () => {
+    if (currentStep > 0) {
+      setCurrentStep(currentStep - 1);
+    }
+  };
+
+  const isCurrentStepValid = () => {
+    const question = QUESTIONS[currentStep];
+    if (question.type === 'text') {
+      return formData[question.id].trim().length > 0;
+    }
+    if (question.type === 'radio') {
+      return formData[question.id] !== '';
+    }
+    if (question.type === 'contact') {
+      return formData.firstname.trim().length > 0 && formData.email.trim().length > 0 && formData.email.includes('@');
+    }
+    return false;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setStatus('Submitting...');
+    if (!isCurrentStepValid()) return;
+
+    setStatus('Küldés folyamatban...');
+    
+    const score = calculateScore();
+    
+    // Prepare data for Web3Forms (including access key and human-readable answers)
+    const readableData: Record<string, any> = {
+      access_key: 'aa9f8e62-b6f0-43c1-9ece-521ecbd1c23a',
+      score: score,
+      firstname: formData.firstname,
+      email: formData.email,
+      website: formData.website,
+    };
+
+    QUESTIONS.forEach(q => {
+      if (q.type === 'radio' && q.options) {
+        const option = q.options.find(o => o.id === formData[q.id]);
+        readableData[q.id] = option ? option.label : '';
+      }
+    });
+
+    // Also send the raw IDs to prepare for formbricks format if needed in web3forms
+    const submissionData = {
+      ...readableData,
+      raw_form_data: formData
+    };
+
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
@@ -32,248 +186,155 @@ const Closer: React.FC = () => {
           'Content-Type': 'application/json',
           Accept: 'application/json'
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(submissionData)
       });
       const result = await response.json();
       if (result.success) {
         window.location.href = 'https://www.designter.hu/thank-you';
       } else {
-        setStatus(result.message || 'An error occurred.');
+        setStatus(result.message || 'Hiba történt a küldés során.');
       }
     } catch (error) {
-      setStatus('An error occurred while submitting the form.');
+      setStatus('Hiba történt a küldés során.');
     }
   };
-  
-  const benefits = [
-    "Megkapod videós elemzésben a 3 legkritikusabb hibát az oldaladon",
-    "Konkrét, azonnal alkalmazható javaslatokat kapsz a javításra",
-    "Megtudod, mennyi bevételt hagysz az asztalon a jelenlegi konverziós rátával"
-  ];
+
+  const question = QUESTIONS[currentStep];
+  const progress = ((currentStep) / QUESTIONS.length) * 100;
 
   return (
-    <section className="py-24 bg-brand-900 text-white relative overflow-hidden">
+    <section id="closer-audit-heading" className="py-24 bg-brand-900 min-h-screen flex items-center justify-center relative overflow-hidden">
       {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-accent opacity-10 blur-[100px] rounded-full transform translate-x-1/3 -translate-y-1/3"></div>
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500 opacity-10 blur-[100px] rounded-full transform -translate-x-1/3 translate-y-1/3"></div>
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-accent opacity-10 blur-[100px] rounded-full transform translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500 opacity-10 blur-[100px] rounded-full transform -translate-x-1/3 translate-y-1/3 pointer-events-none"></div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+      <div className="max-w-2xl w-full mx-auto px-4 relative z-10">
+        
+        {/* Form Container */}
+        <div className="bg-white rounded-3xl p-8 md:p-12 shadow-2xl text-brand-900 w-full min-h-[400px] flex flex-col">
           
-          {/* Text Content */}
-          <div className="text-left sticky top-12">
-            {/* Social Proof Badge */}
-            <div className="inline-flex flex-wrap items-center gap-3 text-sm font-medium text-gray-300 bg-brand-800/80 backdrop-blur-sm px-4 py-2 rounded-full border border-brand-700/50 shadow-sm mb-8">
-              <div className="flex items-center text-yellow-500">
-                <Star className="w-4 h-4 fill-current" />
-                <Star className="w-4 h-4 fill-current" />
-                <Star className="w-4 h-4 fill-current" />
-                <Star className="w-4 h-4 fill-current" />
-                <Star className="w-4 h-4 fill-current" />
-              </div>
-              <span className="font-semibold text-white">5.0 Vásárlói visszajelzés</span>
-            </div>
-
-            <h2 className="text-3xl md:text-5xl font-extrabold mb-8 leading-tight">
-              A weboldalad csendben szabotálja az eladásaidat. 48 órán belül megmutatjuk hol, és hogyan javítsd.
-            </h2>
-            
-            <div className="space-y-6">
-              {benefits.map((benefit, index) => (
-                <div key={index} className="flex items-start gap-3">
-                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center mt-0.5 border border-green-500/20">
-                    <Check className="w-4 h-4 text-green-400" />
-                  </div>
-                  <p className="text-lg text-gray-300 leading-relaxed">{benefit}</p>
-                </div>
-              ))}
-            </div>
+          {/* Progress Bar */}
+          <div className="w-full bg-gray-100 rounded-full h-2 mb-8">
+            <div 
+              className="bg-brand-accent h-2 rounded-full transition-all duration-500 ease-out" 
+              style={{ width: `${progress}%` }}
+            ></div>
           </div>
 
-          {/* Form */}
-          <div className="bg-white rounded-3xl p-6 md:p-10 w-full shadow-2xl text-brand-900 relative">
-            <h3 id="closer-audit-heading" className="text-2xl md:text-3xl font-bold text-brand-900 mb-3">Kérem az Ingyenes Auditot</h3>
-            <p className="text-gray-600 mb-8 leading-relaxed">Válaszold meg az alábbi pár kérdést, hogy pontos képet kapjunk a jelenlegi helyzetedről és 48 órán belül küldjük az elemzést!</p>
-
-            <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div>
-                  <label htmlFor="firstname" className="block text-sm font-bold text-gray-700 mb-1.5">
-                    Keresztnév *
-                  </label>
-                  <input 
-                    type="text" 
-                    id="firstname"
-                    name="firstname"
-                    placeholder="Péter" 
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-accent focus:border-brand-accent outline-none text-brand-900 transition-all bg-gray-50"
-                    required
-                    value={formData.firstname}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="email" className="block text-sm font-bold text-gray-700 mb-1.5">
-                    E-mail cím *
-                  </label>
-                  <input 
-                    type="email" 
-                    id="email" 
-                    name="email"
-                    placeholder="pelda@ceg.hu" 
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-accent focus:border-brand-accent outline-none text-brand-900 transition-all bg-gray-50"
-                    required
-                    value={formData.email}
-                    onChange={handleChange}
-                  />
-                </div>
-              </div>
-              
-              <div>
-                <label htmlFor="website" className="block text-sm font-bold text-gray-700 mb-1.5">
-                  Mi az oldalad linkje? * <span className="text-xs font-normal text-gray-500 block">Ha hirdetsz, akkor azt add meg, amit a hirdetéseidnél is megszoktál.</span>
-                </label>
+          <div className="flex-grow flex flex-col justify-center">
+            <h2 className="text-2xl md:text-3xl font-bold mb-2">{question.label}</h2>
+            {question.sublabel && <p className="text-gray-500 mb-6 text-sm">{question.sublabel}</p>}
+            
+            <div className="mt-4">
+              {question.type === 'text' && (
                 <input 
                   type="text" 
-                  id="website" 
-                  name="website"
+                  name={question.id}
                   placeholder="https://..." 
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-accent focus:border-brand-accent outline-none text-brand-900 transition-all bg-gray-50"
-                  required
-                  value={formData.website}
-                  onChange={handleChange}
+                  className="w-full px-5 py-4 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-accent focus:border-brand-accent outline-none text-lg transition-all bg-gray-50"
+                  value={formData[question.id]}
+                  onChange={handleInputChange}
+                  autoFocus
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && isCurrentStepValid()) {
+                      e.preventDefault();
+                      handleNext();
+                    }
+                  }}
                 />
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div>
-                  <label htmlFor="visitors" className="block text-sm font-bold text-gray-700 mb-1.5">
-                    Hány látogatód van havonta? *
-                  </label>
-                  <select 
-                    id="visitors" 
-                    name="visitors"
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-accent focus:border-brand-accent outline-none text-brand-900 transition-all bg-gray-50 appearance-none cursor-pointer"
-                    required
-                    value={formData.visitors}
-                    onChange={handleChange}
-                  >
-                    <option value="" disabled>Válassz...</option>
-                    <option value="0 - 1.000 (1 pont)">0 - 1.000</option>
-                    <option value="1.000 - 5.000 (4 pont)">1.000 - 5.000</option>
-                    <option value="5.000 - 20.000 (8 pont)">5.000 - 20.000</option>
-                    <option value="20.000+ (10 pont)">20.000+</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label htmlFor="conversions" className="block text-sm font-bold text-gray-700 mb-1.5">
-                    Vásárlás/lead havonta? *
-                  </label>
-                  <select 
-                    id="conversions" 
-                    name="conversions"
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-accent focus:border-brand-accent outline-none text-brand-900 transition-all bg-gray-50 appearance-none cursor-pointer"
-                    required
-                    value={formData.conversions}
-                    onChange={handleChange}
-                  >
-                    <option value="" disabled>Válassz...</option>
-                    <option value="0 - 10 (1 pont)">0 - 10</option>
-                    <option value="10 - 50 (4 pont)">10 - 50</option>
-                    <option value="50 - 200 (7 pont)">50 - 200</option>
-                    <option value="200 - 500 (9 pont)">200 - 500</option>
-                    <option value="500+ (10 pont)">500+</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label htmlFor="ad_spend" className="block text-sm font-bold text-gray-700 mb-1.5">
-                    Havi hirdetési költés? *
-                  </label>
-                  <select 
-                    id="ad_spend" 
-                    name="ad_spend"
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-accent focus:border-brand-accent outline-none text-brand-900 transition-all bg-gray-50 appearance-none cursor-pointer"
-                    required
-                    value={formData.ad_spend}
-                    onChange={handleChange}
-                  >
-                    <option value="" disabled>Válassz...</option>
-                    <option value="0 Ft (0 pont)">0 Ft</option>
-                    <option value="100.000 Ft alatt (2 pont)">100.000 Ft alatt</option>
-                    <option value="100.000 - 300.000 Ft (5 pont)">100.000 - 300.000 Ft</option>
-                    <option value="300.000 - 1.000.000 Ft (8 pont)">300.000 - 1.000.000 Ft</option>
-                    <option value="1.000.000 - 3.000.000 Ft (10 pont)">1.000.000 - 3.000.000 Ft</option>
-                    <option value="3.000.000 Ft felett (12 pont)">3.000.000 Ft felett</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label htmlFor="aov" className="block text-sm font-bold text-gray-700 mb-1.5">
-                    Átlagos vásárlás értéke (AOV)? *
-                  </label>
-                  <select 
-                    id="aov" 
-                    name="aov"
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-accent focus:border-brand-accent outline-none text-brand-900 transition-all bg-gray-50 appearance-none cursor-pointer"
-                    required
-                    value={formData.aov}
-                    onChange={handleChange}
-                  >
-                    <option value="" disabled>Válassz...</option>
-                    <option value="10.000 Ft alatt (2 pont)">10.000 Ft alatt</option>
-                    <option value="10.000 - 50.000 Ft (5 pont)">10.000 - 50.000 Ft</option>
-                    <option value="50.000 - 200.000 Ft (8 pont)">50.000 - 200.000 Ft</option>
-                    <option value="200.000 Ft felett (10 pont)">200.000 Ft felett</option>
-                  </select>
-                </div>
-              </div>
-
-              <div>
-                <label htmlFor="traffic_source" className="block text-sm font-bold text-gray-700 mb-1.5">
-                  Mi a legfőbb forgalmi forrásod? *
-                </label>
-                <select 
-                  id="traffic_source" 
-                  name="traffic_source"
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-accent focus:border-brand-accent outline-none text-brand-900 transition-all bg-gray-50 appearance-none cursor-pointer"
-                  required
-                  value={formData.traffic_source}
-                  onChange={handleChange}
-                >
-                  <option value="" disabled>Válassz egyet...</option>
-                  <option value="Meta hirdetések (5 pont)">Meta hirdetések</option>
-                  <option value="Google Ads (5 pont)">Google Ads</option>
-                  <option value="Influenszerek (4 pont)">Influenszerek</option>
-                  <option value="Organikus közösségi média (2 pont)">Organikus közösségi média</option>
-                  <option value="Google keresés (SEO) (2 pont)">Google keresés (SEO)</option>
-                </select>
-              </div>
-
-              <button 
-                type="submit" 
-                className="w-full bg-brand-accent hover:bg-brand-accentHover text-white font-bold text-lg py-4 rounded-xl shadow-[0_0_20px_rgba(255,107,0,0.2)] hover:shadow-[0_0_30px_rgba(255,107,0,0.4)] transition-all duration-300 transform hover:-translate-y-1 mt-4"
-              >
-                Kérem az auditot
-              </button>
-
-              {status && (
-                <p className="text-center mt-2 font-medium text-brand-accent">
-                  {status}
-                </p>
               )}
 
-              <div className="flex items-center justify-center gap-2 mt-4 p-4 bg-green-50 rounded-xl border border-green-100">
-                <Lock className="w-4 h-4 text-green-600" />
-                <p className="text-sm font-bold text-green-800 text-center">
-                  Az audit 100%-ban ingyenes és kötelezettségmentes.
-                </p>
-              </div>
-            </form>
+              {question.type === 'radio' && question.options && (
+                <div className="flex flex-col gap-3">
+                  {question.options.map((option) => (
+                    <button
+                      key={option.id}
+                      type="button"
+                      onClick={() => handleRadioSelect(question.id, option.id)}
+                      className={`w-full text-left px-5 py-4 rounded-xl border-2 transition-all ${
+                        formData[question.id] === option.id 
+                          ? 'border-brand-accent bg-brand-accent/5' 
+                          : 'border-gray-100 bg-white hover:border-gray-300 hover:bg-gray-50'
+                      }`}
+                    >
+                      <span className={`text-lg ${formData[question.id] === option.id ? 'font-bold text-brand-accent' : 'font-medium text-gray-700'}`}>
+                        {option.label}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              )}
+
+              {question.type === 'contact' && (
+                <div className="flex flex-col gap-5">
+                  <div>
+                    <label className="block text-sm font-bold text-gray-700 mb-1.5">Keresztnév *</label>
+                    <input 
+                      type="text" 
+                      name="firstname"
+                      placeholder="Péter" 
+                      className="w-full px-5 py-4 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-accent focus:border-brand-accent outline-none text-lg transition-all bg-gray-50"
+                      value={formData.firstname}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-bold text-gray-700 mb-1.5">E-mail cím *</label>
+                    <input 
+                      type="email" 
+                      name="email"
+                      placeholder="pelda@ceg.hu" 
+                      className="w-full px-5 py-4 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-accent focus:border-brand-accent outline-none text-lg transition-all bg-gray-50"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
+
+          {/* Navigation Controls */}
+          <div className="mt-10 flex items-center justify-between pt-6 border-t border-gray-100">
+            {currentStep > 0 ? (
+              <button 
+                onClick={handleBack}
+                type="button"
+                className="flex items-center gap-2 text-gray-500 hover:text-brand-900 font-medium transition-colors"
+              >
+                <ArrowLeft className="w-4 h-4" /> Vissza
+              </button>
+            ) : <div></div>}
+
+            {currentStep < QUESTIONS.length - 1 ? (
+              <button 
+                onClick={handleNext}
+                type="button"
+                disabled={!isCurrentStepValid()}
+                className="flex items-center gap-2 bg-brand-900 hover:bg-brand-800 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-6 py-3 rounded-xl font-bold transition-all"
+              >
+                Tovább <ArrowRight className="w-4 h-4" />
+              </button>
+            ) : (
+              <button 
+                onClick={handleSubmit}
+                type="button"
+                disabled={!isCurrentStepValid() || status !== ''}
+                className="flex items-center gap-2 bg-brand-accent hover:bg-brand-accentHover disabled:bg-brand-accent/50 text-white px-8 py-3 rounded-xl font-bold transition-all shadow-[0_0_20px_rgba(255,107,0,0.3)]"
+              >
+                {status ? status : 'Audit Kérése'} <ArrowRight className="w-4 h-4" />
+              </button>
+            )}
+          </div>
+          
+          {currentStep === QUESTIONS.length - 1 && (
+            <div className="flex items-center justify-center gap-2 mt-6">
+              <Lock className="w-3.5 h-3.5 text-gray-400" />
+              <p className="text-xs font-medium text-gray-500 text-center">
+                Az audit 100%-ban ingyenes és kötelezettségmentes.
+              </p>
+            </div>
+          )}
 
         </div>
       </div>
