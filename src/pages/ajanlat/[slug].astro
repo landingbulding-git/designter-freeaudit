@@ -10,7 +10,7 @@ import { getOffers } from '../../lib/notion';
 export async function getStaticPaths() {
   const offers = await getOffers();
 
-  return offers.map((offer) => {
+  return offers.filter(offer => offer.slug).map((offer) => {
     const { visitors, customers, avgOrderValue, adSpend } = offer;
     
     // CR Calculation
