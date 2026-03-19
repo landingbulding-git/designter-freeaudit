@@ -54,11 +54,11 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
   const infiniteReviews = [...reviews, ...reviews, ...reviews, ...reviews];
 
   return (
-    <section className="relative pt-24 pb-16 lg:pt-32 lg:pb-24 bg-brand-900 text-white overflow-hidden min-h-screen flex items-center">
+    <section className="relative pt-20 pb-16 lg:pt-32 lg:pb-24 bg-brand-900 text-white overflow-hidden min-h-screen flex items-center">
       <style>{`
         @keyframes scroll-up {
           0% { transform: translateY(0); }
-          100% { transform: translateY(-50%); } /* Half height since we use 4 sets (2 sets visible, 2 sets for loop) */
+          100% { transform: translateY(-50%); }
         }
         .animate-scroll-up {
           animation: scroll-up 40s linear infinite;
@@ -66,13 +66,12 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
         .animate-scroll-up:hover {
           animation-play-state: paused;
         }
-        /* Hide scrollbar for the container */
         .no-scrollbar::-webkit-scrollbar {
           display: none;
         }
         .no-scrollbar {
-          -ms-overflow-style: none;  /* IE and Edge */
-          scrollbar-width: none;  /* Firefox */
+          -ms-overflow-style: none;
+          scrollbar-width: none;
         }
       `}</style>
       
@@ -86,20 +85,7 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
           {/* Left Side Content */}
           <div className="flex flex-col space-y-8 items-start text-left w-full pt-8 lg:pt-0">
             
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-              {/* Founder Badge */}
-              <div className="flex items-center gap-3 text-sm font-medium text-gray-300 bg-brand-800/80 backdrop-blur-sm pr-4 pl-1.5 py-1.5 rounded-full border border-brand-700/50 shadow-sm">
-                <img 
-                  src="https://xa5228yhxohqyplr.public.blob.vercel-storage.com/me-landing-image.webp" 
-                  alt="Bogdán Norbert" 
-                  className="w-8 h-8 rounded-full border border-brand-accent object-cover"
-                />
-                <div className="flex flex-col">
-                  <span className="text-xs font-bold text-white leading-tight">Bogdán Norbert</span>
-                  <span className="text-[10px] text-brand-accent font-medium leading-tight">CRO Specialista</span>
-                </div>
-              </div>
-
+            <div className="flex flex-wrap items-center gap-4">
               {/* Social Proof Badge */}
               <div className="flex flex-wrap items-center gap-3 text-sm font-medium text-gray-300 bg-brand-800/80 backdrop-blur-sm px-4 py-2 rounded-full border border-brand-700/50 shadow-sm">
                 <div className="flex items-center text-yellow-500">
@@ -124,33 +110,33 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
               Nem akarok látatlanban "okoskodni" – ahhoz, hogy valóban hasznos észrevételeket küldjek, fel kell tennem pár kérdést. Segítesz?
             </p>
 
-            <div className="flex flex-col w-full sm:w-auto space-y-4 mt-2">
+            <div className="flex flex-col w-full space-y-6 mt-2">
               <button 
                 onClick={onCtaClick}
-                className="w-full bg-brand-accent hover:bg-brand-accentHover text-white text-lg font-bold py-4 px-8 rounded-xl shadow-[0_0_20px_rgba(255,107,0,0.3)] hover:shadow-[0_0_30px_rgba(255,107,0,0.5)] transition-all duration-300 transform hover:-translate-y-1"
+                className="w-full sm:w-fit bg-brand-accent hover:bg-brand-accentHover text-white text-lg font-bold py-4 px-10 rounded-xl shadow-[0_0_20px_rgba(255,107,0,0.3)] hover:shadow-[0_0_30px_rgba(255,107,0,0.5)] transition-all duration-300 transform hover:-translate-y-1"
               >
                 Persze, válaszolok és kérem a tippeket
               </button>
               
-              {/* Features list */}
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-start gap-4 sm:gap-6 text-sm font-medium text-gray-300">
-                 <div className="flex items-center gap-2">
-                   <CheckCircle2 className="w-4 h-4 text-green-400" />
+              {/* Features list - Highlighted */}
+              <div className="flex flex-wrap items-center justify-start gap-3 text-sm font-bold">
+                 <div className="flex items-center gap-2 bg-green-500/10 text-green-400 px-3 py-1.5 rounded-lg border border-green-500/20">
+                   <CheckCircle2 className="w-4 h-4" />
                    <span>2 perc az egész</span>
                  </div>
-                 <div className="flex items-center gap-2">
-                   <CheckCircle2 className="w-4 h-4 text-green-400" />
+                 <div className="flex items-center gap-2 bg-brand-accent/10 text-brand-accent px-3 py-1.5 rounded-lg border border-brand-accent/20">
+                   <CheckCircle2 className="w-4 h-4" />
                    <span>100% Ingyenes</span>
                  </div>
-                 <div className="flex items-center gap-2">
-                   <CheckCircle2 className="w-4 h-4 text-green-400" />
+                 <div className="flex items-center gap-2 bg-blue-500/10 text-blue-400 px-3 py-1.5 rounded-lg border border-blue-500/20">
+                   <CheckCircle2 className="w-4 h-4" />
                    <span>Garantált szakmai észrevételek</span>
                  </div>
               </div>
             </div>
           </div>
 
-          {/* Right Side Validation - Wall of Love */}
+          {/* Right Side Validation - Wall of Love (Desktop) */}
           <div className="absolute top-0 right-0 h-full w-full lg:w-1/2 overflow-hidden pointer-events-none hidden lg:block">
             {/* Fade effect top/bottom */}
             <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-brand-900 via-brand-900/80 to-transparent z-10"></div>
@@ -186,15 +172,15 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
             </div>
           </div>
           
-          {/* Mobile visible wall of love */}
-          <div className="relative h-[300px] w-full mt-12 overflow-hidden lg:hidden">
-            <div className="absolute top-0 left-0 w-full h-16 bg-gradient-to-b from-brand-900 to-transparent z-10 pointer-events-none"></div>
-            <div className="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-brand-900 to-transparent z-10 pointer-events-none"></div>
+          {/* Mobile visible wall of love - Fixed Layout */}
+          <div className="relative h-[350px] w-full mt-10 overflow-hidden lg:hidden rounded-2xl border border-white/5 bg-white/5 backdrop-blur-sm">
+            <div className="absolute top-0 left-0 w-full h-16 bg-gradient-to-b from-brand-900/50 to-transparent z-10 pointer-events-none"></div>
+            <div className="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-brand-900/50 to-transparent z-10 pointer-events-none"></div>
             
-            <div className="h-full overflow-hidden no-scrollbar opacity-80">
+            <div className="h-full overflow-hidden no-scrollbar opacity-90">
               <div className="flex flex-col gap-4 py-4 animate-scroll-up px-4">
                 {infiniteReviews.map((review, index) => (
-                  <div key={index} className="bg-white/5 p-5 rounded-2xl border border-white/10">
+                  <div key={index} className="bg-white/5 p-5 rounded-2xl border border-white/10 shadow-lg">
                     <div className="flex items-center gap-1 mb-3 text-yellow-500">
                       <Star className="w-3.5 h-3.5 fill-current" />
                       <Star className="w-3.5 h-3.5 fill-current" />
@@ -202,8 +188,11 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
                       <Star className="w-3.5 h-3.5 fill-current" />
                       <Star className="w-3.5 h-3.5 fill-current" />
                     </div>
-                    <p className="text-gray-200 mb-4 text-xs leading-relaxed">"{review.text}"</p>
-                    <p className="font-bold text-white text-xs">{review.name}</p>
+                    <p className="text-gray-200 mb-4 text-xs leading-relaxed italic">"{review.text}"</p>
+                    <div className="flex items-center justify-between">
+                      <p className="font-bold text-white text-xs">{review.name}</p>
+                      <span className="text-[10px] text-green-400 font-bold">{review.result}</span>
+                    </div>
                   </div>
                 ))}
               </div>
