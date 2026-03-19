@@ -54,7 +54,7 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
   const infiniteReviews = [...reviews, ...reviews, ...reviews, ...reviews];
 
   return (
-    <section className="relative pt-20 pb-16 lg:pt-32 lg:pb-24 bg-brand-900 text-white overflow-hidden min-h-screen flex items-center">
+    <section className="relative pt-12 pb-8 lg:pt-32 lg:pb-24 bg-brand-900 text-white overflow-hidden min-h-[100dvh] lg:min-h-screen flex items-center">
       <style>{`
         @keyframes scroll-up {
           0% { transform: translateY(0); }
@@ -80,12 +80,12 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500 opacity-10 blur-[100px] rounded-full transform -translate-x-1/3 translate-y-1/3"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           
           {/* Left Side Content */}
-          <div className="flex flex-col space-y-8 items-start text-left w-full pt-8 lg:pt-0">
+          <div className="flex flex-col space-y-6 lg:space-y-8 items-center lg:items-start text-center lg:text-left w-full pt-4 lg:pt-0">
             
-            <div className="flex flex-wrap items-center gap-4">
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4">
               {/* Social Proof Badge */}
               <div className="inline-flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-3 text-xs sm:text-sm font-medium text-gray-300 bg-brand-800/80 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-2xl sm:rounded-full border border-brand-700/50 shadow-sm">
                 <div className="flex items-center text-yellow-500">
@@ -110,16 +110,16 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
               Nem akarok látatlanban "okoskodni" – ahhoz, hogy valóban hasznos észrevételeket küldjek, fel kell tennem pár kérdést. Segítesz?
             </p>
 
-            <div className="flex flex-col w-full space-y-6 mt-2">
+            <div className="flex flex-col w-full space-y-5 lg:space-y-6 mt-2">
               <button 
                 onClick={onCtaClick}
-                className="w-full sm:w-fit bg-brand-accent hover:bg-brand-accentHover text-white text-lg font-bold py-4 px-10 rounded-xl shadow-[0_0_20px_rgba(255,107,0,0.3)] hover:shadow-[0_0_30px_rgba(255,107,0,0.5)] transition-all duration-300 transform hover:-translate-y-1"
+                className="w-full sm:w-fit mx-auto lg:mx-0 bg-brand-accent hover:bg-brand-accentHover text-white text-lg font-bold py-4 px-10 rounded-xl shadow-[0_0_20px_rgba(255,107,0,0.3)] hover:shadow-[0_0_30px_rgba(255,107,0,0.5)] transition-all duration-300 transform hover:-translate-y-1"
               >
                 Persze, válaszolok és kérem a tippeket
               </button>
               
               {/* Features list - Highlighted */}
-              <div className="flex flex-wrap items-center justify-start gap-3 text-sm font-bold">
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 text-sm font-bold">
                  <div className="flex items-center gap-2 bg-green-500/10 text-green-400 px-3 py-1.5 rounded-lg border border-green-500/20">
                    <CheckCircle2 className="w-4 h-4" />
                    <span>2 perc az egész</span>
