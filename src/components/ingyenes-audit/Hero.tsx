@@ -87,17 +87,17 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
             
             <div className="flex flex-wrap items-center gap-4">
               {/* Social Proof Badge */}
-              <div className="flex flex-wrap items-center gap-3 text-sm font-medium text-gray-300 bg-brand-800/80 backdrop-blur-sm px-4 py-2 rounded-full border border-brand-700/50 shadow-sm">
+              <div className="inline-flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-3 text-xs sm:text-sm font-medium text-gray-300 bg-brand-800/80 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-2xl sm:rounded-full border border-brand-700/50 shadow-sm">
                 <div className="flex items-center text-yellow-500">
-                  <Star className="w-4 h-4 fill-current" />
-                  <Star className="w-4 h-4 fill-current" />
-                  <Star className="w-4 h-4 fill-current" />
-                  <Star className="w-4 h-4 fill-current" />
-                  <Star className="w-4 h-4 fill-current" />
+                  <Star className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current" />
+                  <Star className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current" />
+                  <Star className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current" />
+                  <Star className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current" />
+                  <Star className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current" />
                 </div>
-                <span className="font-semibold text-white">5.0 vásárlói visszajelzés</span>
-                <span className="text-brand-700">|</span>
-                <span className="text-gray-200">500+ profi audit</span>
+                <span className="font-semibold text-white whitespace-nowrap">5.0 vásárlói visszajelzés</span>
+                <span className="text-brand-700 hidden sm:inline">|</span>
+                <span className="text-gray-200 whitespace-nowrap">500+ profi audit</span>
               </div>
             </div>
 
@@ -124,11 +124,11 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
                    <CheckCircle2 className="w-4 h-4" />
                    <span>2 perc az egész</span>
                  </div>
-                 <div className="flex items-center gap-2 bg-brand-accent/10 text-brand-accent px-3 py-1.5 rounded-lg border border-brand-accent/20">
+                 <div className="flex items-center gap-2 bg-green-500/10 text-green-400 px-3 py-1.5 rounded-lg border border-green-500/20">
                    <CheckCircle2 className="w-4 h-4" />
                    <span>100% Ingyenes</span>
                  </div>
-                 <div className="flex items-center gap-2 bg-blue-500/10 text-blue-400 px-3 py-1.5 rounded-lg border border-blue-500/20">
+                 <div className="flex items-center gap-2 bg-green-500/10 text-green-400 px-3 py-1.5 rounded-lg border border-green-500/20">
                    <CheckCircle2 className="w-4 h-4" />
                    <span>Garantált szakmai észrevételek</span>
                  </div>
@@ -165,33 +165,6 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
                           {review.result}
                         </span>
                       </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-          
-          {/* Mobile visible wall of love - Fixed Layout */}
-          <div className="relative h-[350px] w-full mt-10 overflow-hidden lg:hidden rounded-2xl border border-white/5 bg-white/5 backdrop-blur-sm">
-            <div className="absolute top-0 left-0 w-full h-16 bg-gradient-to-b from-brand-900/50 to-transparent z-10 pointer-events-none"></div>
-            <div className="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-brand-900/50 to-transparent z-10 pointer-events-none"></div>
-            
-            <div className="h-full overflow-hidden no-scrollbar opacity-90">
-              <div className="flex flex-col gap-4 py-4 animate-scroll-up px-4">
-                {infiniteReviews.map((review, index) => (
-                  <div key={index} className="bg-white/5 p-5 rounded-2xl border border-white/10 shadow-lg">
-                    <div className="flex items-center gap-1 mb-3 text-yellow-500">
-                      <Star className="w-3.5 h-3.5 fill-current" />
-                      <Star className="w-3.5 h-3.5 fill-current" />
-                      <Star className="w-3.5 h-3.5 fill-current" />
-                      <Star className="w-3.5 h-3.5 fill-current" />
-                      <Star className="w-3.5 h-3.5 fill-current" />
-                    </div>
-                    <p className="text-gray-200 mb-4 text-xs leading-relaxed italic">"{review.text}"</p>
-                    <div className="flex items-center justify-between">
-                      <p className="font-bold text-white text-xs">{review.name}</p>
-                      <span className="text-[10px] text-green-400 font-bold">{review.result}</span>
                     </div>
                   </div>
                 ))}
