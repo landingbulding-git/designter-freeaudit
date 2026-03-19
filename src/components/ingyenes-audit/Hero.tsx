@@ -38,7 +38,7 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
           100% { transform: translateY(-50%); }
         }
         .animate-scroll-up {
-          animation: scroll-up 40s linear infinite;
+          animation: scroll-up 80s linear infinite;
         }
         .animate-scroll-up:hover {
           animation-play-state: paused;

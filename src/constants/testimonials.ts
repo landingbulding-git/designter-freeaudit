@@ -58,5 +58,17 @@ export const REVIEWS = [
     company: "Edző",
     text: "Ilyet tényleg senki nem csinál. Megkéreztem a Wordpresses csoportokban, hogy hogyan lehetne jobb, de csak ajánlatokkal bombáztak. Az elemzés tényleg önzetlen volt, és olyan hitelességet adott, hogy nem kérdés, kivel fogok dolgozni a jövőben.",
     result: "Hitelesség"
+  },
+  {
+    name: "H. Renáta",
+    company: "Virtuális asszisztens",
+    text: "Olyan volt, mint egy jó szakovosi vizsgálat. :D Én is csinálok weblapokat, de bevallom, a felét sem értettem annak, amit írtál, úgyhogy rád is bíztam a kivitelezést. Köszi szépen!",
+    result: "Szakértői diagnózis"
+  },
+  {
+    name: "D. Edit",
+    company: "Könyvelőiroda tulajdonos",
+    text: "Aztaa. Hihetetlenül alapos volt, nagyon köszi! Ki sem tudok emelni egy dolgot, mert valójában úgy lett elkészítve az oldalam, hogy semmi ilyesmire nem figyeltünk oda tudatosan.",
+    result: "Hihetetlen alaposság"
   }
 ];
