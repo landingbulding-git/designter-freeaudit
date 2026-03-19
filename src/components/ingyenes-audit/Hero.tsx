@@ -95,7 +95,7 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
                 <Star className="w-4 h-4 fill-current" />
                 <Star className="w-4 h-4 fill-current" />
               </div>
-              <span className="font-semibold text-white">5.0</span>
+              <span className="font-semibold text-white">5.0 vásárlói visszajelzés</span>
               <span className="text-brand-700">|</span>
               <span className="text-gray-200">500+ profi audit</span>
             </div>
@@ -108,6 +108,19 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
             <p className="text-lg lg:text-xl text-gray-300 leading-relaxed max-w-xl">
               Nem akarok látatlanban "okoskodni" – ahhoz, hogy valóban hasznos észrevételeket küldjek, fel kell tennem pár kérdést. Segítesz?
             </p>
+
+            {/* Founder Badge */}
+            <div className="flex items-center gap-3 py-2">
+              <img 
+                src="https://xa5228yhxohqyplr.public.blob.vercel-storage.com/me-landing-image.webp" 
+                alt="Bogdán Norbert" 
+                className="w-10 h-10 rounded-full border-2 border-brand-accent object-cover"
+              />
+              <div className="flex flex-col">
+                <span className="text-sm font-bold text-white leading-none">Bogdán Norbert</span>
+                <span className="text-xs text-brand-accent font-medium">CRO Specialista</span>
+              </div>
+            </div>
 
             <div className="flex flex-col w-full sm:w-auto space-y-4 mt-2">
               <button 
@@ -136,15 +149,15 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
           </div>
 
           {/* Right Side Validation - Wall of Love */}
-          <div className="relative h-[550px] w-full max-w-lg mx-auto lg:ml-auto rounded-3xl overflow-hidden border border-brand-700/30 bg-brand-800/20 backdrop-blur-sm shadow-2xl hidden md:block">
+          <div className="absolute top-0 right-0 h-full w-full lg:w-1/2 overflow-hidden pointer-events-none hidden lg:block">
             {/* Fade effect top/bottom */}
-            <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-brand-900 to-transparent z-10 pointer-events-none"></div>
-            <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-brand-900 to-transparent z-10 pointer-events-none"></div>
+            <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-brand-900 via-brand-900/80 to-transparent z-10"></div>
+            <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-brand-900 via-brand-900/80 to-transparent z-10"></div>
             
-            <div className="h-full overflow-hidden no-scrollbar">
-              <div className="flex flex-col gap-4 py-4 animate-scroll-up px-4 sm:px-8">
+            <div className="h-full overflow-hidden no-scrollbar opacity-40">
+              <div className="flex flex-col gap-6 py-12 animate-scroll-up px-12 max-w-xl ml-auto">
                 {infiniteReviews.map((review, index) => (
-                  <div key={index} className="bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/10 hover:bg-white/10 transition-colors">
+                  <div key={index} className="bg-white/5 backdrop-blur-sm p-6 rounded-2xl border border-white/10">
                     <div className="flex items-center gap-1 mb-4 text-yellow-500">
                       <Star className="w-4 h-4 fill-current" />
                       <Star className="w-4 h-4 fill-current" />
@@ -163,10 +176,6 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
                         <span className="block text-green-400 font-bold text-xs bg-green-400/10 px-2 py-1 rounded">
                           {review.result}
                         </span>
-                        <div className="flex items-center bg-white/5 border border-white/10 rounded-full px-2 py-0.5">
-                           <GoogleLogo />
-                           <span className="text-[10px] font-semibold text-gray-300 uppercase tracking-wide">Ellenőrzött</span>
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -175,15 +184,15 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
             </div>
           </div>
           
-          {/* Mobile visible wall of love (shorter, maybe not animated to save resources, or animated but smaller height) */}
-          <div className="relative h-[400px] w-full max-w-lg mx-auto rounded-3xl overflow-hidden border border-brand-700/30 bg-brand-800/20 backdrop-blur-sm shadow-2xl md:hidden">
+          {/* Mobile visible wall of love */}
+          <div className="relative h-[300px] w-full mt-12 overflow-hidden lg:hidden">
             <div className="absolute top-0 left-0 w-full h-16 bg-gradient-to-b from-brand-900 to-transparent z-10 pointer-events-none"></div>
             <div className="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-brand-900 to-transparent z-10 pointer-events-none"></div>
             
-            <div className="h-full overflow-hidden no-scrollbar">
+            <div className="h-full overflow-hidden no-scrollbar opacity-30">
               <div className="flex flex-col gap-4 py-4 animate-scroll-up px-4">
                 {infiniteReviews.map((review, index) => (
-                  <div key={index} className="bg-white/5 backdrop-blur-md p-5 rounded-2xl border border-white/10">
+                  <div key={index} className="bg-white/5 p-5 rounded-2xl border border-white/10">
                     <div className="flex items-center gap-1 mb-3 text-yellow-500">
                       <Star className="w-3.5 h-3.5 fill-current" />
                       <Star className="w-3.5 h-3.5 fill-current" />
@@ -192,17 +201,7 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
                       <Star className="w-3.5 h-3.5 fill-current" />
                     </div>
                     <p className="text-gray-200 mb-4 text-xs leading-relaxed">"{review.text}"</p>
-                    
-                    <div className="flex items-center justify-between border-t border-white/10 pt-3">
-                      <div>
-                        <p className="font-bold text-white text-xs">{review.name}</p>
-                      </div>
-                      <div className="text-right flex items-center gap-2">
-                        <span className="block text-green-400 font-bold text-[10px] bg-green-400/10 px-1.5 py-0.5 rounded">
-                          {review.result}
-                        </span>
-                      </div>
-                    </div>
+                    <p className="font-bold text-white text-xs">{review.name}</p>
                   </div>
                 ))}
               </div>
