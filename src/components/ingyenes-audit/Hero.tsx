@@ -86,18 +86,33 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
           {/* Left Side Content */}
           <div className="flex flex-col space-y-8 items-start text-left w-full pt-8 lg:pt-0">
             
-            {/* Social Proof Badge */}
-            <div className="flex flex-wrap items-center gap-3 text-sm font-medium text-gray-300 bg-brand-800/80 backdrop-blur-sm px-4 py-2 rounded-full border border-brand-700/50 shadow-sm">
-              <div className="flex items-center text-yellow-500">
-                <Star className="w-4 h-4 fill-current" />
-                <Star className="w-4 h-4 fill-current" />
-                <Star className="w-4 h-4 fill-current" />
-                <Star className="w-4 h-4 fill-current" />
-                <Star className="w-4 h-4 fill-current" />
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+              {/* Founder Badge */}
+              <div className="flex items-center gap-3 text-sm font-medium text-gray-300 bg-brand-800/80 backdrop-blur-sm pr-4 pl-1.5 py-1.5 rounded-full border border-brand-700/50 shadow-sm">
+                <img 
+                  src="https://xa5228yhxohqyplr.public.blob.vercel-storage.com/me-landing-image.webp" 
+                  alt="Bogdán Norbert" 
+                  className="w-8 h-8 rounded-full border border-brand-accent object-cover"
+                />
+                <div className="flex flex-col">
+                  <span className="text-xs font-bold text-white leading-tight">Bogdán Norbert</span>
+                  <span className="text-[10px] text-brand-accent font-medium leading-tight">CRO Specialista</span>
+                </div>
               </div>
-              <span className="font-semibold text-white">5.0 vásárlói visszajelzés</span>
-              <span className="text-brand-700">|</span>
-              <span className="text-gray-200">500+ profi audit</span>
+
+              {/* Social Proof Badge */}
+              <div className="flex flex-wrap items-center gap-3 text-sm font-medium text-gray-300 bg-brand-800/80 backdrop-blur-sm px-4 py-2 rounded-full border border-brand-700/50 shadow-sm">
+                <div className="flex items-center text-yellow-500">
+                  <Star className="w-4 h-4 fill-current" />
+                  <Star className="w-4 h-4 fill-current" />
+                  <Star className="w-4 h-4 fill-current" />
+                  <Star className="w-4 h-4 fill-current" />
+                  <Star className="w-4 h-4 fill-current" />
+                </div>
+                <span className="font-semibold text-white">5.0 vásárlói visszajelzés</span>
+                <span className="text-brand-700">|</span>
+                <span className="text-gray-200">500+ profi audit</span>
+              </div>
             </div>
 
             <h1 className="text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight leading-tight">
@@ -108,19 +123,6 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
             <p className="text-lg lg:text-xl text-gray-300 leading-relaxed max-w-xl">
               Nem akarok látatlanban "okoskodni" – ahhoz, hogy valóban hasznos észrevételeket küldjek, fel kell tennem pár kérdést. Segítesz?
             </p>
-
-            {/* Founder Badge */}
-            <div className="flex items-center gap-3 py-2">
-              <img 
-                src="https://xa5228yhxohqyplr.public.blob.vercel-storage.com/me-landing-image.webp" 
-                alt="Bogdán Norbert" 
-                className="w-10 h-10 rounded-full border-2 border-brand-accent object-cover"
-              />
-              <div className="flex flex-col">
-                <span className="text-sm font-bold text-white leading-none">Bogdán Norbert</span>
-                <span className="text-xs text-brand-accent font-medium">CRO Specialista</span>
-              </div>
-            </div>
 
             <div className="flex flex-col w-full sm:w-auto space-y-4 mt-2">
               <button 
@@ -154,7 +156,7 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
             <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-brand-900 via-brand-900/80 to-transparent z-10"></div>
             <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-brand-900 via-brand-900/80 to-transparent z-10"></div>
             
-            <div className="h-full overflow-hidden no-scrollbar opacity-40">
+            <div className="h-full overflow-hidden no-scrollbar opacity-80">
               <div className="flex flex-col gap-6 py-12 animate-scroll-up px-12 max-w-xl ml-auto">
                 {infiniteReviews.map((review, index) => (
                   <div key={index} className="bg-white/5 backdrop-blur-sm p-6 rounded-2xl border border-white/10">
@@ -189,7 +191,7 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
             <div className="absolute top-0 left-0 w-full h-16 bg-gradient-to-b from-brand-900 to-transparent z-10 pointer-events-none"></div>
             <div className="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-brand-900 to-transparent z-10 pointer-events-none"></div>
             
-            <div className="h-full overflow-hidden no-scrollbar opacity-30">
+            <div className="h-full overflow-hidden no-scrollbar opacity-80">
               <div className="flex flex-col gap-4 py-4 animate-scroll-up px-4">
                 {infiniteReviews.map((review, index) => (
                   <div key={index} className="bg-white/5 p-5 rounded-2xl border border-white/10">
