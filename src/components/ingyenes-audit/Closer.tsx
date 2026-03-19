@@ -157,27 +157,25 @@ const Closer: React.FC = () => {
     
     const score = calculateScore();
     
-    // Prepare data for Web3Forms (including access key and human-readable answers)
-    const readableData: Record<string, any> = {
+    // Prepare a clean payload for Web3Forms
+    const payload: Record<string, any> = {
       access_key: 'aa9f8e62-b6f0-43c1-9ece-521ecbd1c23a',
-      score: score,
-      firstname: formData.firstname,
+      subject: `Ingyenes Audit Igénylés - ${formData.firstname}`,
+      from_name: 'DesignTér Audit',
+      keresztnev: formData.firstname,
       email: formData.email,
-      website: formData.website,
+      weboldal: formData.website,
+      osszpontszam: score,
     };
 
+    // Map the question labels to their selected option labels for the email
     QUESTIONS.forEach(q => {
       if (q.type === 'radio' && q.options) {
         const option = q.options.find(o => o.id === formData[q.id]);
-        readableData[q.id] = option ? option.label : '';
+        // Use the question label as the key in the email for better readability
+        payload[q.label] = option ? option.label : 'Nincs megadva';
       }
     });
-
-    // Also send the raw IDs to prepare for formbricks format if needed in web3forms
-    const submissionData = {
-      ...readableData,
-      raw_form_data: formData
-    };
 
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
@@ -186,11 +184,12 @@ const Closer: React.FC = () => {
           'Content-Type': 'application/json',
           Accept: 'application/json'
         },
-        body: JSON.stringify(submissionData)
+        body: JSON.stringify(payload)
       });
+      
       const result = await response.json();
       if (result.success) {
-        window.location.href = 'https://www.designter.hu/thank-you';
+        window.location.href = 'https://landing.designter.hu/ingyenes-audit/thank-you';
       } else {
         setStatus(result.message || 'Hiba történt a küldés során.');
       }
