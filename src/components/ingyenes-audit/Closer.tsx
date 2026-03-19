@@ -192,7 +192,8 @@ const Closer: React.FC = () => {
     });
 
     try {
-      const response = await fetch('https://api.web3forms.com/submit', {
+      // Send to Web3Forms (Primary)
+      const web3Response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -201,7 +202,18 @@ const Closer: React.FC = () => {
         body: JSON.stringify(payload)
       });
       
-      const result = await response.json();
+      // Send to Lupio Webhook (Secondary)
+      // We don't necessarily need to await this for the user redirect, 
+      // but we do it to ensure data integrity.
+      await fetch('https://demo.lupio.hu/webhook/7a088940-a253-4229-9dc7-113a721f1630', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+      
+      const result = await web3Response.json();
       if (result.success) {
         window.location.href = 'https://landing.designter.hu/ingyenes-audit/thank-you';
       } else {
