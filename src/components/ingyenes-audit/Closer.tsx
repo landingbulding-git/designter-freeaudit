@@ -234,44 +234,23 @@ const Closer: React.FC = () => {
 
               {question.type === 'range' && (
                 <div className="flex flex-col gap-2 pt-4">
-                  <div className="relative">
+                  <div className="relative flex items-center">
                     <input 
                       type="number" 
                       name={question.id}
-                      placeholder={question.id === 'adcost' || question.id === 'AOV' ? '0 Ft' : '0'}
-                      className="w-full px-5 py-4 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-accent focus:border-brand-accent outline-none text-lg transition-all bg-gray-50"
+                      placeholder={question.id === 'adcost' || question.id === 'AOV' ? '0' : '0'}
+                      className="w-full px-5 py-4 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-accent focus:border-brand-accent outline-none text-lg transition-all bg-gray-50 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                       value={formData[question.id] ? formData[question.id].replace(/[^0-9]/g, '') : ''}
                       onChange={(e) => {
-                        const val = e.target.value;
-                        const formatted = question.id === 'adcost' || question.id === 'AOV' 
-                          ? (val ? `${parseInt(val).toLocaleString('hu-HU')} Ft` : '')
-                          : val;
-                        handleInputChange({ target: { name: question.id, value: formatted } } as any);
+                        const val = e.target.value.replace(/[^0-9]/g, '');
+                        handleInputChange({ target: { name: question.id, value: val } } as any);
                       }}
                       required
                     />
+                    {(question.id === 'adcost' || question.id === 'AOV') && (
+                      <span className="absolute right-5 text-gray-500 font-medium">Ft</span>
+                    )}
                   </div>
-                </div>
-              )}
-
-              {question.type === 'range' && question.options && (
-                <div className="flex flex-col gap-3">
-                  {question.options.map((option: any, idx: number) => (
-                    <button
-                      key={idx}
-                      type="button"
-                      onClick={() => handleRangeChange(question.id, option)}
-                      className={`w-full text-left px-5 py-4 rounded-xl border-2 transition-all ${
-                        formData[question.id] === option 
-                          ? 'border-brand-accent bg-brand-accent/5' 
-                          : 'border-gray-100 bg-white hover:border-gray-300 hover:bg-gray-50'
-                      }`}
-                    >
-                      <span className={`text-lg ${formData[question.id] === option ? 'font-bold text-brand-accent' : 'font-medium text-gray-700'}`}>
-                        {option}
-                      </span>
-                    </button>
-                  ))}
                 </div>
               )}
 
