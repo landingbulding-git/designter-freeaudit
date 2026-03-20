@@ -12,38 +12,25 @@ const QUESTIONS = [
     id: 'visitors',
     type: 'range',
     label: 'Hány látogatód van átlagosan egy hónapban?',
-    options: [
-      '1 - 1.000', '1.000 - 5.000', '5.000 - 15.000', '15.000 - 50.000', 
-      '50.000 - 100.000', '100.000 - 250.000', '250.000 - 500.000', '500.000+'
-    ]
+    options: Array.from({ length: 40 }, (_, i) => `${(i + 1) * 500}`)
   },
   {
     id: 'customers',
     type: 'range',
     label: 'Hány vásárlás/lead érkezik havonta az oldalon keresztül?',
-    options: [
-      '1 - 10', '10 - 50', '50 - 200', '200 - 500', '500 - 1.000', 
-      '1.000 - 2.500', '2.500 - 5.000', '5.000 - 10.000', '10.000+'
-    ]
+    options: Array.from({ length: 40 }, (_, i) => `${(i + 1) * 5}`)
   },
   {
     id: 'adcost',
     type: 'range',
     label: 'Mennyit költesz havonta hirdetésre?',
-    options: [
-      '0 Ft', '100.000 Ft alatt', '100.000 - 300.000 Ft', '300.000 - 1.000.000 Ft', 
-      '1.000.000 - 3.000.000 Ft', '3.000.000 Ft felett'
-    ]
+    options: Array.from({ length: 40 }, (_, i) => `${(i * 50000).toLocaleString('hu-HU')} Ft`)
   },
   {
     id: 'AOV',
     type: 'range',
     label: 'Mennyi egy átlagos vásárlás értéke (AOV / LTV)?',
-    options: [
-      '10.000 Ft alatt', '10.000 - 30.000 Ft', '30.000 - 70.000 Ft', '70.000 - 150.000 Ft', 
-      '150.000 - 300.000 Ft', '300.000 - 750.000 Ft', '750.000 - 1.500.000 Ft', 
-      '1.500.000 - 3.000.000 Ft', '3.000.000 - 5.000.000 Ft', '5.000.000 Ft felett'
-    ]
+    options: Array.from({ length: 40 }, (_, i) => `${((i + 1) * 5000).toLocaleString('hu-HU')} Ft`)
   },
   {
     id: 'fromwhere',
