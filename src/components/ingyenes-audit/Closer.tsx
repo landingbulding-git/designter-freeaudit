@@ -10,63 +10,39 @@ const QUESTIONS = [
   },
   {
     id: 'visitors',
-    type: 'radio',
+    type: 'range',
     label: 'Hány látogatód van átlagosan egy hónapban?',
     options: [
-      { label: '1 - 1.000' },
-      { label: '1.000 - 5.000' },
-      { label: '5.000 - 15.000' },
-      { label: '15.000 - 50.000' },
-      { label: '50.000 - 100.000' },
-      { label: '100.000 - 250.000' },
-      { label: '250.000 - 500.000' },
-      { label: '500.000+' }
+      '1 - 1.000', '1.000 - 5.000', '5.000 - 15.000', '15.000 - 50.000', 
+      '50.000 - 100.000', '100.000 - 250.000', '250.000 - 500.000', '500.000+'
     ]
   },
   {
     id: 'customers',
-    type: 'radio',
+    type: 'range',
     label: 'Hány vásárlás/lead érkezik havonta az oldalon keresztül?',
     options: [
-      { label: '1 - 10' },
-      { label: '10 - 50' },
-      { label: '50 - 200' },
-      { label: '200 - 500' },
-      { label: '500 - 1.000' },
-      { label: '1.000 - 2.500' },
-      { label: '2.500 - 5.000' },
-      { label: '5.000 - 10.000' },
-      { label: '10.000+' }
+      '1 - 10', '10 - 50', '50 - 200', '200 - 500', '500 - 1.000', 
+      '1.000 - 2.500', '2.500 - 5.000', '5.000 - 10.000', '10.000+'
     ]
   },
   {
     id: 'adcost',
-    type: 'radio',
+    type: 'range',
     label: 'Mennyit költesz havonta hirdetésre?',
     options: [
-      { label: '0 Ft' },
-      { label: '100.000 Ft alatt' },
-      { label: '100.000 - 300.000 Ft' },
-      { label: '300.000 - 1.000.000 Ft' },
-      { label: '1.000.000 - 3.000.000 Ft' },
-      { label: '3.000.000 Ft felett' }
+      '0 Ft', '100.000 Ft alatt', '100.000 - 300.000 Ft', '300.000 - 1.000.000 Ft', 
+      '1.000.000 - 3.000.000 Ft', '3.000.000 Ft felett'
     ]
   },
   {
     id: 'AOV',
-    type: 'radio',
+    type: 'range',
     label: 'Mennyi egy átlagos vásárlás értéke (AOV / LTV)?',
     options: [
-      { label: '10.000 Ft alatt' },
-      { label: '10.000 - 30.000 Ft' },
-      { label: '30.000 - 70.000 Ft' },
-      { label: '70.000 - 150.000 Ft' },
-      { label: '150.000 - 300.000 Ft' },
-      { label: '300.000 - 750.000 Ft' },
-      { label: '750.000 - 1.500.000 Ft' },
-      { label: '1.500.000 - 3.000.000 Ft' },
-      { label: '3.000.000 - 5.000.000 Ft' },
-      { label: '5.000.000 Ft felett' }
+      '10.000 Ft alatt', '10.000 - 30.000 Ft', '30.000 - 70.000 Ft', '70.000 - 150.000 Ft', 
+      '150.000 - 300.000 Ft', '300.000 - 750.000 Ft', '750.000 - 1.500.000 Ft', 
+      '1.500.000 - 3.000.000 Ft', '3.000.000 - 5.000.000 Ft', '5.000.000 Ft felett'
     ]
   },
   {
@@ -123,30 +99,11 @@ const Closer: React.FC = () => {
     });
   };
 
-  const handleRadioSelect = (questionId: string, optionLabel: string) => {
+  const handleRangeChange = (questionId: string, value: string) => {
     setFormData({
       ...formData,
-      [questionId]: optionLabel
+      [questionId]: value
     });
-    
-    // Auto-advance on radio select after a short delay
-    setTimeout(() => {
-      if (currentStep < QUESTIONS.length - 1) {
-        setCurrentStep(currentStep + 1);
-      }
-    }, 300);
-  };
-
-  const handleNext = () => {
-    if (currentStep < QUESTIONS.length - 1) {
-      setCurrentStep(currentStep + 1);
-    }
-  };
-
-  const handleBack = () => {
-    if (currentStep > 0) {
-      setCurrentStep(currentStep - 1);
-    }
   };
 
   const isCurrentStepValid = () => {
@@ -154,7 +111,7 @@ const Closer: React.FC = () => {
     if (question.type === 'text') {
       return formData[question.id].trim().length > 0;
     }
-    if (question.type === 'radio') {
+    if (question.type === 'radio' || question.type === 'range') {
       return formData[question.id] !== '';
     }
     if (question.type === 'contact') {
@@ -179,9 +136,9 @@ const Closer: React.FC = () => {
       weboldal: formData.website,
     };
 
-    // Map the question labels to their selected option labels for the email
+    // Map the question labels to their selected values for the email
     QUESTIONS.forEach(q => {
-      if (q.type === 'radio') {
+      if (q.type === 'radio' || q.type === 'range') {
         payload[q.label] = formData[q.id] || 'Nincs megadva';
       }
     });
@@ -262,21 +219,45 @@ const Closer: React.FC = () => {
                 />
               )}
 
+              {question.type === 'range' && (
+                <div className="flex flex-col gap-6 pt-4">
+                  <div className="relative">
+                    <input 
+                      type="range"
+                      min="0"
+                      max={question.options.length - 1}
+                      value={question.options.indexOf(formData[question.id]) === -1 ? 0 : question.options.indexOf(formData[question.id])}
+                      onChange={(e) => handleRangeChange(question.id, question.options[parseInt(e.target.value)])}
+                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-brand-accent"
+                    />
+                    <div className="flex justify-between text-xs text-gray-400 mt-2">
+                       <span>{question.options[0]}</span>
+                       <span>{question.options[question.options.length - 1]}</span>
+                    </div>
+                  </div>
+                  <div className="text-center bg-gray-50 py-3 rounded-lg border border-gray-100">
+                    <span className="text-xl font-bold text-brand-accent">
+                      {formData[question.id] || question.options[0]}
+                    </span>
+                  </div>
+                </div>
+              )}
+
               {question.type === 'radio' && question.options && (
                 <div className="flex flex-col gap-3">
                   {question.options.map((option, idx) => (
                     <button
                       key={idx}
                       type="button"
-                      onClick={() => handleRadioSelect(question.id, option.label)}
+                      onClick={() => handleRangeChange(question.id, option)}
                       className={`w-full text-left px-5 py-4 rounded-xl border-2 transition-all ${
-                        formData[question.id] === option.label 
+                        formData[question.id] === option 
                           ? 'border-brand-accent bg-brand-accent/5' 
                           : 'border-gray-100 bg-white hover:border-gray-300 hover:bg-gray-50'
                       }`}
                     >
-                      <span className={`text-lg ${formData[question.id] === option.label ? 'font-bold text-brand-accent' : 'font-medium text-gray-700'}`}>
-                        {option.label}
+                      <span className={`text-lg ${formData[question.id] === option ? 'font-bold text-brand-accent' : 'font-medium text-gray-700'}`}>
+                        {option}
                       </span>
                     </button>
                   ))}
