@@ -411,39 +411,50 @@ const image = post.previewImage || post.coverImage;
       </header>
 
       {isNewAudit && statsData && (
-        <div class="not-prose my-16 space-y-12 border-b border-gray-100 pb-16">
-          <h2 class="text-3xl md:text-5xl font-extrabold text-brand-900 leading-tight">
-            A korábbi válaszaid szerint a konverziód kb. <span class="text-brand-accent">{statsData.conversionRate}%</span>. Ez azt jelenti, hogy havonta kb. <span class="text-brand-accent">{new Intl.NumberFormat('hu-HU').format(statsData.lostSales)}</span> látogatód fizetés nélkül távozik.
-          </h2>
+        <div class="not-prose my-16 p-8 md:p-12 bg-gray-50 rounded-3xl border border-gray-100 shadow-sm space-y-10">
+          
+          <div class="text-center">
+            <h2 class="text-2xl md:text-4xl font-bold text-gray-900 leading-tight mb-4">
+              A korábbi válaszaid szerint a konverziód kb. <span class="text-brand-accent">{statsData.conversionRate}%</span>.
+            </h2>
+            <p class="text-lg md:text-xl text-gray-600 font-medium">
+              Ez azt jelenti, hogy havonta kb. <span class="font-bold text-gray-900">{new Intl.NumberFormat('hu-HU').format(statsData.lostSales)}</span> látogatód fizetés nélkül távozik.
+            </p>
+          </div>
 
-          <h2 class="text-3xl md:text-5xl font-extrabold text-brand-900 leading-tight">
-            Mi történne, ha továbbra is ugyanannyit költenél hirdetésre, ugyanannyi látogatód lenne, de <span class="underline decoration-brand-accent">növelnénk</span> azok számát, akik fizetnek is?
-          </h2>
+          <div class="text-center max-w-3xl mx-auto">
+            <h3 class="text-xl md:text-2xl font-semibold text-brand-900 leading-relaxed">
+              Mi történne, ha továbbra is ugyanannyit költenél hirdetésre, ugyanannyi látogatód lenne, de <span class="text-brand-accent">növelnénk</span> azok számát, akik fizetnek is?
+            </h3>
+          </div>
 
-          <div class="overflow-x-auto rounded-2xl border border-gray-200">
+          <div class="overflow-x-auto rounded-2xl border border-gray-200 shadow-sm">
             <table class="w-full text-left border-collapse bg-white">
               <thead>
-                <tr class="bg-gray-50 border-b border-gray-200">
-                  <th class="py-5 px-6 text-lg font-bold text-brand-900">Konverzió növekedés</th>
-                  <th class="py-5 px-6 text-lg font-bold text-brand-900">Plusz Bevétel</th>
-                  <th class="py-5 px-6 text-lg font-bold text-brand-900">Összesen</th>
+                <tr class="bg-gray-100 border-b border-gray-200">
+                  <th class="py-4 px-6 text-sm uppercase tracking-wider font-bold text-gray-700">Konverzió növekedés</th>
+                  <th class="py-4 px-6 text-sm uppercase tracking-wider font-bold text-gray-700">Plusz Bevétel</th>
+                  <th class="py-4 px-6 text-sm uppercase tracking-wider font-bold text-gray-700">Összesen</th>
                 </tr>
               </thead>
               <tbody>
-                {statsData.projections.map((proj) => (
-                  <tr class="border-b border-gray-100 last:border-0 hover:bg-gray-50/50 transition-colors">
+                {statsData.projections.map((proj, idx) => (
+                  <tr class={`border-b border-gray-100 last:border-0 hover:bg-orange-50/50 transition-colors ${idx === 0 ? 'bg-orange-50/30' : ''}`}>
                     <td class="py-5 px-6 text-lg font-semibold text-gray-900">{proj.increase}</td>
                     <td class="py-5 px-6 text-xl font-bold text-brand-accent">{proj.extraRevenue}</td>
-                    <td class="py-5 px-6 text-lg text-gray-600">{proj.total}</td>
+                    <td class="py-5 px-6 text-lg text-gray-600 font-medium">{proj.total}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
 
-          <h2 class="text-3xl md:text-5xl font-extrabold text-brand-900 leading-tight">
-            Ezek alapján minden hónapban minimum <span class="text-brand-accent">{statsData.projections[0].extraRevenue}</span>-ot veszítesz.
-          </h2>
+          <div class="bg-white p-6 md:p-8 rounded-2xl border-l-4 border-brand-accent shadow-sm">
+            <p class="text-xl md:text-2xl font-bold text-gray-900 m-0 leading-tight">
+              Ezek alapján minden hónapban minimum <span class="text-brand-accent">{statsData.projections[0].extraRevenue}</span>-ot veszítesz.
+            </p>
+          </div>
+
         </div>
       )}
 
