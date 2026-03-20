@@ -413,18 +413,18 @@ const image = post.previewImage || post.coverImage;
       {isNewAudit && statsData && (
         <div class="not-prose my-16 space-y-12 border-b border-gray-100 pb-16">
           <h2 class="text-3xl md:text-5xl font-extrabold text-brand-900 leading-tight">
-            A korábbi válaszaid szerint havonta kb. <span class="text-brand-accent">{new Intl.NumberFormat('hu-HU').format(statsData.lostSales)}</span> látogatód foglalás / vásárlás nélkül távozik.
+            A korábbi válaszaid szerint a konverziód kb. <span class="text-brand-accent">{statsData.conversionRate}%</span>. Ez azt jelenti, hogy havonta kb. <span class="text-brand-accent">{new Intl.NumberFormat('hu-HU').format(statsData.lostSales)}</span> látogatód fizetés nélkül távozik.
           </h2>
 
           <h2 class="text-3xl md:text-5xl font-extrabold text-brand-900 leading-tight">
-            Mi történne, ha továbbra is ugyanannyit költenél hirdetésre, ugyanannyi látogatód lenne, de <span class="underline decoration-brand-accent">növelnénk</span> azok számát, akik vásárolnak is?
+            Mi történne, ha továbbra is ugyanannyit költenél hirdetésre, ugyanannyi látogatód lenne, de <span class="underline decoration-brand-accent">növelnénk</span> azok számát, akik fizetnek is?
           </h2>
 
           <div class="overflow-x-auto rounded-2xl border border-gray-200">
             <table class="w-full text-left border-collapse bg-white">
               <thead>
                 <tr class="bg-gray-50 border-b border-gray-200">
-                  <th class="py-5 px-6 text-lg font-bold text-brand-900">Növekedés</th>
+                  <th class="py-5 px-6 text-lg font-bold text-brand-900">Konverzió növekedés</th>
                   <th class="py-5 px-6 text-lg font-bold text-brand-900">Plusz Bevétel</th>
                   <th class="py-5 px-6 text-lg font-bold text-brand-900">Összesen</th>
                 </tr>
