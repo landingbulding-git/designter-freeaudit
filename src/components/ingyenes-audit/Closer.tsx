@@ -12,19 +12,17 @@ const QUESTIONS = [
     id: 'visitors',
     type: 'range',
     label: 'Hány látogatód van átlagosan egy hónapban?',
-    options: Array.from({ length: 40 }, (_, i) => {
-      const val = (i + 1) * 12500;
-      return i === 39 ? '500.000+' : val.toLocaleString('hu-HU');
-    })
+    min: 1000,
+    max: 500000,
+    step: 1000
   },
   {
     id: 'customers',
     type: 'range',
     label: 'Hány vásárlás/lead érkezik havonta az oldalon keresztül?',
-    options: Array.from({ length: 40 }, (_, i) => {
-      const val = (i + 1) * 250;
-      return i === 39 ? '10.000+' : val.toLocaleString('hu-HU');
-    })
+    min: 10,
+    max: 10000,
+    step: 10
   },
   {
     id: 'adcost',
@@ -41,10 +39,9 @@ const QUESTIONS = [
     id: 'AOV',
     type: 'range',
     label: 'Mennyi egy átlagos vásárlás értéke (AOV / LTV)?',
-    options: Array.from({ length: 40 }, (_, i) => {
-      const val = (i + 1) * 125000;
-      return i === 39 ? '5.000.000 Ft+' : `${val.toLocaleString('hu-HU')} Ft`;
-    })
+    min: 5000,
+    max: 3000000,
+    step: 5000
   },
   {
     id: 'fromwhere',
@@ -240,16 +237,37 @@ const Closer: React.FC = () => {
                   <div className="relative">
                     <input 
                       type="range"
+                      min={question.min ?? 0}
+                      max={question.max ?? 100}
+                      step={question.step ?? 1}
+                      value={formData[question.id] || (question.min ?? 0)}
+                      onChange={(e) => handleInputChange({ target: { name: question.id, value: e.target.value } } as any)}
+                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-brand-accent"
+                    />
+                    <div className="flex justify-between text-xs text-gray-400 mt-2">
+                       <span>{(question.min ?? 0).toLocaleString('hu-HU')}{question.id === 'AOV' ? ' Ft' : ''}</span>
+                       <span>{(question.max ?? 100).toLocaleString('hu-HU')}{question.id === 'AOV' ? ' Ft' : ''}</span>
+                    </div>
+                  </div>
+                  <div className="text-center bg-gray-50 py-3 rounded-lg border border-gray-100">
+                    <span className="text-xl font-bold text-brand-accent">
+                      {parseInt(formData[question.id] || (question.min ?? 0).toString()).toLocaleString('hu-HU')}{question.id === 'AOV' ? ' Ft' : ''}
+                    </span>
+                  </div>
+                </div>
+              )}
+
+              {question.type === 'range' && question.options && (
+                <div className="flex flex-col gap-6 pt-4">
+                  <div className="relative">
+                    <input 
+                      type="range"
                       min="0"
                       max={question.options.length - 1}
                       value={question.options.indexOf(formData[question.id]) === -1 ? 0 : question.options.indexOf(formData[question.id])}
                       onChange={(e) => handleRangeChange(question.id, question.options[parseInt(e.target.value)])}
                       className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-brand-accent"
                     />
-                    <div className="flex justify-between text-xs text-gray-400 mt-2">
-                       <span>{question.options[0]}</span>
-                       <span>{question.options[question.options.length - 1]}</span>
-                    </div>
                   </div>
                   <div className="text-center bg-gray-50 py-3 rounded-lg border border-gray-100">
                     <span className="text-xl font-bold text-brand-accent">
