@@ -92,6 +92,18 @@ const Closer: React.FC = () => {
     }
   }, []);
 
+  const handleNext = () => {
+    if (currentStep < QUESTIONS.length - 1) {
+      setCurrentStep(currentStep + 1);
+    }
+  };
+
+  const handleBack = () => {
+    if (currentStep > 0) {
+      setCurrentStep(currentStep - 1);
+    }
+  };
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
