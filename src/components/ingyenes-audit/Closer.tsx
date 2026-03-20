@@ -12,36 +12,56 @@ const QUESTIONS = [
     id: 'visitors',
     type: 'range',
     label: 'Hány látogatód van átlagosan egy hónapban?',
-    options: Array.from({ length: 40 }, (_, i) => `${(i + 1) * 500}`)
+    options: [
+      '500', '1.000', '1.500', '2.000', '2.500', '3.000', '3.500', '4.000', '4.500', '5.000', 
+      '5.500', '6.000', '6.500', '7.000', '7.500', '8.000', '8.500', '9.000', '9.500', '10.000',
+      '10.500', '11.000', '11.500', '12.000', '12.500', '13.000', '13.500', '14.000', '14.500', '15.000',
+      '15.500', '16.000', '16.500', '17.000', '17.500', '18.000', '18.500', '19.000', '19.500', '20.000+'
+    ]
   },
   {
     id: 'customers',
     type: 'range',
     label: 'Hány vásárlás/lead érkezik havonta az oldalon keresztül?',
-    options: Array.from({ length: 40 }, (_, i) => `${(i + 1) * 5}`)
+    options: [
+      '5', '10', '15', '20', '25', '30', '35', '40', '45', '50',
+      '55', '60', '65', '70', '75', '80', '85', '90', '95', '100',
+      '105', '110', '115', '120', '125', '130', '135', '140', '145', '150',
+      '155', '160', '165', '170', '175', '180', '185', '190', '195', '200+'
+    ]
   },
   {
     id: 'adcost',
     type: 'range',
     label: 'Mennyit költesz havonta hirdetésre?',
-    options: Array.from({ length: 40 }, (_, i) => `${(i * 50000).toLocaleString('hu-HU')} Ft`)
+    options: [
+      '0 Ft', '50.000 Ft', '100.000 Ft', '150.000 Ft', '200.000 Ft', '250.000 Ft', '300.000 Ft', '350.000 Ft', '400.000 Ft', '450.000 Ft',
+      '500.000 Ft', '550.000 Ft', '600.000 Ft', '650.000 Ft', '700.000 Ft', '750.000 Ft', '800.000 Ft', '850.000 Ft', '900.000 Ft', '950.000 Ft',
+      '1.000.000 Ft', '1.050.000 Ft', '1.100.000 Ft', '1.150.000 Ft', '1.200.000 Ft', '1.250.000 Ft', '1.300.000 Ft', '1.350.000 Ft', '1.400.000 Ft', '1.450.000 Ft',
+      '1.500.000 Ft', '1.550.000 Ft', '1.600.000 Ft', '1.650.000 Ft', '1.700.000 Ft', '1.750.000 Ft', '1.800.000 Ft', '1.850.000 Ft', '1.900.000 Ft', '2.000.000 Ft+'
+    ]
   },
   {
     id: 'AOV',
     type: 'range',
     label: 'Mennyi egy átlagos vásárlás értéke (AOV / LTV)?',
-    options: Array.from({ length: 40 }, (_, i) => `${((i + 1) * 5000).toLocaleString('hu-HU')} Ft`)
+    options: [
+      '5.000 Ft', '10.000 Ft', '15.000 Ft', '20.000 Ft', '25.000 Ft', '30.000 Ft', '35.000 Ft', '40.000 Ft', '45.000 Ft', '50.000 Ft',
+      '55.000 Ft', '60.000 Ft', '65.000 Ft', '70.000 Ft', '75.000 Ft', '80.000 Ft', '85.000 Ft', '90.000 Ft', '95.000 Ft', '100.000 Ft',
+      '105.000 Ft', '110.000 Ft', '115.000 Ft', '120.000 Ft', '125.000 Ft', '130.000 Ft', '135.000 Ft', '140.000 Ft', '145.000 Ft', '150.000 Ft',
+      '155.000 Ft', '160.000 Ft', '165.000 Ft', '170.000 Ft', '175.000 Ft', '180.000 Ft', '185.000 Ft', '190.000 Ft', '195.000 Ft', '200.000 Ft+'
+    ]
   },
   {
     id: 'fromwhere',
     type: 'radio',
     label: 'Mi a legfőbb forgalmi forrásod?',
     options: [
-      { label: 'Meta hirdetések' },
-      { label: 'Google Ads' },
-      { label: 'Influenszerek' },
-      { label: 'Organikus közösségi média' },
-      { label: 'Google keresés (SEO)' }
+      'Meta hirdetések',
+      'Google Ads',
+      'Influenszerek',
+      'Organikus közösségi média',
+      'Google keresés (SEO)'
     ]
   },
   {
@@ -164,11 +184,14 @@ const Closer: React.FC = () => {
       
       const result = await web3Response.json();
       if (result.success) {
-        window.location.href = 'https://landing.designter.hu/ingyenes-audit/thank-you';
+        if (typeof window !== 'undefined') {
+          window.location.href = 'https://landing.designter.hu/ingyenes-audit/thank-you';
+        }
       } else {
         setStatus(result.message || 'Hiba történt a küldés során.');
       }
     } catch (error) {
+      console.error('Form submission error:', error);
       setStatus('Hiba történt a küldés során.');
     }
   };
