@@ -7,6 +7,7 @@ import { load } from 'cheerio';
 import { MousePointer2 } from 'lucide-react';
 import DefaultCloser from '../../components/ingyenes-audit/Closer';
 import MainWebsiteCloser from '../../components/main-website/Closer';
+import Stats from '../../components/ajanlat/Stats';
 
 export async function getStaticPaths() {
   const posts = await getPublishedBlogPosts();
@@ -22,6 +23,59 @@ const contentHtml = await marked.parse(post.content || '');
 // Process HTML to optimize images using Astro's getImage
 const $ = load(contentHtml);
 let customReadingTime = null;
+
+const isNewAudit = post.type === 'Audit' && post.publishedDate >= new Date('2026-03-20T00:00:00.000Z');
+
+let statsData = null;
+
+if (isNewAudit) {
+    const parseInterval = (text: string) => {
+      if (!text || text === '0') return 0;
+      let cleaned = text.replace(/\s+/g, '');
+      cleaned = cleaned.replace(/\./g, '');
+      const matches = cleaned.match(/\d+/g);
+      if (!matches) return 0;
+      const numbers = matches.map(Number);
+      if (numbers.length === 1) return numbers[0];
+      return (numbers[0] + numbers[1]) / 2;
+    };
+
+    const visitors = parseInterval(post.visitors);
+    const customers = parseInterval(post.customers);
+    const avgOrderValue = parseInterval(post.aov);
+    const adSpend = parseInterval(post.adSpend);
+
+    const currentCR = visitors > 0 ? (customers / visitors) * 100 : 0;
+    const lostSales = visitors - customers;
+    const currentRevenue = customers * avgOrderValue;
+
+    const projections = [1, 3, 5, 10].map(increasePct => {
+      const newCR = currentCR + increasePct;
+      const newCustomers = Math.round(visitors * (newCR / 100));
+      const newTotalRevenue = newCustomers * avgOrderValue;
+      const extraRevenue = newTotalRevenue - currentRevenue;
+
+      return {
+        increase: `+${increasePct}%`,
+        extraRevenue: new Intl.NumberFormat('hu-HU', { style: 'currency', currency: 'HUF', maximumFractionDigits: 0 }).format(extraRevenue),
+        total: new Intl.NumberFormat('hu-HU', { style: 'currency', currency: 'HUF', maximumFractionDigits: 0 }).format(newTotalRevenue)
+      };
+    });
+
+    const extraRev1Pct = Math.round(visitors * ((currentCR + 1) / 100)) * avgOrderValue - currentRevenue;
+    const investmentCost = 317000;
+    const roi = extraRev1Pct > 0 ? Math.floor((extraRev1Pct / investmentCost) * 100) : 0;
+
+    statsData = {
+      visitors: visitors,
+      conversionRate: Number(currentCR.toFixed(1)),
+      avgOrderValue: avgOrderValue,
+      adSpend: adSpend,
+      lostSales: lostSales,
+      projections: projections,
+      roi: `${roi}%`
+    };
+}
 
 if (post.type === 'Audit') {
   // 2. Embed HTML blocks
@@ -372,6 +426,12 @@ const image = post.previewImage || post.coverImage;
       <div class="prose prose-lg prose-slate mx-auto max-w-none prose-headings:font-bold prose-headings:text-brand-900 prose-p:text-gray-700 prose-a:text-brand-accent prose-a:no-underline hover:prose-a:underline prose-strong:text-brand-900 prose-li:text-gray-700">
         <div set:html={optimizedContent} />
       </div>
+
+      {isNewAudit && statsData && (
+        <div class="mt-16 mb-8 max-w-none">
+          <Stats stats={statsData} linkHref="https://cal.com/designter/15perc" client:visible />
+        </div>
+      )}
 
       <script type="application/ld+json" set:html={JSON.stringify({
         "@context": "https://schema.org",

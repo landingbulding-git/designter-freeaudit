@@ -182,6 +182,10 @@ export async function getPublishedBlogPosts() {
           previewImage,
           content: mdString?.parent || (typeof mdString === 'string' ? mdString : '') || '',
           type: page.properties.Type?.select?.name || 'Blog',
+          visitors: page.properties.visitors?.rich_text?.map((t: any) => t.plain_text).join('') || page.properties.Visitors?.rich_text?.map((t: any) => t.plain_text).join('') || '0',
+          customers: page.properties.customers?.rich_text?.map((t: any) => t.plain_text).join('') || page.properties.Customers?.rich_text?.map((t: any) => t.plain_text).join('') || '0',
+          aov: page.properties.aov?.rich_text?.map((t: any) => t.plain_text).join('') || page.properties.AOV?.rich_text?.map((t: any) => t.plain_text).join('') || '0',
+          adSpend: page.properties.adspend?.rich_text?.map((t: any) => t.plain_text).join('') || page.properties.Adspend?.rich_text?.map((t: any) => t.plain_text).join('') || '0',
         };
       })
     );
