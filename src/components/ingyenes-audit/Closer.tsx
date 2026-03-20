@@ -233,47 +233,45 @@ const Closer: React.FC = () => {
               )}
 
               {question.type === 'range' && (
-                <div className="flex flex-col gap-6 pt-4">
+                <div className="flex flex-col gap-2 pt-4">
                   <div className="relative">
                     <input 
-                      type="range"
-                      min={question.min ?? 0}
-                      max={question.max ?? 100}
-                      step={question.step ?? 1}
-                      value={formData[question.id] || (question.min ?? 0)}
-                      onChange={(e) => handleInputChange({ target: { name: question.id, value: e.target.value } } as any)}
-                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-brand-accent"
+                      type="number" 
+                      name={question.id}
+                      placeholder={question.id === 'adcost' || question.id === 'AOV' ? '0 Ft' : '0'}
+                      className="w-full px-5 py-4 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-accent focus:border-brand-accent outline-none text-lg transition-all bg-gray-50"
+                      value={formData[question.id] ? formData[question.id].replace(/[^0-9]/g, '') : ''}
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        const formatted = question.id === 'adcost' || question.id === 'AOV' 
+                          ? (val ? `${parseInt(val).toLocaleString('hu-HU')} Ft` : '')
+                          : val;
+                        handleInputChange({ target: { name: question.id, value: formatted } } as any);
+                      }}
+                      required
                     />
-                    <div className="flex justify-between text-xs text-gray-400 mt-2">
-                       <span>{(question.min ?? 0).toLocaleString('hu-HU')}{question.id === 'AOV' ? ' Ft' : ''}</span>
-                       <span>{(question.max ?? 100).toLocaleString('hu-HU')}{question.id === 'AOV' ? ' Ft' : ''}</span>
-                    </div>
-                  </div>
-                  <div className="text-center bg-gray-50 py-3 rounded-lg border border-gray-100">
-                    <span className="text-xl font-bold text-brand-accent">
-                      {parseInt(formData[question.id] || (question.min ?? 0).toString()).toLocaleString('hu-HU')}{question.id === 'AOV' ? ' Ft' : ''}
-                    </span>
                   </div>
                 </div>
               )}
 
               {question.type === 'range' && question.options && (
-                <div className="flex flex-col gap-6 pt-4">
-                  <div className="relative">
-                    <input 
-                      type="range"
-                      min="0"
-                      max={question.options.length - 1}
-                      value={question.options.indexOf(formData[question.id]) === -1 ? 0 : question.options.indexOf(formData[question.id])}
-                      onChange={(e) => handleRangeChange(question.id, question.options[parseInt(e.target.value)])}
-                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-brand-accent"
-                    />
-                  </div>
-                  <div className="text-center bg-gray-50 py-3 rounded-lg border border-gray-100">
-                    <span className="text-xl font-bold text-brand-accent">
-                      {formData[question.id] || question.options[0]}
-                    </span>
-                  </div>
+                <div className="flex flex-col gap-3">
+                  {question.options.map((option: any, idx: number) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={() => handleRangeChange(question.id, option)}
+                      className={`w-full text-left px-5 py-4 rounded-xl border-2 transition-all ${
+                        formData[question.id] === option 
+                          ? 'border-brand-accent bg-brand-accent/5' 
+                          : 'border-gray-100 bg-white hover:border-gray-300 hover:bg-gray-50'
+                      }`}
+                    >
+                      <span className={`text-lg ${formData[question.id] === option ? 'font-bold text-brand-accent' : 'font-medium text-gray-700'}`}>
+                        {option}
+                      </span>
+                    </button>
+                  ))}
                 </div>
               )}
 
