@@ -13,10 +13,14 @@ const QUESTIONS = [
     type: 'radio',
     label: 'Hány látogatód van átlagosan egy hónapban?',
     options: [
-      { id: 'assmof0ch2sec28ttogabfnr', label: '0 - 1.000', points: 1 },
-      { id: 'o3uh1sdfpb8k09ge4sfkq9zx', label: '1.000 - 5.000', points: 4 },
-      { id: 'f0ds8d21vt4thjjgc1wwwiqj', label: '5.000 - 20.000', points: 8 },
-      { id: 'j2pzkotze87rcyggdkf96xar', label: '20.000+', points: 10 }
+      { label: '1 - 1.000' },
+      { label: '1.000 - 5.000' },
+      { label: '5.000 - 15.000' },
+      { label: '15.000 - 50.000' },
+      { label: '50.000 - 100.000' },
+      { label: '100.000 - 250.000' },
+      { label: '250.000 - 500.000' },
+      { label: '500.000+' }
     ]
   },
   {
@@ -24,11 +28,15 @@ const QUESTIONS = [
     type: 'radio',
     label: 'Hány vásárlás/lead érkezik havonta az oldalon keresztül?',
     options: [
-      { id: 'i7j4qjjj1pce2kew573g0i1t', label: '0 - 10', points: 1 },
-      { id: 'g9l88autmpov7gh851x7l4h2', label: '10 - 50', points: 4 },
-      { id: 'zms6ln1qwn2ecqczxz7okiq7', label: '50 - 200', points: 7 },
-      { id: 'wsgd5xi6frevd9nqbnalg4we', label: '200 - 500', points: 9 },
-      { id: 'e5zuhqvjcwktcovm8wmap2fv', label: '500+', points: 10 }
+      { label: '1 - 10' },
+      { label: '10 - 50' },
+      { label: '50 - 200' },
+      { label: '200 - 500' },
+      { label: '500 - 1.000' },
+      { label: '1.000 - 2.500' },
+      { label: '2.500 - 5.000' },
+      { label: '5.000 - 10.000' },
+      { label: '10.000+' }
     ]
   },
   {
@@ -36,12 +44,12 @@ const QUESTIONS = [
     type: 'radio',
     label: 'Mennyit költesz havonta hirdetésre?',
     options: [
-      { id: 'bmlc078so958fex7unur1rpz', label: '0 Ft', points: 0 },
-      { id: 'sn0jev8qakmh6y6ubceqpx1l', label: '100.000 Ft alatt', points: 2 },
-      { id: 'n50xmdtt1bv6q6r2ff67bztk', label: '100.000 - 300.000 Ft', points: 5 },
-      { id: 'jmhcnl5oohwppp43lkbg7y4u', label: '300.000 - 1.000.000 Ft', points: 8 },
-      { id: 'h8iou3vpm1cvk098i5cpb9n0', label: '1.000.000 - 3.000.000 Ft', points: 10 },
-      { id: 'nmbrfo1v3d0icgt3zy3gbt5p', label: '3.000.000 Ft felett', points: 12 }
+      { label: '0 Ft' },
+      { label: '100.000 Ft alatt' },
+      { label: '100.000 - 300.000 Ft' },
+      { label: '300.000 - 1.000.000 Ft' },
+      { label: '1.000.000 - 3.000.000 Ft' },
+      { label: '3.000.000 Ft felett' }
     ]
   },
   {
@@ -49,10 +57,16 @@ const QUESTIONS = [
     type: 'radio',
     label: 'Mennyi egy átlagos vásárlás értéke (AOV / LTV)?',
     options: [
-      { id: 'n3vt24drwc99u4d52mlqpams', label: '10.000 Ft alatt', points: 2 },
-      { id: 'x5wsqgc0pgitpmak8q6tpy34', label: '10.000 - 50.000 Ft', points: 5 },
-      { id: 'vh0brm90p8hhxzbojoneftvv', label: '50.000 - 200.000 Ft', points: 8 },
-      { id: 'xu4y5iu8w9264tq6p07wj4im', label: '200.000 Ft felett', points: 10 }
+      { label: '10.000 Ft alatt' },
+      { label: '10.000 - 30.000 Ft' },
+      { label: '30.000 - 70.000 Ft' },
+      { label: '70.000 - 150.000 Ft' },
+      { label: '150.000 - 300.000 Ft' },
+      { label: '300.000 - 750.000 Ft' },
+      { label: '750.000 - 1.500.000 Ft' },
+      { label: '1.500.000 - 3.000.000 Ft' },
+      { label: '3.000.000 - 5.000.000 Ft' },
+      { label: '5.000.000 Ft felett' }
     ]
   },
   {
@@ -60,11 +74,11 @@ const QUESTIONS = [
     type: 'radio',
     label: 'Mi a legfőbb forgalmi forrásod?',
     options: [
-      { id: 'g7vami2mg3fjptttvgt46o2r', label: 'Meta hirdetések', points: 5 },
-      { id: 'mf4mgr6hf42tq9c73lr3v67f', label: 'Google Ads', points: 5 },
-      { id: 'tlc0s2pkmmb1wx4ccu0y0nwb', label: 'Influenszerek', points: 4 },
-      { id: 'dad500hjo2enyvitf6fwklp0', label: 'Organikus közösségi média', points: 2 },
-      { id: 'yghsi7ggk1m4p8ljraq5grjt', label: 'Google keresés (SEO)', points: 2 }
+      { label: 'Meta hirdetések' },
+      { label: 'Google Ads' },
+      { label: 'Influenszerek' },
+      { label: 'Organikus közösségi média' },
+      { label: 'Google keresés (SEO)' }
     ]
   },
   {
@@ -102,20 +116,6 @@ const Closer: React.FC = () => {
     }
   }, []);
 
-  const calculateScore = () => {
-    let score = 0;
-    QUESTIONS.forEach(q => {
-      if (q.type === 'radio' && q.options) {
-        const selectedId = formData[q.id];
-        const option = q.options.find(o => o.id === selectedId);
-        if (option) {
-          score += option.points;
-        }
-      }
-    });
-    return score;
-  };
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
@@ -123,10 +123,10 @@ const Closer: React.FC = () => {
     });
   };
 
-  const handleRadioSelect = (questionId: string, optionId: string) => {
+  const handleRadioSelect = (questionId: string, optionLabel: string) => {
     setFormData({
       ...formData,
-      [questionId]: optionId
+      [questionId]: optionLabel
     });
     
     // Auto-advance on radio select after a short delay
@@ -169,8 +169,6 @@ const Closer: React.FC = () => {
 
     setStatus('Küldés folyamatban...');
     
-    const score = calculateScore();
-    
     // Prepare a clean payload for Web3Forms
     const payload: Record<string, any> = {
       access_key: 'aa9f8e62-b6f0-43c1-9ece-521ecbd1c23a',
@@ -179,15 +177,12 @@ const Closer: React.FC = () => {
       keresztnev: formData.firstname,
       email: formData.email,
       weboldal: formData.website,
-      osszpontszam: score,
     };
 
     // Map the question labels to their selected option labels for the email
     QUESTIONS.forEach(q => {
-      if (q.type === 'radio' && q.options) {
-        const option = q.options.find(o => o.id === formData[q.id]);
-        // Use the question label as the key in the email for better readability
-        payload[q.label] = option ? option.label : 'Nincs megadva';
+      if (q.type === 'radio') {
+        payload[q.label] = formData[q.id] || 'Nincs megadva';
       }
     });
 
@@ -203,8 +198,6 @@ const Closer: React.FC = () => {
       });
       
       // Send to Lupio Webhook (Secondary)
-      // We don't necessarily need to await this for the user redirect, 
-      // but we do it to ensure data integrity.
       await fetch('https://demo.lupio.hu/webhook/7a088940-a253-4229-9dc7-113a721f1630', {
         method: 'POST',
         headers: {
@@ -271,18 +264,18 @@ const Closer: React.FC = () => {
 
               {question.type === 'radio' && question.options && (
                 <div className="flex flex-col gap-3">
-                  {question.options.map((option) => (
+                  {question.options.map((option, idx) => (
                     <button
-                      key={option.id}
+                      key={idx}
                       type="button"
-                      onClick={() => handleRadioSelect(question.id, option.id)}
+                      onClick={() => handleRadioSelect(question.id, option.label)}
                       className={`w-full text-left px-5 py-4 rounded-xl border-2 transition-all ${
-                        formData[question.id] === option.id 
+                        formData[question.id] === option.label 
                           ? 'border-brand-accent bg-brand-accent/5' 
                           : 'border-gray-100 bg-white hover:border-gray-300 hover:bg-gray-50'
                       }`}
                     >
-                      <span className={`text-lg ${formData[question.id] === option.id ? 'font-bold text-brand-accent' : 'font-medium text-gray-700'}`}>
+                      <span className={`text-lg ${formData[question.id] === option.label ? 'font-bold text-brand-accent' : 'font-medium text-gray-700'}`}>
                         {option.label}
                       </span>
                     </button>
