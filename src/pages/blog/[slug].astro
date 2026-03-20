@@ -29,51 +29,72 @@ const isNewAudit = post.type === 'Audit' && post.publishedDate >= new Date('2026
 let statsData = null;
 
 if (isNewAudit) {
-    const parseInterval = (text: string) => {
-      if (!text || text === '0') return 0;
+    const parseRange = (text: string) => {
+      if (!text || text === '0') return [0, 0];
       let cleaned = text.replace(/\s+/g, '');
       cleaned = cleaned.replace(/\./g, '');
       const matches = cleaned.match(/\d+/g);
-      if (!matches) return 0;
+      if (!matches) return [0, 0];
       const numbers = matches.map(Number);
-      if (numbers.length === 1) return numbers[0];
-      return (numbers[0] + numbers[1]) / 2;
+      if (numbers.length === 1) return [numbers[0], numbers[0]];
+      return [numbers[0], numbers[1]];
     };
 
-    const visitors = parseInterval(post.visitors);
-    const customers = parseInterval(post.customers);
-    const avgOrderValue = parseInterval(post.aov);
-    const adSpend = parseInterval(post.adSpend);
+    const [minVisitors, maxVisitors] = parseRange(post.visitors);
+    const [minCustomers, maxCustomers] = parseRange(post.customers);
+    const [minAov, maxAov] = parseRange(post.aov);
+    const [minAdSpend, maxAdSpend] = parseRange(post.adSpend);
 
-    const currentCR = visitors > 0 ? (customers / visitors) * 100 : 0;
-    const lostSales = visitors - customers;
-    const currentRevenue = customers * avgOrderValue;
+    const minCR = minVisitors > 0 ? (minCustomers / minVisitors) * 100 : 0;
+    const maxCR = maxVisitors > 0 ? (maxCustomers / maxVisitors) * 100 : 0;
+    
+    const actualMinCR = Math.min(minCR, maxCR);
+    const actualMaxCR = Math.max(minCR, maxCR);
+
+    const minLostSales = minVisitors - minCustomers;
+    const maxLostSales = maxVisitors - maxCustomers;
+    
+    const minCurrentRevenue = minCustomers * minAov;
+    const maxCurrentRevenue = maxCustomers * maxAov;
+
+    const formatCurrency = (val: number) => new Intl.NumberFormat('hu-HU', { style: 'currency', currency: 'HUF', maximumFractionDigits: 0 }).format(val);
+    const formatNumber = (val: number) => new Intl.NumberFormat('hu-HU').format(val);
+
+    const formatRange = (min: number, max: number, formatter: (v: number) => string) => {
+      const actualMin = Math.min(min, max);
+      const actualMax = Math.max(min, max);
+      if (actualMin === actualMax) return formatter(actualMin);
+      return `${formatter(actualMin)} - ${formatter(actualMax)}`;
+    };
+
+    const formatPctRange = (min: number, max: number) => {
+      if (min === max) return `${min.toFixed(1)}%`;
+      return `${min.toFixed(1)}% - ${max.toFixed(1)}%`;
+    };
 
     const projections = [1, 3, 5, 10].map(increasePct => {
-      const newCR = currentCR + increasePct;
-      const newCustomers = Math.round(visitors * (newCR / 100));
-      const newTotalRevenue = newCustomers * avgOrderValue;
-      const extraRevenue = newTotalRevenue - currentRevenue;
+      const minNewCR = minCR + increasePct;
+      const minNewCustomers = Math.round(minVisitors * (minNewCR / 100));
+      const minNewTotalRevenue = minNewCustomers * minAov;
+      const minExtraRevenue = minNewTotalRevenue - minCurrentRevenue;
+
+      const maxNewCR = maxCR + increasePct;
+      const maxNewCustomers = Math.round(maxVisitors * (maxNewCR / 100));
+      const maxNewTotalRevenue = maxNewCustomers * maxAov;
+      const maxExtraRevenue = maxNewTotalRevenue - maxCurrentRevenue;
 
       return {
         increase: `+${increasePct}%`,
-        extraRevenue: new Intl.NumberFormat('hu-HU', { style: 'currency', currency: 'HUF', maximumFractionDigits: 0 }).format(extraRevenue),
-        total: new Intl.NumberFormat('hu-HU', { style: 'currency', currency: 'HUF', maximumFractionDigits: 0 }).format(newTotalRevenue)
+        extraRevenue: formatRange(minExtraRevenue, maxExtraRevenue, formatCurrency),
+        total: formatRange(minNewTotalRevenue, maxNewTotalRevenue, formatCurrency),
+        minExtraRevRaw: Math.min(minExtraRevenue, maxExtraRevenue)
       };
     });
 
-    const extraRev1Pct = Math.round(visitors * ((currentCR + 1) / 100)) * avgOrderValue - currentRevenue;
-    const investmentCost = 317000;
-    const roi = extraRev1Pct > 0 ? Math.floor((extraRev1Pct / investmentCost) * 100) : 0;
-
     statsData = {
-      visitors: visitors,
-      conversionRate: Number(currentCR.toFixed(1)),
-      avgOrderValue: avgOrderValue,
-      adSpend: adSpend,
-      lostSales: lostSales,
+      conversionRateStr: formatPctRange(actualMinCR, actualMaxCR),
+      lostSalesStr: formatRange(minLostSales, maxLostSales, formatNumber),
       projections: projections,
-      roi: `${roi}%`
     };
 }
 
@@ -415,10 +436,10 @@ const image = post.previewImage || post.coverImage;
           
           <div class="text-center">
             <h2 class="text-2xl md:text-4xl font-bold text-gray-900 leading-tight mb-4">
-              A korábbi válaszaid szerint a konverziód kb. <span class="text-brand-accent">{statsData.conversionRate}%</span>.
+              A korábbi válaszaid szerint a konverziód kb. <span class="text-brand-accent">{statsData.conversionRateStr}</span>.
             </h2>
             <p class="text-lg md:text-xl text-gray-600 font-medium">
-              Ez azt jelenti, hogy havonta kb. <span class="font-bold text-gray-900">{new Intl.NumberFormat('hu-HU').format(statsData.lostSales)}</span> látogatód fizetés nélkül távozik.
+              Ez azt jelenti, hogy havonta kb. <span class="font-bold text-gray-900">{statsData.lostSalesStr}</span> látogatód fizetés nélkül távozik.
             </p>
           </div>
 
