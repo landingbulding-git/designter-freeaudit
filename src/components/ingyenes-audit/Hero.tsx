@@ -88,7 +88,7 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
                 
                 <button 
                   type="submit"
-                  className="w-full bg-brand-accent hover:bg-brand-accentHover text-white text-lg font-bold py-5 rounded-xl shadow-[0_0_20px_rgba(255,107,0,0.3)] hover:shadow-[0_0_30px_rgba(255,107,0,0.5)] transition-all duration-300 transform hover:-translate-y-1 mt-2"
+                  className="w-full bg-brand-accent hover:bg-brand-accentHover text-white text-lg font-bold py-5 sm:py-6 rounded-xl shadow-[0_0_20px_rgba(255,107,0,0.3)] hover:shadow-[0_0_30px_rgba(255,107,0,0.5)] transition-all duration-300 transform hover:-translate-y-1 mt-2"
                 >
                   Kérem a 15 perces videós auditot
                 </button>
