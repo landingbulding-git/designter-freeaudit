@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from './Navbar';
 import Hero from './Hero';
 import Comparison from './Comparison';
+import ProcessSteps from './ProcessSteps';
 import Footer from './Footer';
 
 const LandingPageContent: React.FC = () => {
@@ -17,6 +18,7 @@ const LandingPageContent: React.FC = () => {
       <main>
         <Hero onCtaClick={scrollToCloserAudit} />
         <Comparison />
+        <ProcessSteps />
       </main>
       <Footer />
     </div>
