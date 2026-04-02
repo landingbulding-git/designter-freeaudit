@@ -10,9 +10,11 @@ import Footer from './Footer';
 
 const LandingPageContent: React.FC = () => {
   const scrollToCloserAudit = () => {
-    // If you need it to scroll somewhere later, we can adjust this. 
-    // Right now it just triggers from the Hero, but the form is embedded in the Hero anyway.
-    console.log("CTA Clicked");
+    // Scroll to the Hero form if needed, or other sections
+    const element = document.getElementById('hero-form');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   };
 
   return (
@@ -30,9 +32,5 @@ const LandingPageContent: React.FC = () => {
     </div>
   );
 };
-
-export default LandingPageContent;
-
-export default LandingPageContent;
 
 export default LandingPageContent;
