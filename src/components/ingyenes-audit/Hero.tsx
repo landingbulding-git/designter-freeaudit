@@ -18,15 +18,15 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
   }, []);
 
   return (
-    <section className="relative pt-12 pb-8 lg:pt-32 lg:pb-24 bg-brand-900 text-white overflow-hidden min-h-[100dvh] lg:min-h-screen flex items-center">
+    <section className="relative pt-8 pb-8 lg:pt-24 lg:pb-24 bg-brand-900 text-white overflow-hidden min-h-[100dvh] lg:min-h-screen flex items-center">
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-accent opacity-10 blur-[100px] rounded-full transform translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500 opacity-10 blur-[100px] rounded-full transform -translate-x-1/3 translate-y-1/3 pointer-events-none"></div>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-        <div className="flex flex-col space-y-4 lg:space-y-5 items-center text-center w-full pt-4 lg:pt-0">
+        <div className="flex flex-col space-y-5 lg:space-y-6 items-center text-center w-full pt-4 lg:pt-0">
           
-          <div className="flex flex-wrap items-center justify-center gap-4">
+          <div className="flex flex-wrap items-center justify-center gap-4 mb-2">
             {/* Social Proof Badge */}
             <div className="inline-flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs sm:text-sm font-medium text-gray-300 bg-brand-800/80 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-2xl sm:rounded-full border border-brand-700/50 shadow-sm">
               <div className="flex items-center text-yellow-500">
@@ -93,16 +93,16 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
             </form>
             
             {/* Features list - Highlighted */}
-            <div className="flex flex-wrap items-center justify-center gap-3 text-sm font-bold">
-               <div className="flex items-center gap-2 bg-green-500/10 text-green-400 px-3 py-1.5 rounded-lg border border-green-500/20">
-                 <CheckCircle2 className="w-4 h-4" />
-                 <span>Az audit bizalmas, csak Ön kapja meg.</span>
-               </div>
-               <div className="flex items-center gap-2 bg-green-500/10 text-green-400 px-3 py-1.5 rounded-lg border border-green-500/20">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 text-sm font-bold w-full sm:w-auto px-4 sm:px-0">
+               <div className="flex items-center justify-center gap-2 bg-green-500/10 text-green-400 px-3 py-1.5 rounded-lg border border-green-500/20 w-full sm:w-auto">
                  <CheckCircle2 className="w-4 h-4" />
                  <span>100% ingyenes.</span>
                </div>
-               <div className="flex items-center gap-2 bg-green-500/10 text-green-400 px-3 py-1.5 rounded-lg border border-green-500/20">
+               <div className="flex items-center justify-center gap-2 bg-green-500/10 text-green-400 px-3 py-1.5 rounded-lg border border-green-500/20 w-full sm:w-auto">
+                 <CheckCircle2 className="w-4 h-4" />
+                 <span>Az audit bizalmas, csak Ön kapja meg.</span>
+               </div>
+               <div className="flex items-center justify-center gap-2 bg-green-500/10 text-green-400 px-3 py-1.5 rounded-lg border border-green-500/20 w-full sm:w-auto">
                  <CheckCircle2 className="w-4 h-4" />
                  <span>Nincs kötelezettség.</span>
                </div>
