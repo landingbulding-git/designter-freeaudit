@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from './Navbar';
 import Hero from './Hero';
-import ProblemAgitation from './ProblemAgitation';
+import Comparison from './Comparison';
 import Footer from './Footer';
 
 const LandingPageContent: React.FC = () => {
@@ -16,7 +16,7 @@ const LandingPageContent: React.FC = () => {
       <Navbar onCtaClick={scrollToCloserAudit} />
       <main>
         <Hero onCtaClick={scrollToCloserAudit} />
-        <ProblemAgitation />
+        <Comparison />
       </main>
       <Footer />
     </div>
