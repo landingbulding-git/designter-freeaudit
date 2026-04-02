@@ -222,7 +222,6 @@ const Closer: React.FC = () => {
                   className="w-full px-5 py-4 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-accent focus:border-brand-accent outline-none text-lg transition-all bg-gray-50"
                   value={formData[question.id]}
                   onChange={handleInputChange}
-                  autoFocus
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' && isCurrentStepValid()) {
                       e.preventDefault();
