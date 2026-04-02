@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Star, CheckCircle2 } from 'lucide-react';
 
-interface HeroProps {
-  onCtaClick: (data: { firstname: string, clinic: string, website: string }) => void;
-}
-
-const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
+const Hero: React.FC = () => {
   const [userName, setUserName] = useState<string | null>(null);
+  const [status, setStatus] = useState('');
   const [formData, setFormData] = useState({
     firstname: '',
     clinic: '',
@@ -17,7 +14,6 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
     const params = new URLSearchParams(window.location.search);
     const name = params.get('name');
     if (name) {
-      // Capitalize first letter
       const capitalized = name.charAt(0).toUpperCase() + name.slice(1);
       setUserName(capitalized);
       setFormData(prev => ({ ...prev, firstname: capitalized }));
@@ -31,9 +27,51 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onCtaClick(formData);
+    setStatus('Küldés folyamatban...');
+
+    const payload = {
+      access_key: 'aa9f8e62-b6f0-43c1-9ece-521ecbd1c23a',
+      subject: `Ingyenes Audit Igénylés (Hero) - ${formData.firstname} (Klinika: ${formData.clinic})`,
+      from_name: 'DesignTér Audit',
+      keresztnev: formData.firstname,
+      klinika: formData.clinic,
+      weboldal: formData.website,
+    };
+
+    try {
+      // Send to Web3Forms (Primary)
+      const web3Response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+      
+      // Send to Lupio Webhook (Secondary)
+      await fetch('https://demo.lupio.hu/webhook/7a088940-a253-4229-9dc7-113a721f1630', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+      
+      const result = await web3Response.json();
+      if (result.success) {
+        if (typeof window !== 'undefined') {
+          window.location.href = 'https://landing.designter.hu/ingyenes-audit/thank-you';
+        }
+      } else {
+        setStatus(result.message || 'Hiba történt a küldés során.');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setStatus('Hiba történt a küldés során.');
+    }
   };
 
   return (
@@ -49,7 +87,7 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
           <div className="flex flex-col space-y-5 lg:space-y-6 items-center lg:items-start text-center lg:text-left">
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 mb-2">
               {/* Social Proof Badge */}
-              <div className="inline-flex items-center justify-center gap-2 sm:gap-3 text-xs sm:text-sm font-medium text-gray-300 bg-brand-800/80 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-2xl sm:rounded-full border border-brand-700/50 shadow-sm">
+              <div className="inline-flex items-center justify-center gap-2 sm:gap-3 text-xs sm:text-sm font-medium text-gray-300 bg-brand-800/80 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-2xl sm:rounded-full border border-brand-700/50 shadow-sm whitespace-nowrap">
                 <div className="flex items-center text-yellow-500">
                   <Star className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current" />
                   <Star className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current" />
@@ -57,15 +95,20 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
                   <Star className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current" />
                   <Star className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current" />
                 </div>
-                <span className="font-semibold text-white whitespace-nowrap">Etikai Kódex alapján validálva.</span>
+                <span className="font-semibold text-white">Etikai Kódex alapján validálva.</span>
                 <span className="text-brand-700 hidden sm:inline">|</span>
-                <span className="text-gray-200 whitespace-nowrap">100% diszkrét, szakmabeli elemzés.</span>
+                <span className="text-gray-200">100% diszkrét, szakmabeli elemzés.</span>
               </div>
             </div>
 
             <h1 className="text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight leading-tight">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400">
-                {userName ? `${userName}, ` : ''}PEK Audit™: 9 hiba a klinikája online jelenlétben, ami elriasztja a prémium pácienseket.
+                {userName ? `${userName}, ` : ''}
+              </span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-yellow-500">PEK Audit™:</span>
+              <br className="hidden lg:block" />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400">
+                {" "}9 hiba a klinikája online jelenlétben, ami elriasztja a prémium pácienseket.
               </span>
             </h1>
             
@@ -113,9 +156,10 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
                 
                 <button 
                   type="submit"
-                  className="w-full bg-brand-accent hover:bg-brand-accentHover text-white text-lg font-bold py-5 sm:py-6 rounded-xl shadow-[0_0_20px_rgba(255,107,0,0.3)] hover:shadow-[0_0_30px_rgba(255,107,0,0.5)] transition-all duration-300 transform hover:-translate-y-1 mt-2"
+                  disabled={status !== ''}
+                  className="w-full bg-brand-accent hover:bg-brand-accentHover text-white text-lg font-bold py-5 sm:py-6 rounded-xl shadow-[0_0_20px_rgba(255,107,0,0.3)] hover:shadow-[0_0_30px_rgba(255,107,0,0.5)] transition-all duration-300 transform hover:-translate-y-1 mt-2 disabled:opacity-70"
                 >
-                  Kérem a 15 perces videós auditot
+                  {status ? status : 'Kérem a 15 perces videós auditot'}
                 </button>
               </form>
 

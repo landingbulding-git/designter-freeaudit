@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Navbar from './Navbar';
 import Hero from './Hero';
 import Steps from './Steps';
@@ -10,12 +10,6 @@ import Closer from './Closer';
 import Footer from './Footer';
 
 const LandingPageContent: React.FC = () => {
-  const [initialData, setInitialData] = useState({
-    firstname: '',
-    clinic: '',
-    website: ''
-  });
-
   const scrollToHeroForm = () => {
     const element = document.getElementById('hero-form');
     if (element) {
@@ -23,25 +17,17 @@ const LandingPageContent: React.FC = () => {
     }
   };
 
-  const handleHeroSubmit = (data: { firstname: string, clinic: string, website: string }) => {
-    setInitialData(data);
-    const element = document.getElementById('closer-audit-heading');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
-
   return (
     <div className="font-sans text-brand-900 bg-white">
       <Navbar onCtaClick={scrollToHeroForm} />
       <main>
-        <Hero onCtaClick={handleHeroSubmit} />
+        <Hero />
         <Steps />
         <ProcessSteps />
         <Comparison />
         <Expert onCtaClick={scrollToHeroForm} />
         <FAQ />
-        <Closer initialData={initialData} />
+        <Closer />
       </main>
       <Footer />
     </div>
