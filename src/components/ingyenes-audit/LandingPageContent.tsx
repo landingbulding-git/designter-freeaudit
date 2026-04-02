@@ -1,16 +1,14 @@
 import React from 'react';
 import Navbar from './Navbar';
 import Hero from './Hero';
-import Testimonials from './Testimonials';
-import Closer from './Closer';
+import ProblemAgitation from './ProblemAgitation';
 import Footer from './Footer';
 
 const LandingPageContent: React.FC = () => {
   const scrollToCloserAudit = () => {
-    const element = document.getElementById('closer-audit-heading');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
+    // If you need it to scroll somewhere later, we can adjust this. 
+    // Right now it just triggers from the Hero, but the form is embedded in the Hero anyway.
+    console.log("CTA Clicked");
   };
 
   return (
@@ -18,8 +16,7 @@ const LandingPageContent: React.FC = () => {
       <Navbar onCtaClick={scrollToCloserAudit} />
       <main>
         <Hero onCtaClick={scrollToCloserAudit} />
-        <Testimonials />
-        <Closer />
+        <ProblemAgitation />
       </main>
       <Footer />
     </div>
