@@ -30,7 +30,7 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
           <div className="flex flex-col space-y-5 lg:space-y-6 items-center lg:items-start text-center lg:text-left">
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 mb-2">
               {/* Social Proof Badge */}
-              <div className="inline-flex items-center justify-center gap-2 sm:gap-3 text-xs sm:text-sm font-medium text-gray-300 bg-brand-800/80 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-2xl sm:rounded-full border border-brand-700/50 shadow-sm whitespace-nowrap">
+              <div className="inline-flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs sm:text-sm font-medium text-gray-300 bg-brand-800/80 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-2xl sm:rounded-full border border-brand-700/50 shadow-sm">
                 <div className="flex items-center text-yellow-500">
                   <Star className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current" />
                   <Star className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current" />
@@ -38,20 +38,15 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
                   <Star className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current" />
                   <Star className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current" />
                 </div>
-                <span className="font-semibold text-white">Etikai Kódex alapján validálva.</span>
+                <span className="font-semibold text-white whitespace-nowrap">Etikai Kódex alapján validálva.</span>
                 <span className="text-brand-700 hidden sm:inline">|</span>
-                <span className="text-gray-200">100% diszkrét, szakmabeli elemzés.</span>
+                <span className="text-gray-200 whitespace-nowrap">100% diszkrét, szakmabeli elemzés.</span>
               </div>
             </div>
 
             <h1 className="text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight leading-tight">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400">
-                {userName ? `${userName}, ` : ''}
-              </span>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-yellow-500">PEK Audit™:</span>
-              <br className="hidden lg:block" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400">
-                {" "}9 hiba a klinikája online jelenlétben, ami elriasztja a prémium pácienseket.
+                {userName ? `${userName}, ` : ''}PEK Audit™: 9 hiba a klinikája online jelenlétben, ami elriasztja a prémium pácienseket.
               </span>
             </h1>
             
