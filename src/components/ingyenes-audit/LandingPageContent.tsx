@@ -2,8 +2,9 @@ import React from 'react';
 import Navbar from './Navbar';
 import Hero from './Hero';
 import Steps from './Steps';
-import Comparison from './Comparison';
 import ProcessSteps from './ProcessSteps';
+import Comparison from './Comparison';
+import Expert from './Expert';
 import Footer from './Footer';
 
 const LandingPageContent: React.FC = () => {
@@ -19,8 +20,9 @@ const LandingPageContent: React.FC = () => {
       <main>
         <Hero onCtaClick={scrollToCloserAudit} />
         <Steps />
-        <Comparison />
         <ProcessSteps />
+        <Comparison />
+        <Expert onCtaClick={scrollToCloserAudit} />
       </main>
       <Footer />
     </div>
