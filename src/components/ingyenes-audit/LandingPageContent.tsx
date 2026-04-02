@@ -5,6 +5,7 @@ import Steps from './Steps';
 import ProcessSteps from './ProcessSteps';
 import Comparison from './Comparison';
 import Expert from './Expert';
+import FAQ from './FAQ';
 import Footer from './Footer';
 
 const LandingPageContent: React.FC = () => {
@@ -23,10 +24,15 @@ const LandingPageContent: React.FC = () => {
         <ProcessSteps />
         <Comparison />
         <Expert onCtaClick={scrollToCloserAudit} />
+        <FAQ />
       </main>
       <Footer />
     </div>
   );
 };
+
+export default LandingPageContent;
+
+export default LandingPageContent;
 
 export default LandingPageContent;
