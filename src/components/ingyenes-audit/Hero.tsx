@@ -24,7 +24,7 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500 opacity-10 blur-[100px] rounded-full transform -translate-x-1/3 translate-y-1/3 pointer-events-none"></div>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-        <div className="flex flex-col space-y-6 lg:space-y-8 items-center text-center w-full pt-4 lg:pt-0">
+        <div className="flex flex-col space-y-4 lg:space-y-5 items-center text-center w-full pt-4 lg:pt-0">
           
           <div className="flex flex-wrap items-center justify-center gap-4">
             {/* Social Proof Badge */}
@@ -43,20 +43,54 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
           </div>
 
           <h1 className="text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight leading-tight max-w-4xl mx-auto">
-            {userName ? `${userName}, ` : ''}9 rejtett hiba a klinikája online jelenlétében, amely fizetőképes páciensek elvesztéséhez és az orvosi presztízs sérüléséhez vezethet.
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400">
+              {userName ? `${userName}, ` : ''}9 rejtett hiba a klinikája online jelenlétében, amely fizetőképes páciensek elvesztéséhez és az orvosi presztízs sérüléséhez vezethet.
+            </span>
           </h1>
           
-          <p className="text-lg lg:text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto">
+          <p className="text-lg lg:text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto pb-4">
             Igényeljen személyre szabott PEK Audit™-ot: egy 15 perces szakmai diagnózis a klinikájáról Presztízs, Etikai megfelelés és Konverziós hatékonyság alapján – konkrét javítási protokollal.
           </p>
 
-          <div className="flex flex-col w-full space-y-5 lg:space-y-6 mt-2 items-center">
-            <button 
-              onClick={onCtaClick}
-              className="w-full sm:w-fit mx-auto bg-brand-accent hover:bg-brand-accentHover text-white text-lg font-bold py-4 px-10 rounded-xl shadow-[0_0_20px_rgba(255,107,0,0.3)] hover:shadow-[0_0_30px_rgba(255,107,0,0.5)] transition-all duration-300 transform hover:-translate-y-1"
+          <div className="flex flex-col w-full space-y-5 lg:space-y-6 items-center">
+            
+            {/* Lead Capture Form */}
+            <form 
+              className="w-full max-w-3xl grid grid-cols-1 md:grid-cols-3 gap-3"
+              onSubmit={(e) => {
+                e.preventDefault();
+                onCtaClick();
+              }}
             >
-              Kérem a 15 perces videós auditot
-            </button>
+              <input 
+                type="text" 
+                placeholder="Teljes név" 
+                required
+                className="w-full px-4 py-3 bg-brand-800/50 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-accent focus:border-transparent transition-all backdrop-blur-sm"
+              />
+              <input 
+                type="text" 
+                placeholder="Klinika neve" 
+                required
+                className="w-full px-4 py-3 bg-brand-800/50 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-accent focus:border-transparent transition-all backdrop-blur-sm"
+              />
+              <input 
+                type="url" 
+                placeholder="Weboldal címe" 
+                required
+                className="w-full px-4 py-3 bg-brand-800/50 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-accent focus:border-transparent transition-all backdrop-blur-sm"
+              />
+              
+              {/* Button moved inside the form to handle submission naturally */}
+              <div className="md:col-span-3 flex justify-center mt-2">
+                <button 
+                  type="submit"
+                  className="w-full sm:w-fit mx-auto bg-brand-accent hover:bg-brand-accentHover text-white text-lg font-bold py-4 px-10 rounded-xl shadow-[0_0_20px_rgba(255,107,0,0.3)] hover:shadow-[0_0_30px_rgba(255,107,0,0.5)] transition-all duration-300 transform hover:-translate-y-1"
+                >
+                  Kérem a 15 perces videós auditot
+                </button>
+              </div>
+            </form>
             
             {/* Features list - Highlighted */}
             <div className="flex flex-wrap items-center justify-center gap-3 text-sm font-bold">
