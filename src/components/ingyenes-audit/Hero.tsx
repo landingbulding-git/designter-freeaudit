@@ -44,12 +44,12 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
 
           <h1 className="text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight leading-tight max-w-4xl mx-auto">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400">
-              {userName ? `${userName}, ` : ''}9 rejtett hiba a klinikája online jelenlétében, amely fizetőképes páciensek elvesztéséhez és az orvosi presztízs sérüléséhez vezethet.
+              {userName ? `${userName}, ` : ''}PEK Audit™: 9 hiba a klinikája online jelenlétben, ami elriasztja a prémium pácienseket.
             </span>
           </h1>
           
           <p className="text-lg lg:text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto pb-4">
-            Igényeljen személyre szabott PEK Audit™-ot: egy 15 perces szakmai diagnózis a klinikájáról Presztízs, Etikai megfelelés és Konverziós hatékonyság alapján – konkrét javítási protokollal.
+            15 perces egyedi videós diagnózis a klinikájáról. Presztízs, Etika és Konverzió mentén vizsgáljuk meg klinikája online jelenlétét. Pontos javaslatokat kap a szakmai nívó és az eredmények összehangolásához.
           </p>
 
           <div className="flex flex-col w-full space-y-5 lg:space-y-6 items-center">
