@@ -6,40 +6,28 @@ const FAQ: React.FC = () => {
 
   const faqs = [
     {
-      q: "Már van egy szép weboldalam, miért kellene más?",
-      a: "A \"szép\" nem egyenlő az \"eredményessel\". A design csak a csomagolás, a konverzió a motor. Ha a jelenlegi oldalad nem hoz elég ügyfelet, akkor a szépsége nem termel profitot."
+      q: "Ez tényleg ingyenes és személyreszabott?",
+      a: "Az audit 100%-ban díjmentes és kötelezettségmentes. Ez egy szakmai diagnózis: a videóban az Ön konkrét felületeit elemezzük és konkrét hibákat tárunk fel."
     },
     {
-      q: "Bármilyen piaci résben (niche) működik ez?",
-      a: "Igen. Ez a módszertan minden területen működik, legyen szó otthoni szolgáltatásokról, fitneszről, egészségügyről, ingatlanról, jogi vagy oktatási területről, coachingról, SaaS-ról, klinikákról vagy bármilyen professzionális szolgáltatásról"
+      q: "Mennyire veszi figyelembe az elemzés az etikai kódexet?",
+      a: "Ez az audit egyik alappillére. Nem általános marketinges szemmel nézzük az oldalát, hanem az aktuális orvosetikai kódexek (MOK, ETT) és a releváns platformok (Meta, Google) szabályzata tükrében."
     },
     {
-      q: "Bármilyen típusú vállalkozásnál működik (E-kereskedelem, online kurzusok, B2B, SaaS)?",
-      a: "Igen. Minden üzleti modellnél alkalmazható, beleértve a webshopokat, digitális termékeket, online kurzusokat, coaching programokat, SaaS-t, valamint a B2B és B2C szektort is."
+      q: "Van már marketingesem/ügynökségem. Így is érdemes kérnem az auditot?",
+      a: "Igen, kifejezetten javasoljuk. Tekintsen erre úgy, mint egy szakmai másodvéleményre."
     },
     {
-      q: "Pontosan mit kapok ezzel az audittal?",
-      a: "Egy 10-15 perces, privát és személyre szabott videót kapsz, amelyben végigmegyünk a landing oldaladon. Darabjaira szediük az üzeneteidet, a struktúrát, az elrendezést és az ajánlatodat. Megmutatjuk, mi nem működik, és pontosan hogyan javítanánk ki, hogy az oldalad végre eladjon."
+      q: "Miért csak heti 3 audit érhető el?",
+      a: "Mivel minden elemzést manuálisan, szakértői szemmel végzünk el, a minőség megőrzése érdekében limitálnunk kell a heti keretet. Egy-egy diagnózis elkészítése komoly szakmai felkészülést igényel, így csak ennyi fér bele a naptárunkba a meglévő partnereink kiszolgálása mellett."
     },
     {
-      q: "Mennyi idő alatt kapom meg az auditot?",
-      a: "A videót a vásárlástól és az adatbekérő űrlap kitöltésétől számított 48 órán belül küldjük el az e-mail címedre."
+      q: "Mennyi időt kell nekem erre szánnom?",
+      a: "Az Ön részéről mindössze néhány percet igényel az űrlap kitöltése. Az elemzést mi végezzük el, Önnek csak a kész, 15 perces videót kell megnéznie a saját tempójában, amikor a naptára engedi."
     },
     {
-      q: "Valóban az én oldalamra van szabva az audit?",
-      a: "Igen. Minden egyes auditot az alapoktól, kifejezetten a te landing oldaladra rögzítünk. Soha nem használunk sablonokat, és nem osztom meg a videódat nyilvánosan."
-    },
-    {
-      q: "Megírjátok helyettem a szöveget vagy áttervezitek az oldalam?",
-      a: "Nem. Ez egy stratégiai elemzés, amit ha értékesnek találsz, örömmel elvégezzük a kivitelezést is."
-    },
-    {
-      q: "Milyen eredményekre számíthatok?",
-      a: "Az ügyfeleink átlagosan 64%-os konverziós növekedést tapasztalnak már az auditban javasolt változtatások egy részének bevezetése után. Egyes esetekben akár a háromszorosára is nőtt a leadek vagy az eladások száma."
-    },
-    {
-      q: "Tényleg ingyenes? Mi a hátsó szándék?",
-      a: "Nincs hátsó szándék. Az audit során feltárjuk a problémákat és konkrét javaslatokat adunk. Ha úgy érzed, hogy szeretnéd, hogy mi is implementáljuk a változtatásokat, szívesen segítünk, de erre semmilyen nyomás nincs. A legtöbb auditot kérő vállalkozó annyira meglepődik az eredményeken, hogy magától kéri a folytatást."
+      q: "Nem fogják nyilvánosan kritizálni a weboldalam?",
+      a: "Semmiképpen. Az audit teljesen diszkrét, egy privát linket küldünk, amit csak Ön (vagy akivel megosztja) láthat. Számunkra az orvosi titoktartáshoz hasonló diszkréció alapvető szakmai minimum."
     }
   ];
 
