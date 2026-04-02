@@ -23,18 +23,18 @@ const Expert: React.FC<ExpertProps> = ({ onCtaClick }) => {
           </div>
 
           <div className="w-full md:w-2/3 text-center md:text-left">
-            <h2 className="text-3xl font-bold text-brand-900 mb-6">500+ landing oldal elemzése után pontosan tudom, miért nem jönnek a leadjeid.</h2>
+            <h2 className="text-3xl font-bold text-brand-900 mb-6">Tudom, hogy az orvosi marketingben a bizalom a legértékesebb valuta.</h2>
             <div className="relative mb-8">
               <span className="text-6xl text-brand-accent/20 font-serif absolute -top-8 -left-4">"</span>
               <p className="text-lg text-gray-700 leading-relaxed italic relative z-10">
-                Tudom, milyen frusztráló látni, hogy a hirdetésekre költött pénz nem térül meg. Azért hoztam létre a DesignTért, hogy megszüntessem ezt a szakadékot közted és a vevőid között. Sokan ígérnek 'szép' honlapot, de kevesen vállalnak felelősséget a konverzióért, pedig a nap végén csak ez számít.
+                Azért hoztam létre a PEK Auditot™, mert látom, hogyan rontják el az általános marketingügynökségek a kiváló klinikák megítélését. Sokan ígérnek pácienseket, de kevesen értik az orvosetikai határokat és a presztízsalapú kommunikációt. Mi felelősséget vállalunk azért, hogy klinikája ne csak konvertáljon, de közben megőrizze szakmai méltóságát is.
               </p>
             </div>
             
             <div className="flex flex-col sm:flex-row items-center justify-between gap-6 border-t border-gray-200 pt-6">
               <div className="text-center sm:text-left">
                 <p className="font-bold text-brand-900 text-lg">B. Norbi | DesignTér</p>
-                <p className="text-sm text-gray-500">Tulajdonos</p>
+                <p className="text-sm text-gray-500">Alapító & Stratégiai vezető</p>
               </div>
               
               <button 

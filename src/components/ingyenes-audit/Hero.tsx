@@ -2,23 +2,42 @@ import React, { useEffect, useState } from 'react';
 import { Star, CheckCircle2 } from 'lucide-react';
 
 interface HeroProps {
-  onCtaClick: () => void;
+  onCtaClick: (data: { firstname: string, clinic: string, website: string }) => void;
 }
 
 const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
   const [userName, setUserName] = useState<string | null>(null);
+  const [formData, setFormData] = useState({
+    firstname: '',
+    clinic: '',
+    website: ''
+  });
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const name = params.get('name');
     if (name) {
       // Capitalize first letter
-      setUserName(name.charAt(0).toUpperCase() + name.slice(1));
+      const capitalized = name.charAt(0).toUpperCase() + name.slice(1);
+      setUserName(capitalized);
+      setFormData(prev => ({ ...prev, firstname: capitalized }));
     }
   }, []);
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onCtaClick(formData);
+  };
+
   return (
-    <section className="relative pt-8 pb-8 lg:pt-24 lg:pb-24 bg-brand-900 text-white overflow-hidden min-h-[100dvh] lg:min-h-screen flex items-center">
+    <section id="hero-form" className="relative pt-8 pb-8 lg:pt-24 lg:pb-24 bg-brand-900 text-white overflow-hidden min-h-[100dvh] lg:min-h-screen flex items-center">
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-accent opacity-10 blur-[100px] rounded-full transform translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500 opacity-10 blur-[100px] rounded-full transform -translate-x-1/3 translate-y-1/3 pointer-events-none"></div>
@@ -30,7 +49,7 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
           <div className="flex flex-col space-y-5 lg:space-y-6 items-center lg:items-start text-center lg:text-left">
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 mb-2">
               {/* Social Proof Badge */}
-              <div className="inline-flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs sm:text-sm font-medium text-gray-300 bg-brand-800/80 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-2xl sm:rounded-full border border-brand-700/50 shadow-sm">
+              <div className="inline-flex items-center justify-center gap-2 sm:gap-3 text-xs sm:text-sm font-medium text-gray-300 bg-brand-800/80 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-2xl sm:rounded-full border border-brand-700/50 shadow-sm">
                 <div className="flex items-center text-yellow-500">
                   <Star className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current" />
                   <Star className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current" />
@@ -60,28 +79,34 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
             <div className="w-full max-w-xl bg-brand-800/30 backdrop-blur-md p-6 lg:p-8 rounded-3xl border border-white/10 shadow-2xl">
               <form 
                 className="flex flex-col gap-4"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  onCtaClick();
-                }}
+                onSubmit={handleSubmit}
               >
                 <div className="space-y-4">
                   <input 
                     type="text" 
+                    name="firstname"
                     placeholder="Teljes név" 
                     required
+                    value={formData.firstname}
+                    onChange={handleChange}
                     className="w-full px-5 py-4 bg-brand-900/50 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-accent focus:border-transparent transition-all"
                   />
                   <input 
                     type="text" 
+                    name="clinic"
                     placeholder="Klinika neve" 
                     required
+                    value={formData.clinic}
+                    onChange={handleChange}
                     className="w-full px-5 py-4 bg-brand-900/50 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-accent focus:border-transparent transition-all"
                   />
                   <input 
-                    type="url" 
+                    type="text" 
+                    name="website"
                     placeholder="Weboldal címe" 
                     required
+                    value={formData.website}
+                    onChange={handleChange}
                     className="w-full px-5 py-4 bg-brand-900/50 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-accent focus:border-transparent transition-all"
                   />
                 </div>
