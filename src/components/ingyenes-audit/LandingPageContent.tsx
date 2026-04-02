@@ -6,6 +6,7 @@ import ProcessSteps from './ProcessSteps';
 import Comparison from './Comparison';
 import Expert from './Expert';
 import FAQ from './FAQ';
+import Closer from './Closer';
 import Footer from './Footer';
 
 const LandingPageContent: React.FC = () => {
@@ -27,6 +28,7 @@ const LandingPageContent: React.FC = () => {
         <Comparison />
         <Expert onCtaClick={scrollToCloserAudit} />
         <FAQ />
+        <Closer />
       </main>
       <Footer />
     </div>
