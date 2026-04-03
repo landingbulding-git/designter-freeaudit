@@ -60,7 +60,7 @@ const ThankYou: React.FC = () => {
         </div>
         
         {/* Embedded Iframe - Placed below the box and made much wider and taller */}
-        <div className="w-full max-w-6xl mt-16 rounded-3xl overflow-hidden shadow-2xl border border-white/10 bg-brand-900/50 aspect-video relative z-10">
+        <div className="w-full max-w-6xl mt-16 rounded-3xl overflow-hidden shadow-2xl border border-white/10 bg-brand-900/50 aspect-[9/16] md:aspect-video relative z-10">
           <iframe
             src={iframeUrl}
             className="absolute top-0 left-0 w-full h-full"
