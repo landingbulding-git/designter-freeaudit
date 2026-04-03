@@ -26,41 +26,22 @@ const ThankYou: React.FC = () => {
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500 opacity-10 blur-[100px] rounded-full transform -translate-x-1/3 translate-y-1/3 pointer-events-none"></div>
 
       <div className="relative z-10 flex flex-col items-center w-full max-w-7xl">
-        {/* Alarm Icon */}
-        <div className="mb-8">
-          <div className="w-20 h-20 bg-brand-accent/20 rounded-full flex items-center justify-center border-2 border-brand-accent/30 animate-pulse">
-            <AlertTriangle className="w-10 h-10 text-brand-accent" />
-          </div>
-        </div>
-
-        {/* Title */}
-        <h1 className="text-2xl md:text-4xl font-extrabold text-white mb-16 max-w-2xl leading-tight">
-          Az Ön audit kérelme még nincs megerősítve.
-        </h1>
-
-        {/* Content Box with Founder Image */}
-        <div className="relative mt-12 w-full max-w-2xl mx-auto">
-          {/* Founder Image - Half inside, half outside */}
-          <div className="absolute -top-12 left-1/2 -translate-x-1/2 z-20">
-            <div className="w-24 h-24 rounded-full border-4 border-brand-900 overflow-hidden shadow-xl bg-gray-200">
-              <img
-                src="https://xa5228yhxohqyplr.public.blob.vercel-storage.com/me-landing-image.webp"
-                alt="B. Norbi"
-                className="w-full h-full object-cover"
-              />
+        {/* Content Box with Alarm Icon integrated to save space */}
+        <div className="w-full max-w-2xl mx-auto">
+          <div className="bg-brand-800/40 backdrop-blur-md p-6 md:p-8 rounded-3xl border border-white/10 shadow-2xl relative z-10 flex flex-col md:flex-row items-center gap-4 text-left">
+            <div className="flex-shrink-0">
+              <div className="w-12 h-12 bg-brand-accent/20 rounded-full flex items-center justify-center border border-brand-accent/30 animate-pulse">
+                <AlertTriangle className="w-6 h-6 text-brand-accent" />
+              </div>
             </div>
-          </div>
-
-          {/* The Box */}
-          <div className="bg-brand-800/40 backdrop-blur-md p-8 md:p-12 pt-16 rounded-3xl border border-white/10 shadow-2xl relative z-10">
-            <p className="text-lg md:text-xl text-gray-200 leading-relaxed">
-              A kérése megérkezett, azonban ahogy egy remek orvos, úgy én is adatokra alapozom a diagnózisomat. Kérem, válaszoljon a videóban feltett kérdésekre, hogy jóváhagyhassuk a jelentkezését és megkezdhessük a mélyelemzést.
+            <p className="text-lg md:text-xl text-gray-200 leading-relaxed text-center md:text-left">
+              Ahogy egy remek orvos, úgy én is adatokra alapozom a diagnózisomat. Kérem, válaszoljon a videós kérdésekre a megerősítéshez.
             </p>
           </div>
         </div>
         
         {/* Embedded Iframe - Placed below the box and made much wider and taller */}
-        <div className="w-full max-w-6xl mt-16 rounded-3xl overflow-hidden shadow-2xl border border-white/10 bg-brand-900/50 aspect-[9/16] md:aspect-video relative z-10">
+        <div className="w-full max-w-6xl mt-8 rounded-3xl overflow-hidden shadow-2xl border border-white/10 bg-brand-900/50 aspect-[9/16] md:aspect-video relative z-10">
           <iframe
             src={iframeUrl}
             className="absolute top-0 left-0 w-full h-full"
