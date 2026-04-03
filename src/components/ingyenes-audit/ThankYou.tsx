@@ -25,7 +25,7 @@ const ThankYou: React.FC = () => {
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-accent opacity-10 blur-[100px] rounded-full transform translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500 opacity-10 blur-[100px] rounded-full transform -translate-x-1/3 translate-y-1/3 pointer-events-none"></div>
 
-      <div className="relative z-10 flex flex-col items-center w-full max-w-5xl">
+      <div className="relative z-10 flex flex-col items-center w-full max-w-7xl">
         {/* Alarm Icon */}
         <div className="mb-8">
           <div className="w-20 h-20 bg-brand-accent/20 rounded-full flex items-center justify-center border-2 border-brand-accent/30 animate-pulse">
@@ -59,8 +59,8 @@ const ThankYou: React.FC = () => {
           </div>
         </div>
         
-        {/* Embedded Iframe - Placed below the box and made wider */}
-        <div className="w-full max-w-4xl mt-12 rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-brand-900/50 aspect-video relative z-10">
+        {/* Embedded Iframe - Placed below the box and made much wider and taller */}
+        <div className="w-full max-w-6xl mt-16 rounded-3xl overflow-hidden shadow-2xl border border-white/10 bg-brand-900/50 aspect-video relative z-10">
           <iframe
             src={iframeUrl}
             className="absolute top-0 left-0 w-full h-full"
