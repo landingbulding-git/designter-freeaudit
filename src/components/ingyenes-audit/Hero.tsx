@@ -6,6 +6,7 @@ const Hero: React.FC = () => {
   const [status, setStatus] = useState('');
   const [formData, setFormData] = useState({
     firstname: '',
+    email: '',
     clinic: '',
     website: ''
   });
@@ -36,6 +37,7 @@ const Hero: React.FC = () => {
       subject: `Ingyenes Audit Igénylés (Hero) - ${formData.firstname} (Klinika: ${formData.clinic})`,
       from_name: 'DesignTér Audit',
       keresztnev: formData.firstname,
+      email: formData.email,
       klinika: formData.clinic,
       weboldal: formData.website,
     };
@@ -63,7 +65,12 @@ const Hero: React.FC = () => {
       const result = await web3Response.json();
       if (result.success) {
         if (typeof window !== 'undefined') {
-          window.location.href = 'https://landing.designter.hu/ingyenes-audit/thank-you';
+          const queryParams = new URLSearchParams({
+            name: formData.firstname,
+            email: formData.email,
+            link: formData.website
+          }).toString();
+          window.location.href = `/ingyenes-audit/thank-you?${queryParams}`;
         }
       } else {
         setStatus(result.message || 'Hiba történt a küldés során.');
@@ -126,6 +133,15 @@ const Hero: React.FC = () => {
                     placeholder="Teljes név" 
                     required
                     value={formData.firstname}
+                    onChange={handleChange}
+                    className="w-full px-5 py-4 bg-brand-900/50 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-accent focus:border-transparent transition-all"
+                  />
+                  <input 
+                    type="email" 
+                    name="email"
+                    placeholder="E-mail cím" 
+                    required
+                    value={formData.email}
                     onChange={handleChange}
                     className="w-full px-5 py-4 bg-brand-900/50 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-accent focus:border-transparent transition-all"
                   />
