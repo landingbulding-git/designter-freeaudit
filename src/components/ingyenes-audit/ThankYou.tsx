@@ -25,7 +25,7 @@ const ThankYou: React.FC = () => {
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-accent opacity-10 blur-[100px] rounded-full transform translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500 opacity-10 blur-[100px] rounded-full transform -translate-x-1/3 translate-y-1/3 pointer-events-none"></div>
 
-      <div className="relative z-10 flex flex-col items-center w-full max-w-4xl">
+      <div className="relative z-10 flex flex-col items-center w-full max-w-5xl">
         {/* Alarm Icon */}
         <div className="mb-8">
           <div className="w-20 h-20 bg-brand-accent/20 rounded-full flex items-center justify-center border-2 border-brand-accent/30 animate-pulse">
@@ -39,7 +39,7 @@ const ThankYou: React.FC = () => {
         </h1>
 
         {/* Content Box with Founder Image */}
-        <div className="relative mt-12 w-full max-w-2xl">
+        <div className="relative mt-12 w-full max-w-2xl mx-auto">
           {/* Founder Image - Half inside, half outside */}
           <div className="absolute -top-12 left-1/2 -translate-x-1/2 z-20">
             <div className="w-24 h-24 rounded-full border-4 border-brand-900 overflow-hidden shadow-xl bg-gray-200">
@@ -53,21 +53,22 @@ const ThankYou: React.FC = () => {
 
           {/* The Box */}
           <div className="bg-brand-800/40 backdrop-blur-md p-8 md:p-12 pt-16 rounded-3xl border border-white/10 shadow-2xl relative z-10">
-            <p className="text-lg md:text-xl text-gray-200 leading-relaxed mb-10">
+            <p className="text-lg md:text-xl text-gray-200 leading-relaxed">
               A kérése megérkezett, azonban ahogy egy remek orvos, úgy én is adatokra alapozom a diagnózisomat. Kérem, válaszoljon a videóban feltett kérdésekre, hogy jóváhagyhassuk a jelentkezését és megkezdhessük a mélyelemzést.
             </p>
-            
-            {/* Embedded Iframe */}
-            <div className="w-full rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-brand-900/50 aspect-video relative">
-              <iframe
-                src={iframeUrl}
-                className="absolute top-0 left-0 w-full h-full"
-                allow="camera; microphone; fullscreen"
-                title="Videoform Analyzer"
-              ></iframe>
-            </div>
           </div>
         </div>
+        
+        {/* Embedded Iframe - Placed below the box and made wider */}
+        <div className="w-full max-w-4xl mt-12 rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-brand-900/50 aspect-video relative z-10">
+          <iframe
+            src={iframeUrl}
+            className="absolute top-0 left-0 w-full h-full"
+            allow="camera; microphone; fullscreen"
+            title="Videoform Analyzer"
+          ></iframe>
+        </div>
+        
       </div>
     </div>
   );

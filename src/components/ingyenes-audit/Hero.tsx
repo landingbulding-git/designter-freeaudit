@@ -7,7 +7,6 @@ const Hero: React.FC = () => {
   const [formData, setFormData] = useState({
     firstname: '',
     email: '',
-    clinic: '',
     website: ''
   });
 
@@ -34,11 +33,10 @@ const Hero: React.FC = () => {
 
     const payload = {
       access_key: 'aa9f8e62-b6f0-43c1-9ece-521ecbd1c23a',
-      subject: `Ingyenes Audit Igénylés (Hero) - ${formData.firstname} (Klinika: ${formData.clinic})`,
+      subject: `Ingyenes Audit Igénylés (Hero) - ${formData.firstname}`,
       from_name: 'DesignTér Audit',
       keresztnev: formData.firstname,
       email: formData.email,
-      klinika: formData.clinic,
       weboldal: formData.website,
     };
 
@@ -142,15 +140,6 @@ const Hero: React.FC = () => {
                     placeholder="E-mail cím" 
                     required
                     value={formData.email}
-                    onChange={handleChange}
-                    className="w-full px-5 py-4 bg-brand-900/50 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-accent focus:border-transparent transition-all"
-                  />
-                  <input 
-                    type="text" 
-                    name="clinic"
-                    placeholder="Klinika neve" 
-                    required
-                    value={formData.clinic}
                     onChange={handleChange}
                     className="w-full px-5 py-4 bg-brand-900/50 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-accent focus:border-transparent transition-all"
                   />
