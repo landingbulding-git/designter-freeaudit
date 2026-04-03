@@ -26,6 +26,11 @@ const ThankYou: React.FC = () => {
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500 opacity-10 blur-[100px] rounded-full transform -translate-x-1/3 translate-y-1/3 pointer-events-none"></div>
 
       <div className="relative z-10 flex flex-col items-center w-full max-w-7xl">
+        {/* Title */}
+        <h1 className="text-2xl md:text-4xl font-extrabold text-white mb-8 max-w-2xl leading-tight">
+          Az Ön audit kérelme még nincs megerősítve.
+        </h1>
+
         {/* Content Box with Alarm Icon integrated to save space */}
         <div className="w-full max-w-2xl mx-auto">
           <div className="bg-brand-800/40 backdrop-blur-md p-6 md:p-8 rounded-3xl border border-white/10 shadow-2xl relative z-10 flex flex-col md:flex-row items-center gap-4 text-left">
