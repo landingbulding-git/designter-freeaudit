@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://www.designter.hu',
   redirects: {
-    '/': 'https://landing.designter.hu/free-audit',
+    '/': 'https://landing.designter.hu/ingyenes-audit',
   },
   integrations: [react(), tailwind(), sitemap()],
   image: {
