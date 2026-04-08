@@ -1,5 +1,5 @@
 import React from 'react';
-import { ClipboardCheck, Video, MailOpen } from 'lucide-react';
+import { ClipboardCheck, Video, MailOpen } from '../InlineIcons';
 
 const Steps: React.FC = () => {
   const steps = [

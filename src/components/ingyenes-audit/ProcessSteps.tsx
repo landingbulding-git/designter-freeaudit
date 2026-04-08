@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award, ShieldCheck, Zap } from 'lucide-react';
+import { Award, ShieldCheck, Zap } from '../InlineIcons';
 
 const ProcessSteps: React.FC = () => {
   const steps = [

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stethoscope, PenTool, Layout, LineChart } from 'lucide-react';
+import { Stethoscope, PenTool, Layout, LineChart } from '../InlineIcons';
 
 const Process: React.FC = () => {
   const steps = [

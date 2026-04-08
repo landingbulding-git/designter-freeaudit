@@ -1,5 +1,5 @@
 import React from 'react';
-import { AlertCircle, ArrowRight } from 'lucide-react';
+import { AlertCircle, ArrowRight } from '../InlineIcons';
 
 interface ProblemAgitationProps {
   onCtaClick: () => void;

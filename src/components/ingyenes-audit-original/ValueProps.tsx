@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrainCircuit, Zap, Smartphone } from 'lucide-react';
+import { BrainCircuit, Zap, Smartphone } from '../InlineIcons';
 
 const ValueProps: React.FC = () => {
   const features = [

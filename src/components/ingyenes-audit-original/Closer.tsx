@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, ArrowLeft, Lock } from 'lucide-react';
+import { ArrowRight, ArrowLeft, Lock } from '../InlineIcons';
 
 const QUESTIONS = [
   {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Star, CheckCircle2 } from 'lucide-react';
+import { Star, CheckCircle2 } from '../InlineIcons';
 
 const Hero: React.FC = () => {
   const [userName, setUserName] = useState<string | null>(null);

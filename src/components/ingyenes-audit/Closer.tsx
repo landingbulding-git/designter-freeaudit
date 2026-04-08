@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Video, ShieldAlert, CheckCircle, Lock } from 'lucide-react';
+import { Video, ShieldAlert, CheckCircle, Lock } from '../InlineIcons';
 
 const Closer: React.FC = () => {
   const [status, setStatus] = useState('');

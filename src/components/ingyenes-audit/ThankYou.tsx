@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { AlertTriangle } from 'lucide-react';
+import { AlertTriangle } from '../InlineIcons';
 
 const ThankYou: React.FC = () => {
   const [name, setName] = useState('');

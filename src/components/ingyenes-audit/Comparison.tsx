@@ -1,5 +1,5 @@
 import React from 'react';
-import { Users, ShieldAlert, TrendingDown, ShieldCheck, TrendingUp, XCircle, CheckCircle2, UserCheck } from 'lucide-react';
+import { Users, ShieldAlert, TrendingDown, ShieldCheck, TrendingUp, XCircle, CheckCircle2, UserCheck } from '../InlineIcons';
 
 const Comparison: React.FC = () => {
   return (

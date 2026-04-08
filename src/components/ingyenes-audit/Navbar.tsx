@@ -1,5 +1,5 @@
 import React from 'react';
-import { MousePointer2 } from 'lucide-react';
+import { MousePointer2 } from '../InlineIcons';
 
 interface NavbarProps {
   onCtaClick: () => void;
