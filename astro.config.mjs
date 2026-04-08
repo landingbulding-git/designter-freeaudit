@@ -6,6 +6,9 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://www.designter.hu',
+  redirects: {
+    '/': 'https://landing.designter.hu/free-audit',
+  },
   integrations: [react(), tailwind(), sitemap()],
   image: {
     domains: ['prod-files-secure.s3.us-west-2.amazonaws.com', 'images.unsplash.com'],
